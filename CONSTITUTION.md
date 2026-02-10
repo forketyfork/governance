@@ -119,12 +119,12 @@ All Lands share a common set of agent commands that structure the development wo
 ### The Workflow
 
 ```text
-  PLAN                          IMPLEMENT                      REVIEW
-  ─────                         ─────────                      ──────
+  PLAN                                IMPLEMENT                       REVIEW
+  ─────                               ─────────                       ──────
 
   /bug
-  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review  ─┬──►  Merge
-  /tech                              /ship                          /address ◄─┘
+  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review   ─┬──►  Merge
+  /tech                               /ship                           /address ◄─┘
                        ▲                                                ▲
                        │                                                │
                   Human reviews                                    Human reviews

@@ -95,12 +95,12 @@ The `commands/` directory contains specifications for agent commands that struct
 ### The Workflow
 
 ```text
-  PLAN                          IMPLEMENT                      REVIEW
-  ─────                         ─────────                      ──────
+  PLAN                                IMPLEMENT                       REVIEW
+  ─────                               ─────────                       ──────
 
   /bug
-  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review  ─┬──►  Merge
-  /tech                              /ship                          /address ◄─┘
+  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review   ─┬──►  Merge
+  /tech                               /ship                           /address ◄─┘
 
                        ▲                                                ▲
                        │                                                │
