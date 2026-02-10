@@ -1,0 +1,57 @@
+# CLAUDE.md
+
+## Project
+
+**Name:** [project name]
+**Description:** [One paragraph. What this project does, for whom, and why.]
+**Stack:** [Language, framework, key dependencies]
+**Status:** [Active development / Maintenance / Experimental]
+
+## Build & Run
+
+```bash
+# Build
+[build command]
+
+# Run
+[run command]
+
+# Test
+[test command]
+
+# Lint
+[lint command]
+
+# Format check
+[format command]
+```
+
+## Governance
+
+This project is a Land in the federated governance framework. The constitution of the Federation is defined in the [CONSTITUTION.md](https://github.com/forketyfork/governance/blob/main/CONSTITUTION.md).
+
+## Project Documentation
+
+Read these before making any changes:
+
+- `docs/PRD.md` — What the software does (features, user flows, success criteria)
+- `docs/ARCHITECTURE.md` — How it's built (layers, modules, dependencies, ADRs)
+- `docs/CONVENTIONS.md` — Coding patterns for this project
+- `docs/TRACEABILITY.md` — Feature-to-test mapping
+
+## Agent Rules
+
+1. Read the project documentation listed above before writing any code.
+2. Follow `docs/CONVENTIONS.md` exactly. Do not introduce new patterns.
+3. Every new public function must have a doc comment explaining WHAT it does.
+4. Every new feature must have corresponding tests.
+5. Do not introduce new dependencies without asking first.
+6. Do not leave TODOs in code. If something is incomplete, say so.
+7. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
+8. If you add a feature, update `docs/TRACEABILITY.md`.
+9. Maximum file length: 300 lines. Maximum function length: 50 lines.
+10. Use conventional commit messages.
+
+## Project-Specific Notes
+
+[Add anything the agent needs to know that's specific to this project: quirks, known issues, special build steps, environment setup, etc.]

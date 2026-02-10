@@ -1,0 +1,183 @@
+# Conventions
+
+[This is an example of coding patterns documentation for this project. The AI agent reads this at the start of every session to produce consistent code. If a pattern isn't documented here, the agent will invent one — and it will be different every time.]
+[Adjust this template according to the project's stack, and what makes sense for the project.]
+
+---
+
+## Naming
+
+### Files and Directories
+
+[Describe the naming convention for source files and directories. Examples:]
+- [e.g., Source files: `snake_case.zig`, `camelCase.ts`, `PascalCase.kt`]
+- [e.g., Test files: `*_test.zig`, `*.test.ts`, `*Test.kt`]
+- [e.g., Directories: `snake_case/` for modules, grouped by feature or layer]
+
+### Functions and Methods
+
+[Describe naming conventions. Examples:]
+- [e.g., Public functions: `camelCase` / `snake_case`]
+- [e.g., Private/internal: prefixed with `_` / no prefix, just not exported]
+- [e.g., Boolean functions: `is*`, `has*`, `can*`, `should*`]
+- [e.g., Factory functions: `create*`, `make*`, `build*`]
+
+### Types and Interfaces
+
+[Describe naming conventions. Examples:]
+- [e.g., Types/classes: `PascalCase`]
+- [e.g., Interfaces: `PascalCase`, no `I` prefix]
+- [e.g., Enums: `PascalCase` name, `UPPER_SNAKE_CASE` values / `PascalCase` values]
+- [e.g., Constants: `UPPER_SNAKE_CASE` / `camelCase`]
+
+### Variables
+
+[Describe naming conventions. Examples:]
+- [e.g., Local variables: `camelCase` / `snake_case`]
+- [e.g., Global/module state: avoid, but if necessary: `camelCase` with module prefix]
+
+---
+
+## Error Handling
+
+[Describe how errors are handled in this project. This is one of the most important sections — inconsistent error handling is the #1 source of AI-generated bugs.]
+
+### Pattern
+
+[Describe the standard error handling pattern. Examples:]
+- [e.g., Use Zig error unions (`!T`) for all fallible operations. Propagate with `try`.]
+- [e.g., Use TypeScript `Result<T, E>` type. Never throw exceptions for expected failures.]
+- [e.g., Use Kotlin `Result<T>` or nullable returns. Reserve exceptions for truly exceptional cases.]
+
+### What to Do with Errors
+
+- [e.g., Domain errors: return as typed errors to the caller]
+- [e.g., Infrastructure errors (I/O, network): wrap in a domain error type, then return]
+- [e.g., Programming errors (null, out of bounds): let them crash — these indicate bugs]
+
+### What NOT to Do
+
+- [e.g., Never swallow errors with empty catch blocks]
+- [e.g., Never use `catch unreachable` unless you can mathematically prove unreachability]
+- [e.g., Never log and continue — either handle the error or propagate it]
+
+---
+
+## State Management
+
+[Describe where state lives and how it's mutated.]
+
+### Where State Lives
+
+- [e.g., Application state: `AppState` struct in `app_state.zig`, owned by runtime]
+- [e.g., UI state: per-component, accessed via `SessionViewState`]
+- [e.g., Persistent state: `config.toml` (user prefs) and `persistence.toml` (runtime)]
+
+### How State Is Mutated
+
+- [e.g., UI components push `UiAction` to the queue, never mutate state directly]
+- [e.g., State changes happen in the main loop after all component updates]
+- [e.g., Database writes go through repository classes, always inside `DbContext.tx {}`]
+
+---
+
+## File and Directory Structure
+
+[Describe the project layout and what goes where.]
+
+```
+project-root/
+├── src/                    # [or whatever the source root is]
+│   ├── [layer-or-feature]/ # [describe the grouping principle]
+│   └── ...
+├── tests/                  # [or wherever tests live]
+├── docs/                   # PRD, ARCHITECTURE, CONVENTIONS, TRACEABILITY
+├── CLAUDE.md               # Agent instructions
+└── [build files]           # package.json / build.zig / build.gradle.kts
+```
+
+[Describe the grouping principle: by feature? by layer? by both?]
+[Note any directories with special rules]
+
+---
+
+## Stack-Specific Patterns
+
+[Patterns that are specific to this project's stack. Delete sections that don't apply.]
+
+### TypeScript/Obsidian Plugin Patterns
+
+- [e.g., Settings are stored via `plugin.loadData()` / `plugin.saveData()`]
+- [e.g., Commands are registered in `onload()` via `this.addCommand()`]
+- [e.g., Views extend `ItemView` and register with `registerView()`]
+- [e.g., Use `Notice()` for user-facing messages, never `console.log()`]
+
+### Zig Patterns
+
+- [e.g., All allocations use the allocator passed as the first parameter]
+- [e.g., Prefer `defer` for cleanup immediately after acquisition]
+- [e.g., Use `std.log` for debug output, never `std.debug.print` in production]
+
+### Kotlin Multiplatform Patterns
+
+- [e.g., Shared code in `commonMain`, platform code in `androidMain` / `iosMain`]
+- [e.g., Use `expect` / `actual` for platform abstractions]
+- [e.g., ViewModels use `StateFlow` for observable state]
+- [e.g., DI via Koin, registered in shared module]
+
+---
+
+## Testing Patterns
+
+### What to Test
+
+- [e.g., All public functions that contain business logic]
+- [e.g., All command handlers / API endpoints]
+- [e.g., Error paths for all I/O operations]
+
+### What Not to Test
+
+- [e.g., Private helper functions (tested implicitly through public API)]
+- [e.g., Pure delegation (function A just calls function B with no logic)]
+- [e.g., UI layout / styling (unless behavior depends on it)]
+
+### Test Structure
+
+- [e.g., Arrange-Act-Assert pattern]
+- [e.g., One behavior per test — if the test name has "and", split it]
+- [e.g., Test names describe behavior: `test_returns_error_when_input_is_empty`]
+
+### Test Data
+
+- [e.g., Inline test data for simple cases]
+- [e.g., Fixture files in `tests/fixtures/` for complex data]
+- [e.g., Factory functions for test objects: `createTestUser()`, `createTestConfig()`]
+
+---
+
+## Comments and Documentation
+
+### When to Comment
+
+- [e.g., Public functions: always a doc comment explaining WHAT, not HOW]
+- [e.g., Non-obvious "why": if the code does something surprising, explain why]
+- [e.g., TODOs: NEVER. Use GitHub issues instead.]
+
+### When Not to Comment
+
+- [e.g., Obvious code: `i += 1 // increment i` adds nothing]
+- [e.g., Implementation details that change frequently]
+
+---
+
+## Import Ordering
+
+[Describe the expected import order. Examples:]
+
+```
+1. Standard library
+2. External dependencies
+3. Internal modules (by layer: platform → core → services → UI)
+```
+
+[Note: this seems minor but AI agents are wildly inconsistent about import ordering. Documenting it prevents churn.]
