@@ -58,6 +58,7 @@ When replying to review or issue comments:
 - Never edit or PATCH the original review comment body.
 - For review comments, always post a new reply using `in_reply_to` with `gh api repos/<org>/<repo>/pulls/<pr>/comments --method POST --field in_reply_to=<comment_id> --field body="..."`.
 - For issue comments, post a new comment with `gh api repos/<org>/<repo>/issues/<pr>/comments --method POST --field body="..."`.
+- To avoid shell expansion issues with backticks or special characters, write the reply body to `.tmp/reply.txt` and use `--field body=@.tmp/reply.txt` to read it directly from the file.
 - If a mistaken edit already happened, leave it and add a new reply noting the fix.
 
 After I approve:
@@ -66,4 +67,5 @@ After I approve:
 - Commit with message referencing the addressed comments
 - Push the changes
 - Draft responses for each comment (don't post them — show me first)
+- Use the **humanizer** skill on each reply draft before presenting it
 - The comment should be concise and explain what was done to fix the issue or why it won't be fixed; no "good catch" or "thanks for pointing that out" phrases.
