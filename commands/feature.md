@@ -51,16 +51,19 @@ When you have enough information, produce the issue in this format. Present it t
 ## Scope
 
 **In scope:**
+
 - <what this feature does>
 - <what this feature does>
 
 **Out of scope:**
+
 - <what this feature explicitly does NOT do>
 - <what this feature explicitly does NOT do>
 
 ## Implementation Plan
 
 ### Affected Modules
+
 - `<module/directory>`: <what changes>
 - `<module/directory>`: <what changes>
 
@@ -77,6 +80,7 @@ Each task is independently testable. Ordered by implementation sequence.
 7. [ ] Update docs/ARCHITECTURE.md (if architecture changed)
 
 ### New Dependencies
+
 <List with justification, or "None">
 
 ## Acceptance Criteria
@@ -90,6 +94,7 @@ Each task is independently testable. Ordered by implementation sequence.
 ---
 
 ## Rules
+
 - Do NOT write implementation code. You can reference module names, types, and function names for clarity.
 - If the feature touches more than 3 modules, suggest breaking it into multiple issues.
 - If the feature conflicts with a non-goal in the PRD, tell the user directly.

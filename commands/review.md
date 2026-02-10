@@ -23,12 +23,14 @@ Ask: "Does this match what you expected?"
 ### Step 2: Interface Review
 
 For every new or changed public function/type/interface, present:
+
 - **Name and signature**, with types explained in plain language if the user might not know them.
 - **What it does** in one sentence.
 - **Concern level:** Green / Yellow / Red.
 - For Yellow/Red: explain the problem and suggest a fix.
 
 Common problems to check:
+
 - Function does more than one thing
 - Parameters accept overly broad types (any, Object, interface{})
 - Return type hides errors (null instead of error type)
@@ -51,17 +53,20 @@ Ask: "Does the architectural impact look right?"
 ### Step 4: Type-Specific Checks
 
 **For Bugs:**
+
 - Find the regression test. Explain what it sets up, what it asserts, and whether it would actually catch a regression if the fix were reverted.
 - Does the fix address the root cause or just suppress the symptom?
 - Could the fix break anything else?
 
 **For Features:**
+
 - Does the implementation match the user flow in the issue?
 - For each acceptance criterion: is there a corresponding test?
 - Were docs/PRD.md and docs/TRACEABILITY.md updated?
 - Any obvious edge cases not covered?
 
 **For Tech Debt (Refactor):**
+
 - Is there ANY behavior change, even subtle? Flag it.
 - Were tests modified? Modifying tests during a refactor is suspicious — explain why.
 
@@ -72,6 +77,7 @@ Ask: "Concerns with any of this?"
 Only report issues you actually find. Do not list clean categories.
 
 Scan for:
+
 - Dead code (defined but unused)
 - Redundant code (multiple functions doing the same thing)
 - Over-engineering (abstractions with only one implementation)
@@ -92,6 +98,7 @@ Scan for:
   - Needs discussion — architectural or design decision needed
 
 ## Rules
+
 - Be skeptical by default. Better to flag a false positive than miss a real issue.
 - Explain everything in terms the user can understand. Use analogies to languages they know (Kotlin, Java) when helpful.
 - When you flag a problem, suggest what the fix looks like. Don't just say "this is wrong."

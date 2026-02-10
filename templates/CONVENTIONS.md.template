@@ -10,6 +10,7 @@
 ### Files and Directories
 
 [Describe the naming convention for source files and directories. Examples:]
+
 - [e.g., Source files: `snake_case.zig`, `camelCase.ts`, `PascalCase.kt`]
 - [e.g., Test files: `*_test.zig`, `*.test.ts`, `*Test.kt`]
 - [e.g., Directories: `snake_case/` for modules, grouped by feature or layer]
@@ -17,6 +18,7 @@
 ### Functions and Methods
 
 [Describe naming conventions. Examples:]
+
 - [e.g., Public functions: `camelCase` / `snake_case`]
 - [e.g., Private/internal: prefixed with `_` / no prefix, just not exported]
 - [e.g., Boolean functions: `is*`, `has*`, `can*`, `should*`]
@@ -25,6 +27,7 @@
 ### Types and Interfaces
 
 [Describe naming conventions. Examples:]
+
 - [e.g., Types/classes: `PascalCase`]
 - [e.g., Interfaces: `PascalCase`, no `I` prefix]
 - [e.g., Enums: `PascalCase` name, `UPPER_SNAKE_CASE` values / `PascalCase` values]
@@ -33,6 +36,7 @@
 ### Variables
 
 [Describe naming conventions. Examples:]
+
 - [e.g., Local variables: `camelCase` / `snake_case`]
 - [e.g., Global/module state: avoid, but if necessary: `camelCase` with module prefix]
 
@@ -45,6 +49,7 @@
 ### Pattern
 
 [Describe the standard error handling pattern. Examples:]
+
 - [e.g., Use Zig error unions (`!T`) for all fallible operations. Propagate with `try`.]
 - [e.g., Use TypeScript `Result<T, E>` type. Never throw exceptions for expected failures.]
 - [e.g., Use Kotlin `Result<T>` or nullable returns. Reserve exceptions for truly exceptional cases.]

@@ -53,7 +53,9 @@ When you have enough information, produce the issue in this format. Present it t
 <Module, file, or component if known. "Unknown" if not.>
 
 ## Acceptance Criteria
+
 <how to verify that the task is done? Fill in from context. For instance, but not limited to:>
+
 - [ ] If feasible: a regression test exists that reproduces this bug (fails before fix, passes after)
 - [ ] The fix does not break existing tests
 - [ ] If the fix changes documented behavior: docs/PRD.md is updated (if present)
@@ -61,6 +63,7 @@ When you have enough information, produce the issue in this format. Present it t
 ---
 
 ## Rules
+
 - If during the interview you realize this is a feature request or a misunderstanding of existing behavior, say so and suggest /feature.
 - Never suggest fixes or write code. The implementing agent handles that.
 - If the user can't reproduce the bug, note that in Reproducibility. Don't refuse to create the issue.
