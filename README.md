@@ -94,21 +94,11 @@ The `commands/` directory contains specifications for agent commands that struct
 
 ### The Workflow
 
-```text
-  PLAN                                IMPLEMENT                       REVIEW
-  ─────                               ─────────                       ──────
+The full workflow — phases, human checkpoints, and the role of each command — is described in the [Constitution](CONSTITUTION.md#the-workflow).
 
-  /bug
-  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review   ─┬──►  Merge
-  /tech                               /ship                           /address ◄─┘
+### The Federation
 
-                       ▲                                                ▲
-                       │                                                │
-                  Human reviews                                    Human reviews
-                  the issue                                        the PR
-```
-
-Two human checkpoints. Everything between them is delegated to agents.
+The projects currently governed under this framework are listed in [FEDERATION.md](FEDERATION.md).
 
 ## Adding a New Project
 
