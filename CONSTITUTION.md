@@ -111,27 +111,35 @@ All Lands share a common set of agent commands that structure the development wo
 
 ### Session Commands
 
-| Command      | Purpose                                     | Input                               | Output                                       |
-| ------------ | ------------------------------------------- | ----------------------------------- | -------------------------------------------- |
-| `/learn`     | Extract learnings to update CLAUDE.md       | Current session context + CLAUDE.md | Proposed CLAUDE.md updates with diff preview |
-| `/knowledge` | Extract reusable knowledge from the session | Current session context             | Knowledge notes saved to Zettelkasten        |
+| Command      | Purpose                                  | Input                               | Output                                           |
+| ------------ | ---------------------------------------- | ----------------------------------- | ------------------------------------------------ |
+| `/learn`     | Extract learnings to update CLAUDE.md    | Current session context + CLAUDE.md | Proposed CLAUDE.md updates with diff preview     |
+| `/knowledge` | Produce learning notes for the developer | Current session context             | Learning notes saved to developer's Zettelkasten |
 
 ### The Workflow
 
+The development workflow has four phases:
+
+1. **Plan** — A planning command (`/bug`, `/feature`, or `/tech`) interviews the developer and produces a GitHub issue with clear scope, acceptance criteria, and implementation tasks. The developer reviews the issue before implementation begins. _(Human checkpoint 1.)_
+2. **Implement** — `/implement` picks up the approved issue and produces code: a draft PR with tests, documentation updates, and a checklist. `/ship` handles the mechanics of committing, pushing, and creating the PR.
+3. **Review** — `/review` walks the developer through the PR diff with a structured checklist. The developer makes the merge decision. If changes are needed, `/address` processes review comments and produces fixes. _(Human checkpoint 2.)_
+4. **Reflect** — After the session's work is done, `/learn` extracts reusable insights into the project's CLAUDE.md so future agent sessions start smarter. `/knowledge` produces learning notes the developer can study in their Zettelkasten — staying informed about their own codebase without reading every line of code.
+
 ```text
-  PLAN                                IMPLEMENT                       REVIEW
-  ─────                               ─────────                       ──────
+  PLAN                          IMPLEMENT                   REVIEW                   REFLECT
+  ─────                         ─────────                   ──────                   ───────
 
   /bug
-  /feature    ──►  GitHub Issue  ──►  /implement  ──►  Draft PR  ──►  /review   ─┬──►  Merge
-  /tech                               /ship                           /address ◄─┘
-                       ▲                                                ▲
-                       │                                                │
-                  Human reviews                                    Human reviews
-                  the issue                                        the PR
+  /feature ──► GitHub Issue ──► /implement ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
+  /tech                         /ship                       /address ◄┘              /knowledge
+
+                    ▲                                          ▲
+                    │                                          │
+               Human reviews                              Human reviews
+               the issue                                  the PR
 ```
 
-Two human checkpoints. Everything between them is delegated to agents.
+Two human checkpoints bracket the automated work. Everything between them is delegated to agents. The Reflect phase happens at session end and requires no human gate — its outputs (updated CLAUDE.md, learning notes) are additive.
 
 ---
 

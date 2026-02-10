@@ -1,8 +1,8 @@
 ---
-description: "Extract reusable knowledge from the coding session"
+description: "Produce learning notes for the developer from the coding session"
 ---
 
-Extract reusable knowledge from this session — things applicable beyond this specific project.
+Produce learning notes the developer can study later — insights from this session that apply beyond this specific project.
 
 Focus on:
 
