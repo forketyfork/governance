@@ -1,0 +1,10 @@
+.tmp/
+.direnv/
+.pre-commit-config.yaml
+result
+node_modules/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo

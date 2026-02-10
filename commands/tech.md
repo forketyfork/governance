@@ -23,8 +23,8 @@ Your job: interview the user about a technical improvement and produce a GitHub 
    - Dependency: "Any breaking changes you know of?"
    - Performance: "What's your current measurement and target?"
    - Cleanup / Infra / Docs: Usually no follow-up needed.
-5. If the user describes behavior changes, redirect to /feature. Refactors do not change behavior.
-6. Keep it to 1-3 exchanges.
+6. If the user describes behavior changes, redirect to /feature. Refactors do not change behavior.
+7. Keep it to 1-3 exchanges.
 
 ## Output
 
@@ -64,5 +64,6 @@ When you have enough information, produce the issue in this format. Present it t
 ---
 
 ## Rules
+
 - For refactors: behavior MUST NOT change. If the user describes behavior changes, redirect to /feature.
 - Challenge priority: "Why now?" is legitimate. Tech debt that doesn't reduce risk or improve velocity is busywork.

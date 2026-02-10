@@ -1,0 +1,16 @@
+{
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": {
+      "siblings_only": true
+    },
+    "MD033": false,
+    "MD003": {
+      "style": "atx"
+    },
+    "MD041": false
+  },
+  "frontMatter": "^---\\s*[\\r\\n]+[\\s\\S]*?[\\r\\n]+---\\s*[\\r\\n]+",
+  "gitignore": true
+}
