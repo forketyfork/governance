@@ -10,23 +10,20 @@
 ## Build & Run
 
 ```bash
+# Enter the dev shell (installs pre-commit hooks automatically)
+nix develop    # or: direnv allow (one-time)
+
 # Install agent commands (symlinks command specs to ~/.claude/commands and ~/.codex/prompts)
 ./scripts/install-commands.sh
 
-# Lint (Markdown)
-npx markdownlint-cli2 '**/*.md'
-
-# Format check (Markdown)
-npx prettier --check '**/*.md' '**/*.md.template'
-
-# Lint (Shell)
-shellcheck scripts/*.sh
-
-# Format check (Shell)
-shfmt -d scripts/*.sh
-
-# Run all checks at once
+# Run all checks at once (inside dev shell)
 pre-commit run --all-files
+
+# Individual tools are on PATH inside the dev shell:
+markdownlint-cli2 '**/*.md'
+prettier --check '**/*.md' '**/*.md.template'
+shellcheck scripts/*.sh
+shfmt -d scripts/*.sh
 ```
 
 There is no build or test step — this is a documentation-only repository.
@@ -64,10 +61,12 @@ governance/
 │   └── install-commands.sh
 ├── docs/                       # Standard docs directory
 ├── .github/workflows/ci.yml   # CI pipeline
+├── flake.nix                   # Nix flake (toolchain + git hooks)
+├── flake.lock
+├── .envrc                      # direnv config
 ├── .editorconfig
 ├── .markdownlint-cli2.jsonc
-├── .prettierrc
-└── .pre-commit-config.yaml
+└── .prettierrc
 ```
 
 ## Agent Rules

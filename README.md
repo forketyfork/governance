@@ -20,14 +20,21 @@ The `install-commands.sh` script symlinks command specifications to your Claude 
 
 Changes to files in `commands/` take effect immediately across all tools that consumed the symlinks.
 
-### Set Up Pre-commit Hooks
+### Set Up Development Environment
+
+With [direnv](https://direnv.net/) (recommended):
 
 ```bash
-pip install pre-commit
-pre-commit install
+direnv allow
 ```
 
-On every commit, pre-commit hooks automatically check markdown lint, markdown formatting, shell lint, and shell formatting.
+Or manually:
+
+```bash
+nix develop
+```
+
+This enters a Nix dev shell with all tools on PATH and pre-commit hooks installed automatically. On every commit, hooks check markdown lint, markdown formatting, shell lint, and shell formatting.
 
 ## Repository Structure
 
@@ -58,10 +65,12 @@ governance/
 │   └── install-commands.sh
 ├── docs/                       # Standard docs directory (empty, for future use)
 ├── .github/workflows/ci.yml   # CI pipeline
+├── flake.nix                   # Nix flake (toolchain + git hooks)
+├── flake.lock
+├── .envrc                      # direnv config
 ├── .editorconfig
 ├── .markdownlint-cli2.jsonc
-├── .prettierrc
-└── .pre-commit-config.yaml
+└── .prettierrc
 ```
 
 ## How It Works
@@ -113,18 +122,11 @@ Run all checks at once:
 pre-commit run --all-files
 ```
 
-Or run individual tools:
+Or run individual tools (inside the dev shell):
 
 ```bash
-# Markdown lint
-npx markdownlint-cli2 '**/*.md'
-
-# Markdown format check
-npx prettier --check '**/*.md' '**/*.md.template'
-
-# Shell lint
+markdownlint-cli2 '**/*.md'
+prettier --check '**/*.md' '**/*.md.template'
 shellcheck scripts/*.sh
-
-# Shell format check
 shfmt -d scripts/*.sh
 ```
