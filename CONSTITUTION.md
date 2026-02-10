@@ -118,7 +118,7 @@ All Lands share a common set of agent commands that structure the development wo
 
 ### The Workflow
 
-```
+```text
   PLAN                          IMPLEMENT                      REVIEW
   ─────                         ─────────                      ──────
 

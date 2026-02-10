@@ -38,7 +38,7 @@ This enters a Nix dev shell with all tools on PATH and pre-commit hooks installe
 
 ## Repository Structure
 
-```
+```text
 governance/
 ├── CONSTITUTION.md             # Principles, guardrails, workflows
 ├── FEDERATION.md               # Registry of governed Lands
@@ -94,7 +94,7 @@ The `commands/` directory contains specifications for agent commands that struct
 
 ### The Workflow
 
-```
+```text
   PLAN                          IMPLEMENT                      REVIEW
   ─────                         ─────────                      ──────
 

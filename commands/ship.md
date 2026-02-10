@@ -14,7 +14,7 @@ After confirmation:
 - Stage only files relevant to this task, unless I instruct otherwise
 - Commit with this structure:
 
-  ```
+  ```text
   <commit header, according to conventional commits>
 
   Issue: <summarize user prompts received during this session into a concise description of the issue>

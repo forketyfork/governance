@@ -6,7 +6,7 @@ Review the **unresolved** review and issue comments on this PR against the PR de
 
 To get only unresolved review comments, use the GraphQL API to fetch review threads with their resolution state:
 
-```
+```bash
 gh api graphql -f query='
 {
   repository(owner: "<org>", name: "<repo>") {

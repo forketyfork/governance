@@ -24,7 +24,7 @@ Abstraction test: Before adding anything, ask "Would this help on a _different_ 
 
 Output a diff preview:
 
-```
+```diff
 # Proposed CLAUDE.md Changes
 ## Added to [Section Name]
 + <new content>

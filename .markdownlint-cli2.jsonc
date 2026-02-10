@@ -6,8 +6,9 @@
       "siblings_only": true
     },
     "MD033": false,
-    "MD003": false,
-    "MD040": false,
+    "MD003": {
+      "style": "atx"
+    },
     "MD041": false
   },
   "frontMatter": "^---\\s*[\\r\\n]+[\\s\\S]*?[\\r\\n]+---\\s*[\\r\\n]+",

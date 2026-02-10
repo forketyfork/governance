@@ -34,7 +34,7 @@ This repository IS the Federation's governance framework. The constitution is de
 
 ## Repository Structure
 
-```
+```text
 governance/
 ├── CONSTITUTION.md             # Principles, guardrails, workflows
 ├── FEDERATION.md               # Registry of governed Lands
