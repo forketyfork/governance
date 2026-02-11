@@ -1,5 +1,7 @@
 # Governance
 
+![Workflow Diagram](images/workflow-diagram.svg)
+
 Federated governance framework for AI-assisted software projects.
 
 ## What This Is
