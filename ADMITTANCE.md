@@ -15,7 +15,7 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Build and test commands
    - Reference to docs/ for detailed documentation
 3. **Set up guardrails:**
-   - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails above).
+   - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails in CONSTITUTION.md).
    - Create pre-commit hooks that run lint + format + type check + test.
    - Set up CI (GitHub Actions recommended) with build + test + lint.
    - Enable branch protection on main/master.
@@ -39,7 +39,7 @@ Run the documentation commands in this order. Each one builds on the previous.
 
 ## Phase 4: Register
 
-Add the project to the Registry of Lands table above. Mark each column honestly.
+Add the project to the Registry of Lands table in FEDERATION.md. Mark each column honestly.
 
 ## Checklist: When Is a Land "Governed"?
 

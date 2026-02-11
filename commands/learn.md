@@ -13,7 +13,12 @@ Identify from this session:
 3. **Corrections:** What in CLAUDE.md was wrong or outdated?
 4. **Missing context:** What project knowledge would have helped from the start?
 
-For each item, draft an update:
+Before drafting any updates, deduplicate and prune:
+
+1. **Deduplication:** For each learning identified above, check if CLAUDE.md already covers the topic. If it does and the existing entry is correct and complete, skip it. If it covers the topic but needs updating, propose an update to the existing entry rather than adding a new one.
+2. **Pruning:** Review existing CLAUDE.md entries that relate to this session's work. If any are now outdated, incorrect, or contradicted by what happened in this session, propose their removal or update. Stale knowledge is worse than missing knowledge.
+
+For each remaining item, draft an update:
 
 - Blockers → Add to a "Known Pitfalls" or "Gotchas" section
 - Discoveries → Add to relevant technical section (create if needed)
