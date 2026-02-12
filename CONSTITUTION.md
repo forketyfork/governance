@@ -242,6 +242,31 @@ Federation is a collection of Lands sharing the same governance model. The Lands
 
 Admittance of a new Land into the Federation must follow the process outlined in the ADMITTANCE.md file.
 
+### Cross-Land Impact
+
+When a PR in one Land modifies an external contract, the change must be assessed for impact on dependent Lands before merging.
+
+**What constitutes an external contract change:**
+
+- API endpoints (REST, GraphQL, gRPC) — routes, request/response shapes, status codes, authentication requirements
+- Shared library interfaces — exported functions, types, or modules consumed by other Lands
+- Message formats — event schemas, queue payloads, serialization formats
+- File formats — configuration files, data files, or protocols consumed by other tools
+- Database schemas — tables, columns, or stored procedures accessed by multiple Lands
+
+Each Land's CONVENTIONS.md should document file patterns and markers that indicate external contract boundaries (e.g., `api/`, `proto/`, `schemas/`). This enables `/review` to flag contract changes during the review phase.
+
+**Assessment process:**
+
+1. **Flag.** During `/review`, identify that the PR touches an external contract. The reviewer (human or agent) checks whether changed files match the contract patterns documented in CONVENTIONS.md.
+2. **Check dependencies.** Consult FEDERATION.md for Lands that depend on the changed contract. If dependency information is not tracked yet, the developer identifies dependent Lands manually.
+3. **Assess.** For each dependent Land, determine the impact: _breaks_ (the Land will fail without a coordinated change), _needs update_ (the Land should adapt but won't break immediately), or _unaffected_ (the change is backward-compatible). Record this assessment in the PR description.
+4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked GitHub issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
+
+**No PR that changes an external contract merges without steps 1–4 completed.** If a contract change is merged without assessment and a dependent Land breaks, treat it as a hotfix in the affected Land and create a `/tech` issue to add the missing dependency tracking.
+
+**Dependency tracking in FEDERATION.md:** Consider extending the Registry of Lands table or adding a separate dependency map that records which Lands consume which contracts. This makes step 2 mechanical rather than relying on the developer's memory. The format and implementation of this tracking is left to a future issue.
+
 ---
 
 ## Archival
