@@ -20,6 +20,20 @@ The answer: standardized documentation, mandatory guardrails, structured workflo
 
 ---
 
+## Separation of Powers
+
+The governance framework operates through three branches:
+
+**Legislative** — The rules. CONSTITUTION.md, command specifications, CONVENTIONS.md, ARCHITECTURE.md, and PRD.md. These define what agents must do and what they must not do. Changes to the legislative branch follow the amendment process.
+
+**Executive** — Mechanical enforcement. Linters, formatters, type checkers, pre-commit hooks, CI pipelines, branch protection, coverage thresholds. The executive enforces rules without discretion. If a rule can be expressed as an automated check, it should be — documentation is the fallback, not the primary enforcement mechanism.
+
+**Judiciary** — Interpretation and judgment. The `/review` command and the human checkpoints. The judiciary decides whether the spirit of the law was followed in a specific case, not just the letter. When `/review` identifies a pattern as problematic, that ruling should flow back into the legislative branch (update the rules) or the executive branch (add a linter rule).
+
+**Precedent flows upward.** When the judiciary (review) identifies a recurring problem, it becomes case law. Case law that applies to one project flows into that project's CONVENTIONS.md via `/learn`. Case law that applies across the federation flows into the governance repo via `/amend`.
+
+---
+
 ## Standard Documents
 
 Every Land must maintain these documents in a `docs/` directory at the repository root. They are living documents, updated as part of the development workflow — not after.
@@ -82,6 +96,62 @@ This is a non-exhaustive list of recommended tools for different platforms provi
 | ktlint               | Formatting                                 |
 | kotlin.test / JUnit5 | Test runner                                |
 | Kover                | Coverage (threshold: 60%, raise over time) |
+
+### Rule Promotion
+
+Every documented convention is a candidate for automation. Promotion is the process of turning a CONVENTIONS.md entry into a linter rule, type constraint, or automated test.
+
+**When to promote:**
+
+- When `/review` flags the same violation twice across different PRs
+- When a new Land is admitted and the convention applies to its stack
+- During Phase 3 backfill, alongside test gap work
+
+**How to promote:**
+
+1. Identify the convention in CONVENTIONS.md.
+2. Determine the enforcement mechanism (linter rule, type constraint, pre-commit check, CI test).
+3. Implement the automated check.
+4. Update CONVENTIONS.md to note that the rule is now enforced automatically, keeping the explanation of _why_.
+5. If the rule applies across the federation, propose an amendment to the governance repo.
+
+**Tracking:** In CONVENTIONS.md, mark each rule with its enforcement status:
+
+- `[auto]` — enforced by linter, type system, or CI
+- `[review]` — enforced during code review only
+- `[planned]` — automation planned but not yet implemented
+
+---
+
+## Agent Environment
+
+Each Land must minimize the developer-as-relay bottleneck. The goal: the agent should never ask for something it could have obtained itself if the project were properly configured.
+
+### Observability
+
+Each Land's CLAUDE.md must include an **Observability** section documenting:
+
+- **What the agent can do independently** — run tests, start the application, read logs, hit endpoints, inspect build output
+- **What requires developer assistance** — UI state observation, mobile device interaction, hardware-dependent behavior
+- **Debug mode** — how to enable verbose logging or diagnostic output
+
+During admittance, for each "requires developer assistance" item, assess whether a script, tool, or CI artifact could close the gap. Close cheap gaps immediately. Document expensive gaps as known limitations.
+
+### Enforceability
+
+Rules documented in CONVENTIONS.md and ARCHITECTURE.md are the first line of defense. Automation is the permanent fix.
+
+For every rule in CONVENTIONS.md, ask: **can this be a linter rule, a type constraint, or a test instead?** If yes, promote it. The document becomes the explanation of _why_ the rule exists; the linter becomes the enforcement.
+
+Promotion priority:
+
+1. **Type system** — catches errors at compile time, zero runtime cost
+2. **Linter rule** — catches errors before commit, fast feedback
+3. **Pre-commit hook** — catches errors before push, slightly slower
+4. **CI check** — catches errors before merge, last automated gate
+5. **Documentation** — catches errors during review, requires human attention
+
+Rules enforced only by documentation will eventually be violated. Rules enforced by automation are violated only by disabling the automation — which is visible and auditable.
 
 ---
 
