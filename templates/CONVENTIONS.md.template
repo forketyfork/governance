@@ -3,6 +3,14 @@
 [This is an example of coding patterns documentation for this project. The AI agent reads this at the start of every session to produce consistent code. If a pattern isn't documented here, the agent will invent one — and it will be different every time.]
 [Adjust this template according to the project's stack, and what makes sense for the project.]
 
+[Mark each rule with its enforcement status:]
+
+- [`[auto]` — enforced by linter, type system, or CI]
+- [`[review]` — enforced during code review only]
+- [`[planned]` — automation planned but not yet implemented]
+
+[See "Rule Promotion" in the constitution for when and how to promote `[review]` rules to `[auto]`.]
+
 ---
 
 ## Naming

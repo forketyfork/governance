@@ -20,6 +20,12 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Set up CI (GitHub Actions recommended) with build + test + lint.
    - Enable branch protection on main/master.
 4. **Create the `docs/` directory.**
+5. **Assess observability:**
+   - Can the agent run the project and see output? If not, create a run/start script.
+   - Can the agent run tests and see results? If not, configure the test runner for CLI output.
+   - Can the agent read logs? Document log locations and how to enable debug logging.
+   - Can the agent observe the UI? If it's a CLI tool, yes. If it's a GUI app, document the limitation and evaluate whether DOM snapshots, screenshot automation, or visual regression tests can close the gap.
+   - Fill in the Observability section of CLAUDE.md.
 
 ## Phase 2: Documentation
 

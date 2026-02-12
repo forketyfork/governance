@@ -52,6 +52,25 @@ Read these before making any changes:
 9. Maximum file length: 300 lines. Maximum function length: 50 lines.
 10. Use conventional commit messages.
 
+## Observability
+
+### What the agent can do independently
+
+- [e.g., Run tests and see output: `zig build test`]
+- [e.g., Start the service: `./gradlew run`, hit endpoints: `curl localhost:8080/health`]
+- [e.g., Read logs: `tail -f logs/app.log`]
+- [e.g., Boot the app and inspect UI via DOM snapshots]
+
+### What requires developer assistance
+
+- [e.g., Obsidian plugin UI — developer must describe visual state or provide screenshot]
+- [e.g., Mobile app — no remote access, developer provides screen recordings]
+
+### Debug mode
+
+- [e.g., `DEBUG=true npm start` enables verbose logging]
+- [e.g., `zig build -Dlog-level=debug test` for debug output]
+
 ## Project-Specific Notes
 
 [Add anything the agent needs to know that's specific to this project: quirks, known issues, special build steps, environment setup, etc.]
