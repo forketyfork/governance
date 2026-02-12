@@ -220,10 +220,10 @@ When a critical bug blocks the developer's immediate workflow, the normal planni
 
 **Fast path:**
 
-1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem.
+1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem. No GitHub issue is required at this stage.
 2. The agent must still read project docs before coding.
 3. The agent must still write a regression test.
-4. `/ship` produces a PR as normal.
+4. `/ship` produces a PR without a `fixes #` reference (the issue does not exist yet).
 5. `/review` still happens — the fast path skips planning, not review.
 
 **Cleanup (mandatory within 24 hours):**
@@ -262,7 +262,7 @@ A Land may be archived when it is no longer actively maintained. Archival is not
 3. Disable CI and branch protection (optional — reduces noise).
 4. Keep the repository and its docs intact — they may be useful for reference.
 
-**Reactivation:** An archived Land can be reactivated by running the admittance process from Phase 2 (documentation refresh) onward. Phase 1 infrastructure likely still exists.
+**Reactivation:** An archived Land can be reactivated by running the admittance process from Phase 1 step 3 (re-enable guardrails) if any were disabled during archival, otherwise from Phase 2 (documentation refresh).
 
 ---
 
