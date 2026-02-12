@@ -259,13 +259,13 @@ Each Land's CONVENTIONS.md should document file patterns and markers that indica
 **Assessment process:**
 
 1. **Flag.** During `/review`, identify that the PR touches an external contract. The reviewer (human or agent) checks whether changed files match the contract patterns documented in CONVENTIONS.md.
-2. **Check dependencies.** Consult FEDERATION.md for Lands that depend on the changed contract. If dependency information is not tracked yet, the developer identifies dependent Lands manually.
+2. **Check dependencies.** Consult the dependency map in FEDERATION.md for Lands that consume the changed contract.
 3. **Assess.** For each dependent Land, determine the impact: _breaks_ (the Land will fail without a coordinated change), _needs update_ (the Land should adapt but won't break immediately), or _unaffected_ (the change is backward-compatible). Record this assessment in the PR description.
 4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked GitHub issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
 
 **No PR that changes an external contract merges without steps 1–4 completed.** If a contract change is merged without assessment and a dependent Land breaks, treat it as a hotfix in the affected Land and create a `/tech` issue to add the missing dependency tracking.
 
-**Dependency tracking in FEDERATION.md:** Consider extending the Registry of Lands table or adding a separate dependency map that records which Lands consume which contracts. This makes step 2 mechanical rather than relying on the developer's memory. The format and implementation of this tracking is left to a future issue.
+Cross-Land dependencies are tracked in the dependency map in FEDERATION.md. Update the map whenever a new dependency is introduced or removed.
 
 ---
 
