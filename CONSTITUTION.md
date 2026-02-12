@@ -178,6 +178,7 @@ All Lands share a common set of agent commands that structure the development wo
 | `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context   | Branch, commit, and draft PR ready for review                            |
 | `/review`    | Guide the developer through PR review | PR diff + linked issue + project docs   | Step-by-step review walkthrough with verdict                             |
 | `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context | Classified comments, fixes, and reply drafts                             |
+| `/amend`     | Propose a governance amendment        | Project-level insight + governance docs | PR against governance repo with classification and affected Lands        |
 
 ### Session Commands
 
@@ -211,6 +212,28 @@ The development workflow has four phases:
 
 Two human checkpoints bracket the automated work. Everything between them is delegated to agents. The Reflect phase happens at session end and requires no human gate — its outputs (updated CLAUDE.md, learning notes) are additive.
 
+### Hotfix Exception
+
+When a critical bug blocks the developer's immediate workflow, the normal planning phase may be skipped. The implementation phase starts directly.
+
+**Criteria:** The bug prevents normal use of the software _right now_. Not "this is annoying" — "this is broken and I need it working."
+
+**Fast path:**
+
+1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem.
+2. The agent must still read project docs before coding.
+3. The agent must still write a regression test.
+4. `/ship` produces a PR as normal.
+5. `/review` still happens — the fast path skips planning, not review.
+
+**Cleanup (mandatory within 24 hours):**
+
+- Create the GitHub issue retroactively using `/bug`.
+- Link the PR to the issue.
+- Run `/learn` to capture what broke and why.
+
+If hotfixes become frequent for a specific Land, that's a signal the test coverage or architecture has gaps. Create a `/tech` issue to address the root cause.
+
 ---
 
 ## The Federation
@@ -218,6 +241,28 @@ Two human checkpoints bracket the automated work. Everything between them is del
 Federation is a collection of Lands sharing the same governance model. The Lands accepted into the Federation are listed in the FEDERATION.md file.
 
 Admittance of a new Land into the Federation must follow the process outlined in the ADMITTANCE.md file.
+
+---
+
+## Archival
+
+A Land may be archived when it is no longer actively maintained. Archival is not failure — it is honest acknowledgment that governance resources should focus on active projects.
+
+**Triggers for archival review:**
+
+- No commits in 6 months
+- The developer has stopped using the software
+- The project has been superseded by another Land
+- The underlying platform or dependency is abandoned
+
+**Archival process:**
+
+1. Update FEDERATION.md: change status to `Archived`.
+2. Add a note in the project's README: "This project is archived and no longer maintained."
+3. Disable CI and branch protection (optional — reduces noise).
+4. Keep the repository and its docs intact — they may be useful for reference.
+
+**Reactivation:** An archived Land can be reactivated by running the admittance process from Phase 2 (documentation refresh) onward. Phase 1 infrastructure likely still exists.
 
 ---
 
