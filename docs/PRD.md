@@ -41,8 +41,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
 
 7. **F7: Automated Quality Checks** — A Nix-based development environment that
    provides pre-commit hooks (markdown lint, markdown formatting, shell lint,
-   shell formatting) and a CI pipeline that runs the same checks on every push
-   and pull request.
+   shell formatting) and a CI pipeline that runs the same checks on pull
+   requests and on pushes to `main`.
 
 8. **F8: Land Archival** — A defined process for archiving projects that are no
    longer actively maintained, including triggers, steps, and a reactivation
@@ -145,7 +145,7 @@ required sections.
 2. Pre-commit hooks are installed automatically.
 3. On every commit, hooks check markdown lint, markdown formatting, shell lint,
    and shell formatting.
-4. On every push or pull request to `main`, the CI pipeline runs the same
+4. On pull requests and on pushes to `main`, the CI pipeline runs the same
    checks.
 
 **Result:** No malformed markdown or shell scripts reach the main branch.
@@ -199,7 +199,7 @@ quality, with full documentation created retroactively.
   `~/.claude/commands/` and `~/.codex/prompts/` for every command spec; the
   script is idempotent and handles existing symlinks, updated targets, and
   non-symlink conflicts.
-- **F4:** `ADMITTANCE.md` describes all four phases with concrete steps and
+- **F4:** `ADMITTANCE.md` describes all phases with concrete steps and
   includes a checklist for when a Land reaches "Governed" status.
 - **F5:** `FEDERATION.md` contains a table with columns for every standard
   document and guardrail, with clear status indicators and a column legend.
