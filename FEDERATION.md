@@ -2,7 +2,7 @@
 
 | Land       | Stack          | GitHub                                                              | PRD | ARCH | TRACE | CONV | Lint | CI  | Coverage | Pre-commit | Status  |
 | ---------- | -------------- | ------------------------------------------------------------------- | --- | ---- | ----- | ---- | ---- | --- | -------- | ---------- | ------- |
-| governance | Markdown, Bash | [forketyfork/governance](https://github.com/forketyfork/governance) | ✗   | ✗    | —     | ✗    | ✓    | ✓   | —        | ✓          | Partial |
+| governance | Markdown, Bash | [forketyfork/governance](https://github.com/forketyfork/governance) | ✓   | ✗    | —     | ✗    | ✓    | ✓   | —        | ✓          | Partial |
 
 **Column legend:**
 
