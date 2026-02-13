@@ -55,6 +55,12 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
 10. **F10: Hotfix Exception** — A fast-path workflow that allows skipping the
     planning phase for critical bugs, with mandatory cleanup within 24 hours.
 
+11. **F11: Cross-Land Impact Assessment** — A process for evaluating how changes
+    to external contracts (APIs, shared libraries, message formats, file formats,
+    database schemas) in one Land affect dependent Lands, with a dependency map
+    in `FEDERATION.md` and a mandatory review step that blocks merging until the
+    assessment is complete.
+
 ## Non-Goals
 
 - **Code generation.** The governance framework defines workflows and
@@ -114,7 +120,8 @@ Codex environments, and future edits to command specs propagate instantly.
    `CONVENTIONS.md`, runs `/traceability`) to generate standard docs (Phase 2).
 4. Developer backfills test coverage gaps identified by the traceability matrix
    (Phase 3, ongoing).
-5. Developer registers the project in `FEDERATION.md` (Phase 4).
+5. Developer registers the project in `FEDERATION.md` and populates the
+   dependency map with any known cross-Land dependencies (Phase 4).
 
 **Result:** The project is fully governed with all standard documents, automated
 checks, and federation registration in place.
@@ -125,8 +132,11 @@ checks, and federation registration in place.
 2. The table shows each governed project with its compliance status across all
    required documents and guardrails.
 3. Developer uses the table to identify which projects need attention.
+4. Developer consults the dependency map to understand cross-Land contract
+   dependencies before making changes.
 
-**Result:** A single view of governance compliance across all projects.
+**Result:** A single view of governance compliance and cross-Land dependencies
+across all projects.
 
 ### F6: Project Templates
 
@@ -188,6 +198,24 @@ used for code changes.
 **Result:** Critical bugs are fixed immediately without sacrificing review
 quality, with full documentation created retroactively.
 
+### F11: Cross-Land Impact Assessment
+
+1. A PR in one Land modifies an external contract (API route, shared type,
+   message schema, file format, or database schema).
+2. During `/review`, the reviewer identifies the contract change by checking
+   against patterns documented in that Land's CONVENTIONS.md.
+3. The reviewer consults the dependency map in `FEDERATION.md` to find all Lands
+   that consume the changed contract.
+4. For each dependent Land, the reviewer assesses impact: _breaks_ (requires
+   coordinated change), _needs update_ (should adapt but won't break
+   immediately), or _unaffected_ (backward-compatible). The assessment is
+   recorded in the PR description.
+5. For each Land marked _breaks_ or _needs update_, a linked GitHub issue is
+   created in that Land's repository before the original PR merges.
+
+**Result:** Contract changes never silently break dependent Lands. Every
+cross-Land impact is assessed, documented, and tracked before merging.
+
 ## Success Criteria
 
 - **F1:** The constitution covers principles, separation of powers, standard
@@ -201,8 +229,9 @@ quality, with full documentation created retroactively.
   non-symlink conflicts.
 - **F4:** `ADMITTANCE.md` describes all phases with concrete steps and
   includes a checklist for when a Land reaches "Governed" status.
-- **F5:** `FEDERATION.md` contains a table with columns for every standard
-  document and guardrail, with clear status indicators and a column legend.
+- **F5:** `FEDERATION.md` contains a registry table with columns for every
+  standard document and guardrail, with clear status indicators and a column
+  legend, plus a dependency map tracking cross-Land contract dependencies.
 - **F6:** Templates exist for `CLAUDE.md` and `CONVENTIONS.md` with bracketed
   placeholders and instructional comments covering all required sections.
 - **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, and
@@ -213,3 +242,9 @@ quality, with full documentation created retroactively.
   planning-review workflow used for code changes.
 - **F10:** The constitution documents the hotfix criteria, fast path, and
   mandatory cleanup steps.
+- **F11:** The constitution defines what constitutes an external contract change,
+  the four-step assessment process (flag, check dependencies, assess, notify),
+  and the merge-blocking rule. `FEDERATION.md` contains a dependency map with
+  source Land, contract, type, and consuming Land. `/review` includes a
+  cross-Land impact step that checks contract changes against the dependency
+  map.

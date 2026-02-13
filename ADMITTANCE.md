@@ -45,7 +45,8 @@ Run the documentation commands in this order. Each one builds on the previous.
 
 ## Phase 4: Register
 
-Add the project to the Registry of Lands table in FEDERATION.md. Mark each column honestly.
+1. Add the project to the Registry of Lands table in FEDERATION.md. Mark each column honestly.
+2. Populate the dependency map in FEDERATION.md with any known cross-Land dependencies — contracts this Land consumes from other Lands, and contracts other Lands consume from this one.
 
 ## Checklist: When Is a Land "Governed"?
 
@@ -55,6 +56,7 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] docs/PRD.md exists and covers all implemented features
 - [ ] docs/ARCHITECTURE.md exists and matches the actual code
 - [ ] docs/CONVENTIONS.md exists
+- [ ] docs/CONVENTIONS.md documents external contract boundary patterns (if the Land exposes or consumes cross-Land contracts)
 - [ ] docs/TRACEABILITY.md exists with no "Missing" features that are high-priority
 - [ ] Linter configured and enforced via pre-commit
 - [ ] Formatter configured and enforced via pre-commit
@@ -64,3 +66,4 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] Branch protection enabled on main/master
 - [ ] Pre-commit hooks installed and working
 - [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
+- [ ] Cross-Land dependencies recorded in FEDERATION.md dependency map (if applicable)
