@@ -50,7 +50,22 @@ If there's architectural drift, be explicit about it.
 
 Ask: "Does the architectural impact look right?"
 
-### Step 4: Type-Specific Checks
+### Step 4: Cross-Land Impact
+
+If the PR touches files that match external contract patterns documented in CONVENTIONS.md (e.g., API routes, shared schemas, message formats):
+
+- **Contracts changed:** list each changed contract and what changed (endpoint, field, format).
+- **Dependent Lands:** look up the dependency map in FEDERATION.md. List every Land that consumes the changed contract.
+- **Impact assessment in PR:** verify the PR description includes an impact assessment for each dependent Land: _breaks_, _needs update_, or _unaffected_.
+- **Linked issues:** for each Land marked _breaks_ or _needs update_, verify a linked issue exists in that Land's repository.
+
+If the PR changes external contracts but has no impact assessment, flag this as a blocker.
+
+If CONVENTIONS.md does not document contract boundary patterns for this project, note the gap — the reviewer should still check manually and recommend adding the patterns.
+
+Ask: "Does the cross-Land impact look complete?"
+
+### Step 5: Type-Specific Checks
 
 **For Bugs:**
 
@@ -72,7 +87,7 @@ Ask: "Does the architectural impact look right?"
 
 Ask: "Concerns with any of this?"
 
-### Step 5: Suspicious Patterns
+### Step 6: Suspicious Patterns
 
 Only report issues you actually find. Do not list clean categories.
 
@@ -87,7 +102,7 @@ Scan for:
 - Dependency bloat (large library for trivial use)
 - Inconsistent naming vs. existing code
 
-### Step 6: Verdict
+### Step 7: Verdict
 
 - **Confidence:** High / Medium / Low
 - **Top risks:** 1-3 things most likely to cause problems.
