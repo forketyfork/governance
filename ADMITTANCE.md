@@ -63,3 +63,4 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] CI pipeline runs build + test + lint on every push
 - [ ] Branch protection enabled on main/master
 - [ ] Pre-commit hooks installed and working
+- [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
