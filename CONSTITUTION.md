@@ -310,7 +310,7 @@ Each Land's CONVENTIONS.md should document file patterns and markers that indica
 **Assessment process:**
 
 1. **Flag.** During `/review`, identify that the PR touches an external contract. The reviewer (human or agent) checks whether changed files match the contract patterns documented in CONVENTIONS.md.
-2. **Check dependencies.** Consult the `docs/ARCHITECTURE.md` of other Lands in the Federation to find Lands that consume the changed contract.
+2. **Check dependencies.** Consult the `docs/ARCHITECTURE.md` of other Lands in the Federation to find Lands that consume the changed contract. If a Land in the Federation lacks `docs/ARCHITECTURE.md` (e.g., `Partial` or `Legacy` status), manually assess whether it could be affected — the absence of the document does not mean the Land has no dependencies.
 3. **Assess.** For each dependent Land, determine the impact: _breaks_ (the Land will fail without a coordinated change), _needs update_ (the Land should adapt but won't break immediately), or _unaffected_ (the change is backward-compatible). Record this assessment in the PR description.
 4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
 
