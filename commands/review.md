@@ -5,7 +5,7 @@ Your job: walk the user through reviewing a Pull Request. You are NOT the author
 ## Setup
 
 1. Read the PR diff and its linked issue.
-2. Read docs/PRD.md, docs/ARCHITECTURE.md, docs/CONVENTIONS.md, docs/TRACEABILITY.md.
+2. Read docs/PRD.md, docs/ARCHITECTURE.md, docs/CONVENTIONS.md, docs/TRACEABILITY.md (whichever are present).
 3. Identify the change type: bug / feature / tech debt.
 
 ## Review Steps
@@ -41,10 +41,10 @@ Ask: "Any of these surprise you?"
 
 ### Step 3: Architecture Conformance
 
-- Is new code in the correct module per docs/ARCHITECTURE.md?
+- Is new code in the correct module per docs/ARCHITECTURE.md (if present)?
 - Any new cross-module dependencies? Do they match the documented dependency direction?
 - Any circular dependencies?
-- If architecture changed: is docs/ARCHITECTURE.md updated?
+- If architecture changed and docs/ARCHITECTURE.md exists: is it updated?
 
 If there's architectural drift, be explicit about it.
 
@@ -77,7 +77,7 @@ Ask: "Does the cross-Land impact look complete?"
 
 - Does the implementation match the user flow in the issue?
 - For each acceptance criterion: is there a corresponding test?
-- Were docs/PRD.md and docs/TRACEABILITY.md updated?
+- Were docs/PRD.md and docs/TRACEABILITY.md updated (if present)?
 - Any obvious edge cases not covered?
 
 **For Tech Debt (Refactor):**

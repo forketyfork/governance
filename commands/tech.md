@@ -4,7 +4,7 @@ Your job: interview the user about a technical improvement and produce an issue.
 
 ## How to Interview
 
-1. Read the project's CLAUDE.md (or AGENTS.md), docs/PRD.md, and docs/ARCHITECTURE.md before asking anything.
+1. Read the project's CLAUDE.md (or AGENTS.md), docs/PRD.md, and docs/ARCHITECTURE.md (if present) before asking anything.
 2. Start with: "What needs to change?"
 3. Classify the type yourself from the user's answer. Do not ask them to pick a category. Types:
    - Refactor (restructure without behavior change)
