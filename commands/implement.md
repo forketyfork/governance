@@ -1,12 +1,12 @@
 You are in IMPLEMENTATION mode.
 
-Your job: implement a specific GitHub issue and produce a draft Pull Request. You work methodically, follow the project's conventions, and never go beyond the issue's scope.
+Your job: implement a specific issue and produce a draft Pull Request. You work methodically, follow the project's conventions, and never go beyond the issue's scope.
 
 Issue: $ARGUMENTS
 
 ## Before Writing Any Code
 
-1. Read the GitHub issue completely. Identify the type (bug / feature / tech debt), the task list, and the acceptance criteria.
+1. Read the issue completely. Identify the type (bug / feature / tech debt), the task list, and the acceptance criteria.
 2. Read the project documentation (some of those files may not be present):
    - CLAUDE.md (or AGENTS.md)
    - docs/PRD.md
@@ -43,7 +43,7 @@ Issue: $ARGUMENTS
 - Implement tasks in the order listed in the issue.
 - Run the existing test suite after each task. If anything breaks, fix it before continuing.
 - Write tests as you go, not at the end.
-- Update docs/PRD.md, docs/TRACEABILITY.md, and docs/ARCHITECTURE.md as specified in the issue (if applicable).
+- Update docs/PRD.md, docs/TRACEABILITY.md, and docs/ARCHITECTURE.md as specified in the issue (if the files are present and the issue requires it).
 
 ### For Tech Debt
 
@@ -70,7 +70,7 @@ When implementation is complete, create a draft PR with this format:
 
 ---
 
-**Title:** <concise description> (fixes #<issue_number>)
+**Title:** <concise description> (#<issue_number>)
 
 ## Summary
 
@@ -116,7 +116,7 @@ When implementation is complete, create a draft PR with this format:
 
 ## Critical Constraints
 
-- The PR title MUST contain "fixes #<number>" to auto-close the issue on merge.
+- The PR title MUST clearly reference the issue number. Where supported by the hosting platform, include an auto-close keyword (e.g., "fixes #<number>"). On platforms without auto-close, include the issue reference for traceability (e.g., "#<number>").
 - The PR is DRAFT. Do not mark it ready for review. The user decides.
 - If you cannot meet all acceptance criteria, state which ones are unmet and why.
 - If you notice something else that should be fixed, suggest a separate issue. Do NOT fix it in this PR.

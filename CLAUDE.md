@@ -28,6 +28,12 @@ shfmt -d scripts/*.sh
 
 There is no build or test step — this is a documentation-only repository.
 
+## Infrastructure
+
+- **Source code hosting:** GitHub — URL: <https://github.com/forketyfork/governance> — CLI: `gh`
+- **Issue tracker:** GitHub Issues — URL: <https://github.com/forketyfork/governance/issues> — CLI: `gh issue`
+- **CI/CD:** GitHub Actions — config: `.github/workflows/ci.yml`
+
 ## Governance
 
 This repository IS the Federation's governance framework. The constitution is defined in [CONSTITUTION.md](CONSTITUTION.md).
@@ -49,6 +55,7 @@ governance/
 │   ├── implement.md
 │   ├── knowledge.md
 │   ├── learn.md
+│   ├── managing-github.md
 │   ├── prd.md
 │   ├── review.md
 │   ├── ship.md

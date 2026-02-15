@@ -17,7 +17,7 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
 3. **Set up guardrails:**
    - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails in CONSTITUTION.md).
    - Create pre-commit hooks that run lint + format + type check + test.
-   - Set up CI (GitHub Actions recommended) with build + test + lint.
+   - Set up CI with build + test + lint (see Infrastructure in CONSTITUTION.md).
    - Enable branch protection on main/master.
 4. **Set up a reproducible, worktree-ready development environment:**
    - Configure a stack-appropriate environment activation path from inside the repository (for example, Nix + direnv, devcontainer, virtual environment).
