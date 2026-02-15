@@ -174,7 +174,7 @@ project-root/
 
 - [e.g., Public functions: always a doc comment explaining WHAT, not HOW]
 - [e.g., Non-obvious "why": if the code does something surprising, explain why]
-- [e.g., TODOs: NEVER. Use GitHub issues instead.]
+- [e.g., TODOs: NEVER. Use issues instead.]
 
 ### When Not to Comment
 
