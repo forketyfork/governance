@@ -33,6 +33,12 @@
 [format command]
 ```
 
+## Infrastructure
+
+- **Source code hosting:** [e.g., GitHub — CLI: `gh`]
+- **Issue tracker:** [e.g., GitHub Issues — CLI: `gh issue`]
+- **CI/CD:** [e.g., GitHub Actions — config: `.github/workflows/ci.yml`]
+
 ## Governance
 
 This project is a Land in the federated governance framework. The constitution of the Federation is defined in the [CONSTITUTION.md](https://raw.githubusercontent.com/forketyfork/governance/refs/heads/main/CONSTITUTION.md).

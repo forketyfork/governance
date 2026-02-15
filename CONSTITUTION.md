@@ -13,7 +13,7 @@ The answer: standardized documentation, mandatory guardrails, structured workflo
 ## Principles
 
 1. **No code without context.** An agent must read the project's documentation before writing a single line. No exceptions.
-2. **No implementation without specification.** Every change starts as a GitHub issue produced by a planning agent. The implementing agent works from the issue, not from vibes.
+2. **No implementation without specification.** Every change starts as an issue produced by a planning agent. The implementing agent works from the issue, not from vibes.
 3. **No merge without review.** Every PR is a draft until the developer reviews it. The developer reviews boundaries (interfaces, architecture, tests), not every line.
 4. **Document what IS, not what should be.** If the code violates its own architecture doc, fix the code or fix the doc — never pretend the violation doesn't exist.
 5. **Automate what humans forget.** Linters, formatters, type checkers, pre-commit hooks, and CI exist because the developer will skip manual checks when tired. The machines don't get tired.
@@ -63,7 +63,7 @@ Every Land must have these automated checks in place. They are non-negotiable be
 | Conventional commits          | Structured commit messages. Agents must follow this                  |
 | Max file length: 300 lines    | Forces decomposition. Exceeding = refactor before continuing         |
 | Max function length: 50 lines | Same principle at function level                                     |
-| No TODOs in code              | Incomplete work goes in GitHub issues, not in source comments        |
+| No TODOs in code              | Incomplete work goes in issues, not in source comments               |
 
 ### Stack-Specific
 
@@ -120,6 +120,34 @@ Every documented convention is a candidate for automation. Promotion is the proc
 - `[auto]` — enforced by linter, type system, or CI
 - `[review]` — enforced during code review only
 - `[planned]` — automation planned but not yet implemented
+
+---
+
+## Infrastructure
+
+Each Land must declare its infrastructure tooling in its CLAUDE.md. The
+governance framework does not prescribe specific vendors — it defines outcome
+requirements. The specific tools are a Land-level decision.
+
+### Required Infrastructure
+
+| Component           | Outcome Requirement                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Source code hosting | A platform that supports branches, pull/merge requests, and code review. The agent must be able to create PRs and post comments. |
+| Issue tracker       | A system for tracking issues with labels, descriptions, and status. Planning commands produce issues here.                       |
+| CI/CD pipeline      | Automated build, test, and lint on every push. PRs cannot merge without passing CI.                                              |
+
+### What Each Land Documents
+
+In the Infrastructure section of its CLAUDE.md, each Land declares:
+
+- **Source code hosting:** platform name, CLI tool (if any), repository URL
+- **Issue tracker:** platform name, CLI tool or API (if any)
+- **CI/CD:** platform name, configuration file location
+
+Agent commands read the project's CLAUDE.md to determine which CLI or API to
+use for operations like creating pull requests, posting review comments, or
+searching issues.
 
 ---
 
@@ -192,16 +220,16 @@ All Lands share a common set of agent commands that structure the development wo
 
 ### Workflow Commands
 
-| Command      | Purpose                               | Input                                   | Output                                                                   |
-| ------------ | ------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------ |
-| `/bug`       | Triage a bug report                   | User interview                          | GitHub issue with reproduction steps and acceptance criteria             |
-| `/feature`   | Plan a new feature                    | User interview + project docs           | GitHub issue with status quo, objectives, user flow, implementation plan |
-| `/tech`      | Plan a technical improvement          | User interview + project docs           | GitHub issue with status quo, objectives, tasks, risk assessment         |
-| `/implement` | Implement a GitHub issue              | GitHub issue + project docs             | Draft PR with tests, doc updates, and checklist                          |
-| `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context   | Branch, commit, and draft PR ready for review                            |
-| `/review`    | Guide the developer through PR review | PR diff + linked issue + project docs   | Step-by-step review walkthrough with verdict                             |
-| `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context | Classified comments, fixes, and reply drafts                             |
-| `/amend`     | Propose a governance amendment        | Project-level insight + governance docs | PR against governance repo with classification and affected Lands        |
+| Command      | Purpose                               | Input                                   | Output                                                            |
+| ------------ | ------------------------------------- | --------------------------------------- | ----------------------------------------------------------------- |
+| `/bug`       | Triage a bug report                   | User interview                          | Issue with reproduction steps and acceptance criteria             |
+| `/feature`   | Plan a new feature                    | User interview + project docs           | Issue with status quo, objectives, user flow, implementation plan |
+| `/tech`      | Plan a technical improvement          | User interview + project docs           | Issue with status quo, objectives, tasks, risk assessment         |
+| `/implement` | Implement an issue                    | Issue + project docs                    | Draft PR with tests, doc updates, and checklist                   |
+| `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context   | Branch, commit, and draft PR ready for review                     |
+| `/review`    | Guide the developer through PR review | PR diff + linked issue + project docs   | Step-by-step review walkthrough with verdict                      |
+| `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context | Classified comments, fixes, and reply drafts                      |
+| `/amend`     | Propose a governance amendment        | Project-level insight + governance docs | PR against governance repo with classification and affected Lands |
 
 ### Session Commands
 
@@ -214,7 +242,7 @@ All Lands share a common set of agent commands that structure the development wo
 
 The development workflow has four phases:
 
-1. **Plan** — A planning command (`/bug`, `/feature`, or `/tech`) interviews the developer and produces a GitHub issue with clear scope, acceptance criteria, and implementation tasks. The developer reviews the issue before implementation begins. _(Human checkpoint 1.)_
+1. **Plan** — A planning command (`/bug`, `/feature`, or `/tech`) interviews the developer and produces an issue with clear scope, acceptance criteria, and implementation tasks. The developer reviews the issue before implementation begins. _(Human checkpoint 1.)_
 2. **Implement** — `/implement` picks up the approved issue and produces code: a draft PR with tests, documentation updates, and a checklist. `/ship` handles the mechanics of committing, pushing, and creating the PR.
 3. **Review** — `/review` walks the developer through the PR diff with a structured checklist. The developer makes the merge decision. If changes are needed, `/address` processes review comments and produces fixes. _(Human checkpoint 2.)_
 4. **Reflect** — After the session's work is done, `/learn` extracts reusable insights into the project's CLAUDE.md so future agent sessions start smarter. `/knowledge` produces learning notes the developer can study in their Zettelkasten — staying informed about their own codebase without reading every line of code.
@@ -224,7 +252,7 @@ The development workflow has four phases:
   ─────                         ─────────                   ──────                   ───────
 
   /bug
-  /feature ──► GitHub Issue ──► /implement ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
+  /feature ──► Issue ──► /implement ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
   /tech                         /ship                       /address ◄┘              /knowledge
 
                     ▲                                          ▲
@@ -243,7 +271,7 @@ When a critical bug blocks the developer's immediate workflow, the normal planni
 
 **Fast path:**
 
-1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem. No GitHub issue is required at this stage.
+1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem. No issue is required at this stage.
 2. The agent must still read project docs before coding.
 3. The agent must still write a regression test.
 4. `/ship` produces a PR without a `fixes #` reference (the issue does not exist yet).
@@ -251,7 +279,7 @@ When a critical bug blocks the developer's immediate workflow, the normal planni
 
 **Cleanup (mandatory within 24 hours):**
 
-- Create the GitHub issue retroactively using `/bug`.
+- Create the issue retroactively using `/bug`.
 - Link the PR to the issue.
 - Run `/learn` to capture what broke and why.
 
@@ -284,7 +312,7 @@ Each Land's CONVENTIONS.md should document file patterns and markers that indica
 1. **Flag.** During `/review`, identify that the PR touches an external contract. The reviewer (human or agent) checks whether changed files match the contract patterns documented in CONVENTIONS.md.
 2. **Check dependencies.** Consult the dependency map in FEDERATION.md for Lands that consume the changed contract.
 3. **Assess.** For each dependent Land, determine the impact: _breaks_ (the Land will fail without a coordinated change), _needs update_ (the Land should adapt but won't break immediately), or _unaffected_ (the change is backward-compatible). Record this assessment in the PR description.
-4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked GitHub issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
+4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
 
 **No PR that changes an external contract merges without steps 1–4 completed.** If a contract change is merged without assessment and a dependent Land breaks, treat it as a hotfix in the affected Land and create a `/tech` issue to add the missing dependency tracking.
 

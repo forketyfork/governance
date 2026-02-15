@@ -4,32 +4,7 @@ description: "Address the PR review and issue comments"
 
 Review the **unresolved** review and issue comments on this PR against the PR description and our session context.
 
-To get only unresolved review comments, use the GraphQL API to fetch review threads with their resolution state:
-
-```bash
-gh api graphql -f query='
-{
-  repository(owner: "<org>", name: "<repo>") {
-    pullRequest(number: <pr>) {
-      reviewThreads(first: 100) {
-        nodes {
-          isResolved
-          comments(first: 1) {
-            nodes {
-              databaseId
-              body
-              author { login }
-              path
-            }
-          }
-        }
-      }
-    }
-  }
-}'
-```
-
-Only consider threads where `isResolved` is `false`. Also consider any unresolved issue comments.
+Use the API or CLI for the source code hosting declared in the project's CLAUDE.md to fetch unresolved review threads and issue comments. Only consider unresolved threads.
 
 For each comment:
 
@@ -56,9 +31,8 @@ Comment 2 — <same as above>
 When replying to review or issue comments:
 
 - Never edit or PATCH the original review comment body.
-- For review comments, always post a new reply using `in_reply_to` with `gh api repos/<org>/<repo>/pulls/<pr>/comments --method POST --field in_reply_to=<comment_id> --field body="..."`.
-- For issue comments, post a new comment with `gh api repos/<org>/<repo>/issues/<pr>/comments --method POST --field body="..."`.
-- To avoid shell expansion issues with backticks or special characters, write the reply body to `.tmp/reply.txt` and use `--field body=@.tmp/reply.txt` to read it directly from the file.
+- Always post a new reply using the API or CLI for the source code hosting declared in the project's CLAUDE.md.
+- To avoid shell expansion issues with backticks or special characters, write the reply body to a temp file and pass it by reference.
 - If a mistaken edit already happened, leave it and add a new reply noting the fix.
 
 After I approve:

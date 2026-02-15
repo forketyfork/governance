@@ -28,6 +28,12 @@ shfmt -d scripts/*.sh
 
 There is no build or test step — this is a documentation-only repository.
 
+## Infrastructure
+
+- **Source code hosting:** GitHub — CLI: `gh`
+- **Issue tracker:** GitHub Issues — CLI: `gh issue`
+- **CI/CD:** GitHub Actions — config: `.github/workflows/ci.yml`
+
 ## Governance
 
 This repository IS the Federation's governance framework. The constitution is defined in [CONSTITUTION.md](CONSTITUTION.md).

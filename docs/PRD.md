@@ -67,6 +67,13 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
     `script/setup` or an equivalent command), with minimal host prerequisites,
     so development workflows run without hidden machine-specific setup.
 
+13. **F13: Infrastructure-Agnostic Governance** — The constitution and command
+    specifications do not prescribe specific source code hosting, issue
+    tracking, or CI/CD platforms. Each Land declares its infrastructure tooling
+    in its CLAUDE.md. Command specs reference the project's declared tooling
+    rather than hardcoding vendor-specific CLI commands. Vendor-specific
+    knowledge (e.g., GitHub CLI patterns) is preserved in dedicated skills.
+
 ## Non-Goals
 
 - **Code generation.** The governance framework defines workflows and
@@ -99,7 +106,7 @@ governed projects operate.
 2. The agent reads the corresponding command specification from the symlinked
    file.
 3. The agent follows the specification's procedure: interviewing the developer,
-   reading project docs, and producing the expected output (a GitHub issue, a PR,
+   reading project docs, and producing the expected output (an issue, a PR,
    a review walkthrough, etc.).
 
 **Result:** The agent performs a structured task with consistent quality across
@@ -182,7 +189,7 @@ remains intact for reference.
 1. Developer identifies a governance change needed (from a review, a session
    learning, or direct observation).
 2. Developer runs `/feature` or `/tech` to plan the governance change as a
-   GitHub issue.
+   issue.
 3. The change is implemented, reviewed, and merged following the standard
    workflow.
 4. Affected command specifications and Land-level `CLAUDE.md` files are updated.
@@ -216,7 +223,7 @@ quality, with full documentation created retroactively.
    coordinated change), _needs update_ (should adapt but won't break
    immediately), or _unaffected_ (backward-compatible). The assessment is
    recorded in the PR description.
-5. For each Land marked _breaks_ or _needs update_, a linked GitHub issue is
+5. For each Land marked _breaks_ or _needs update_, a linked issue is
    created in that Land's repository before the original PR merges.
 
 **Result:** Contract changes never silently break dependent Lands. Every
@@ -235,6 +242,23 @@ cross-Land impact is assessed, documented, and tracked before merging.
 
 **Result:** Environment setup is repeatable for each worktree, reducing setup
 drift and hidden dependencies.
+
+### F13: Infrastructure-Agnostic Governance
+
+1. Developer reads the constitution's Infrastructure section, which defines
+   outcome requirements for issue tracker, source code hosting, and CI/CD
+   without naming specific vendors.
+2. Developer fills in the Infrastructure section of their project's CLAUDE.md
+   with the specific tools used (e.g., GitHub + GitHub Actions, or GitLab +
+   GitLab CI).
+3. When an agent runs a command like `/ship` or `/address`, it reads the
+   project's CLAUDE.md to determine which CLI or API to use.
+4. For projects on a supported platform, the agent can use a platform-specific
+   skill (e.g., the `gh` skill for GitHub) for concrete CLI commands.
+
+**Result:** The governance framework works with any combination of source code
+hosting, issue tracking, and CI/CD. Projects self-declare their tooling, and
+agents adapt.
 
 ## Success Criteria
 
@@ -272,3 +296,9 @@ drift and hidden dependencies.
   and validate a reproducible, worktree-ready development environment with
   minimal host prerequisites, a clear activation path, and a documented
   bootstrap entry point (`script/setup` preferred).
+- **F13:** The constitution's Infrastructure section defines outcome requirements
+  for source code hosting, issue tracking, and CI/CD without naming specific
+  vendors. The CLAUDE.md template includes an Infrastructure section with
+  placeholders. Command specifications use generic terms and reference the
+  project's declared tooling. Vendor-specific CLI knowledge is available
+  through dedicated skills (e.g., `gh` for GitHub).
