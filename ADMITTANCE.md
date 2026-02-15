@@ -19,8 +19,12 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Create pre-commit hooks that run lint + format + type check + test.
    - Set up CI (GitHub Actions recommended) with build + test + lint.
    - Enable branch protection on main/master.
-4. **Create the `docs/` directory.**
-5. **Assess observability:**
+4. **Set up a reproducible development environment:**
+   - Configure a stack-appropriate environment activation path from inside the repository (for example, Nix + direnv, devcontainer, virtual environment).
+   - Keep host prerequisites minimal and document them explicitly.
+   - Verify that build, lint, type-check, and test commands run after environment activation without undeclared global dependencies.
+5. **Create the `docs/` directory.**
+6. **Assess observability:**
    - Can the agent run the project and see output? If not, create a run/start script.
    - Can the agent run tests and see results? If not, configure the test runner for CLI output.
    - Can the agent read logs? Document log locations and how to enable debug logging.
@@ -65,5 +69,7 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] CI pipeline runs build + test + lint on every push
 - [ ] Branch protection enabled on main/master
 - [ ] Pre-commit hooks installed and working
+- [ ] Reproducible development environment is documented in CLAUDE.md with activation steps and minimal host prerequisites
+- [ ] After activation, build/lint/type-check/test commands run without undeclared global setup
 - [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
 - [ ] Cross-Land dependencies recorded in FEDERATION.md dependency map (if applicable)
