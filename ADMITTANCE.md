@@ -19,10 +19,11 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Create pre-commit hooks that run lint + format + type check + test.
    - Set up CI (GitHub Actions recommended) with build + test + lint.
    - Enable branch protection on main/master.
-4. **Set up a reproducible development environment:**
+4. **Set up a reproducible, worktree-ready development environment:**
    - Configure a stack-appropriate environment activation path from inside the repository (for example, Nix + direnv, devcontainer, virtual environment).
+   - Define a worktree bootstrap entry point at the repository root (prefer `script/setup` following scripts-to-rule-them-all, or a clearly documented equivalent command).
    - Keep host prerequisites minimal and document them explicitly.
-   - Verify that build, lint, type-check, and test commands run after environment activation without undeclared global dependencies.
+   - Verify that from a fresh git worktree, bootstrap + activation can run build, lint, type-check, and test without undeclared global dependencies or setup performed in another worktree.
 5. **Create the `docs/` directory.**
 6. **Assess observability:**
    - Can the agent run the project and see output? If not, create a run/start script.
@@ -69,7 +70,7 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] CI pipeline runs build + test + lint on every push
 - [ ] Branch protection enabled on main/master
 - [ ] Pre-commit hooks installed and working
-- [ ] Reproducible development environment is documented in CLAUDE.md with activation steps and minimal host prerequisites
-- [ ] After activation, build/lint/type-check/test commands run without undeclared global setup
+- [ ] Reproducible development environment is documented in CLAUDE.md with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
+- [ ] From a fresh git worktree, bootstrap + activation can run build/lint/type-check/test without undeclared global setup or reliance on sibling worktrees
 - [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
 - [ ] Cross-Land dependencies recorded in FEDERATION.md dependency map (if applicable)
