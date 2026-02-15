@@ -135,14 +135,20 @@ and may use any appropriate toolchain (for example, Nix + direnv,
 devcontainers, virtual environments), but the outcome is mandatory:
 
 - The activation path is documented in the Land's CLAUDE.md.
+- A worktree bootstrap entry point is documented (prefer `script/setup` per
+  scripts-to-rule-them-all, or a clearly documented equivalent command).
 - Required host prerequisites are minimal and explicitly documented.
 - Build, lint, type-check, and test workflows run without hidden global setup.
+- A fresh git worktree can run bootstrap + activation and then execute build,
+  lint, type-check, and test workflows without relying on setup performed in
+  other worktrees.
 - Setup instructions are deterministic enough for both the developer and the
   agent to follow without project-external tribal knowledge.
 
 This is an outcome requirement, not a tool mandate. A Land is compliant when a
-new machine with the documented prerequisites can enter the repository, run the
-documented activation path, and execute the Land's standard workflows.
+new machine with the documented prerequisites can enter a fresh worktree, run
+the documented bootstrap and activation paths, and execute the Land's standard
+workflows.
 
 ### Observability
 
