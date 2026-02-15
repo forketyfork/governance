@@ -51,7 +51,7 @@ Run the documentation commands in this order. Each one builds on the previous.
 ## Phase 4: Register
 
 1. Add the project to the Registry of Lands table in FEDERATION.md. Mark each column honestly.
-2. Populate the dependency map in FEDERATION.md with any known cross-Land dependencies — contracts this Land consumes from other Lands, and contracts other Lands consume from this one.
+2. Document any known cross-Land dependencies in the Land's own `docs/ARCHITECTURE.md` — contracts this Land consumes from other Lands.
 
 ## Checklist: When Is a Land "Governed"?
 
@@ -73,4 +73,4 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] Reproducible development environment is documented in CLAUDE.md with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
 - [ ] From a fresh git worktree, bootstrap + activation can run build/lint/type-check/test without undeclared global setup or reliance on sibling worktrees
 - [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
-- [ ] Cross-Land dependencies recorded in FEDERATION.md dependency map (if applicable)
+- [ ] Cross-Land dependencies documented in the Land's own `docs/ARCHITECTURE.md` (if applicable)

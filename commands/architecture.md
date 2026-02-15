@@ -37,6 +37,10 @@ For each significant flow that crosses a service boundary, provide a Mermaid seq
 
 Table with columns: Direction (inbound/outbound/bidirectional), Counterpart, Protocol, Endpoint/Topic/Socket, Payload (brief), Auth, Owner (team, if known).
 
+### Cross-Land Dependencies (include only if this Land consumes contracts from other Lands)
+
+Table listing external contracts this Land depends on from other Lands in the Federation. Columns: Source Land, Contract (identifier such as endpoint, schema, module), Type (`API`, `schema`, `library`, `file format`, or `protocol`), Description (what this Land uses it for). This section is the authoritative record of what this Land consumes from the rest of the Federation and is consulted during cross-Land impact assessment (see CONSTITUTION.md).
+
 ### Component Diagram
 
 Mermaid diagram showing LAYERS, not individual files. Group related files into labeled subgraphs. Target 10-20 boxes maximum. Each box: module/file name + one-line italic responsibility description. Show dependency arrows between groups. If the diagram would exceed 20 boxes, you are showing too much detail — collapse further.

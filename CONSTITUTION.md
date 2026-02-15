@@ -38,12 +38,12 @@ The governance framework operates through three branches:
 
 Every Land must maintain these documents in a `docs/` directory at the repository root. They are living documents, updated as part of the development workflow — not after.
 
-| Document               | Purpose                                                                                                                                                        | Created by                        | Updated by                                                       |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------------------------------- |
-| `docs/PRD.md`          | What the software does, for whom, and why. Features, user flows, success criteria, non-goals. Source of truth for WHAT.                                        | `/prd` command                    | `/prd` command or manually during `/feature` workflow            |
-| `docs/ARCHITECTURE.md` | How the software is built. Layers, modules, dependencies, data flow, patterns, ADRs. Source of truth for HOW.                                                  | `/architecture` command           | `/architecture` command or manually during `/implement` workflow |
-| `docs/CONVENTIONS.md`  | Coding patterns for this specific project. Naming, error handling, state management, file structure, stack-specific idioms. Fed to the agent at session start. | Manually or with agent assistance | Manually when patterns evolve                                    |
-| `docs/TRACEABILITY.md` | Maps PRD features to test files. Shows what's tested, what's partial, what's missing.                                                                          | `/traceability` command           | `/traceability` command or during `/implement` workflow          |
+| Document               | Purpose                                                                                                                                                                  | Created by                        | Updated by                                                       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- | ---------------------------------------------------------------- |
+| `docs/PRD.md`          | What the software does, for whom, and why. Features, user flows, success criteria, non-goals. Source of truth for WHAT.                                                  | `/prd` command                    | `/prd` command or manually during `/feature` workflow            |
+| `docs/ARCHITECTURE.md` | How the software is built. Layers, modules, dependencies, data flow, patterns, ADRs. Includes cross-Land dependencies consumed by this project. Source of truth for HOW. | `/architecture` command           | `/architecture` command or manually during `/implement` workflow |
+| `docs/CONVENTIONS.md`  | Coding patterns for this specific project. Naming, error handling, state management, file structure, stack-specific idioms. Fed to the agent at session start.           | Manually or with agent assistance | Manually when patterns evolve                                    |
+| `docs/TRACEABILITY.md` | Maps PRD features to test files. Shows what's tested, what's partial, what's missing.                                                                                    | `/traceability` command           | `/traceability` command or during `/implement` workflow          |
 
 Additionally, each project has a `CLAUDE.md` (symlinked to `AGENTS.md`) at the repository root containing agent-specific instructions, project context, and references to the docs/ files.
 
@@ -282,13 +282,13 @@ Each Land's CONVENTIONS.md should document file patterns and markers that indica
 **Assessment process:**
 
 1. **Flag.** During `/review`, identify that the PR touches an external contract. The reviewer (human or agent) checks whether changed files match the contract patterns documented in CONVENTIONS.md.
-2. **Check dependencies.** Consult the dependency map in FEDERATION.md for Lands that consume the changed contract.
+2. **Check dependencies.** Consult the `docs/ARCHITECTURE.md` of other Lands in the Federation to find Lands that consume the changed contract.
 3. **Assess.** For each dependent Land, determine the impact: _breaks_ (the Land will fail without a coordinated change), _needs update_ (the Land should adapt but won't break immediately), or _unaffected_ (the change is backward-compatible). Record this assessment in the PR description.
 4. **Notify.** For each Land marked _breaks_ or _needs update_, create a linked GitHub issue in that Land's repository before merging the original PR. The issue must reference the originating PR and describe the required change.
 
 **No PR that changes an external contract merges without steps 1–4 completed.** If a contract change is merged without assessment and a dependent Land breaks, treat it as a hotfix in the affected Land and create a `/tech` issue to add the missing dependency tracking.
 
-Cross-Land dependencies are tracked in the dependency map in FEDERATION.md. Update the map whenever a new dependency is introduced or removed.
+Each Land tracks its own cross-Land dependencies in its `docs/ARCHITECTURE.md`. Update the architecture document whenever a new dependency is introduced or removed.
 
 ---
 

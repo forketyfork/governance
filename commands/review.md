@@ -55,7 +55,7 @@ Ask: "Does the architectural impact look right?"
 If the PR touches files that match external contract patterns documented in CONVENTIONS.md (e.g., API routes, shared schemas, message formats):
 
 - **Contracts changed:** list each changed contract and what changed (endpoint, field, format).
-- **Dependent Lands:** look up the dependency map in FEDERATION.md. List every Land that consumes the changed contract.
+- **Dependent Lands:** consult the `docs/ARCHITECTURE.md` of other Lands in the Federation to find Lands that consume the changed contract. List every dependent Land.
 - **Impact assessment in PR:** verify the PR description includes an impact assessment for each dependent Land: _breaks_, _needs update_, or _unaffected_.
 - **Linked issues:** for each Land marked _breaks_ or _needs update_, verify a linked issue exists in that Land's repository.
 

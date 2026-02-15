@@ -57,9 +57,9 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
 
 11. **F11: Cross-Land Impact Assessment** — A process for evaluating how changes
     to external contracts (APIs, shared libraries, message formats, file formats,
-    database schemas) in one Land affect dependent Lands, with a dependency map
-    in `FEDERATION.md` and a mandatory review step that blocks merging until the
-    assessment is complete.
+    database schemas) in one Land affect dependent Lands, with cross-Land
+    dependencies tracked in each Land's own `docs/ARCHITECTURE.md` and a
+    mandatory review step that blocks merging until the assessment is complete.
 
 12. **F12: Reproducible Development Environment Requirement** — A governance
     requirement that each Land defines a stack-appropriate, repo-local
@@ -126,8 +126,8 @@ Codex environments, and future edits to command specs propagate instantly.
    `CONVENTIONS.md`, runs `/traceability`) to generate standard docs (Phase 2).
 4. Developer backfills test coverage gaps identified by the traceability matrix
    (Phase 3, ongoing).
-5. Developer registers the project in `FEDERATION.md` and populates the
-   dependency map with any known cross-Land dependencies (Phase 4).
+5. Developer registers the project in `FEDERATION.md` and documents any known
+   cross-Land dependencies in the Land's own `docs/ARCHITECTURE.md` (Phase 4).
 
 **Result:** The project is fully governed with all standard documents, automated
 checks, and federation registration in place.
@@ -138,11 +138,8 @@ checks, and federation registration in place.
 2. The table shows each governed project with its compliance status across all
    required documents and guardrails.
 3. Developer uses the table to identify which projects need attention.
-4. Developer consults the dependency map to understand cross-Land contract
-   dependencies before making changes.
 
-**Result:** A single view of governance compliance and cross-Land dependencies
-across all projects.
+**Result:** A single view of governance compliance across all projects.
 
 ### F6: Project Templates
 
@@ -210,8 +207,8 @@ quality, with full documentation created retroactively.
    message schema, file format, or database schema).
 2. During `/review`, the reviewer identifies the contract change by checking
    against patterns documented in that Land's CONVENTIONS.md.
-3. The reviewer consults the dependency map in `FEDERATION.md` to find all Lands
-   that consume the changed contract.
+3. The reviewer consults the `docs/ARCHITECTURE.md` of other Lands in the
+   Federation to find all Lands that consume the changed contract.
 4. For each dependent Land, the reviewer assesses impact: _breaks_ (requires
    coordinated change), _needs update_ (should adapt but won't break
    immediately), or _unaffected_ (backward-compatible). The assessment is
@@ -251,7 +248,7 @@ drift and hidden dependencies.
   includes a checklist for when a Land reaches "Governed" status.
 - **F5:** `FEDERATION.md` contains a registry table with columns for every
   standard document and guardrail, with clear status indicators and a column
-  legend, plus a dependency map tracking cross-Land contract dependencies.
+  legend.
 - **F6:** Templates exist for `CLAUDE.md` and `CONVENTIONS.md` with bracketed
   placeholders and instructional comments covering all required sections.
 - **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, and
@@ -264,10 +261,9 @@ drift and hidden dependencies.
   mandatory cleanup steps.
 - **F11:** The constitution defines what constitutes an external contract change,
   the four-step assessment process (flag, check dependencies, assess, notify),
-  and the merge-blocking rule. `FEDERATION.md` contains a dependency map with
-  source Land, contract, type, and consuming Land. `/review` includes a
-  cross-Land impact step that checks contract changes against the dependency
-  map.
+  and the merge-blocking rule. Each Land tracks its own cross-Land dependencies
+  in `docs/ARCHITECTURE.md`. `/review` includes a cross-Land impact step that
+  checks contract changes against the architecture documents of dependent Lands.
 - **F12:** The constitution and admittance process require each Land to document
   and validate a reproducible, worktree-ready development environment with
   minimal host prerequisites, a clear activation path, and a documented
