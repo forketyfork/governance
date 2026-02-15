@@ -10,6 +10,13 @@
 ## Build & Run
 
 ```bash
+# Environment activation
+[environment activation command]
+#
+# Minimal host prerequisites:
+# - [prerequisite 1]
+# - [prerequisite 2]
+
 # Build
 [build command]
 

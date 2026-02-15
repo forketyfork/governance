@@ -61,6 +61,11 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
     in `FEDERATION.md` and a mandatory review step that blocks merging until the
     assessment is complete.
 
+12. **F12: Reproducible Development Environment Requirement** — A governance
+    requirement that each Land defines a stack-appropriate, repo-local
+    environment activation path with minimal host prerequisites, so development
+    workflows run without hidden machine-specific setup.
+
 ## Non-Goals
 
 - **Code generation.** The governance framework defines workflows and
@@ -216,6 +221,18 @@ quality, with full documentation created retroactively.
 **Result:** Contract changes never silently break dependent Lands. Every
 cross-Land impact is assessed, documented, and tracked before merging.
 
+### F12: Reproducible Development Environment Requirement
+
+1. Developer enters a Land repository and reads environment activation steps in
+   that Land's `CLAUDE.md`.
+2. Developer activates the stack-appropriate development environment from inside
+   the repository.
+3. Developer and agent run build, lint, type-check, and test workflows without
+   relying on undeclared global machine setup.
+
+**Result:** Environment setup is repeatable and Land-local, reducing setup drift
+and hidden dependencies.
+
 ## Success Criteria
 
 - **F1:** The constitution covers principles, separation of powers, standard
@@ -248,3 +265,6 @@ cross-Land impact is assessed, documented, and tracked before merging.
   source Land, contract, type, and consuming Land. `/review` includes a
   cross-Land impact step that checks contract changes against the dependency
   map.
+- **F12:** The constitution and admittance process require each Land to document
+  and validate a reproducible, repo-local development environment with minimal
+  host prerequisites and a clear activation path.
