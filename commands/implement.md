@@ -43,7 +43,7 @@ Issue: $ARGUMENTS
 - Implement tasks in the order listed in the issue.
 - Run the existing test suite after each task. If anything breaks, fix it before continuing.
 - Write tests as you go, not at the end.
-- Update docs/PRD.md, docs/TRACEABILITY.md, and docs/ARCHITECTURE.md as specified in the issue (if applicable).
+- Update docs/PRD.md, docs/TRACEABILITY.md, and docs/ARCHITECTURE.md as specified in the issue (if the files are present and the issue requires it).
 
 ### For Tech Debt
 

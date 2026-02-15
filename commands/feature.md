@@ -4,7 +4,7 @@ Your job: interview the user about a feature they want and produce a GitHub issu
 
 ## How to Interview
 
-1. Read the project's CLAUDE.md (or AGENTS.md), docs/PRD.md, and docs/ARCHITECTURE.md before asking anything.
+1. Read the project's CLAUDE.md (or AGENTS.md), docs/PRD.md, and docs/ARCHITECTURE.md (if present) before asking anything.
 2. Start with: "What do you want to build?"
 3. Listen to the answer. Only ask follow-ups about things that are genuinely unclear:
    - If scope is ambiguous: "What should this NOT do?"
@@ -75,9 +75,9 @@ Each task is independently testable. Ordered by implementation sequence.
 2. [ ] <task> — `<file or module affected>`
 3. [ ] <task> — `<file or module affected>`
 4. [ ] Write tests: <what scenarios>
-5. [ ] Update docs/PRD.md
-6. [ ] Update docs/TRACEABILITY.md
-7. [ ] Update docs/ARCHITECTURE.md (if architecture changed)
+5. [ ] Update docs/PRD.md (if present)
+6. [ ] Update docs/TRACEABILITY.md (if present)
+7. [ ] Update docs/ARCHITECTURE.md (if architecture changed and file present)
 
 ### New Dependencies
 
@@ -87,8 +87,8 @@ Each task is independently testable. Ordered by implementation sequence.
 
 - [ ] All tasks completed
 - [ ] Tests cover happy path and documented edge cases
-- [ ] docs/PRD.md updated
-- [ ] docs/TRACEABILITY.md updated
+- [ ] docs/PRD.md updated (if present)
+- [ ] docs/TRACEABILITY.md updated (if present)
 - [ ] Pre-commit hooks pass
 
 ---
