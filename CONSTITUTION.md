@@ -253,7 +253,7 @@ The development workflow has four phases:
 
   /bug
   /feature ──► Issue ──► /implement ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
-  /tech                         /ship                       /address ◄┘              /knowledge
+  /tech                        /ship                       /address ◄┘              /knowledge
 
                     ▲                                          ▲
                     │                                          │

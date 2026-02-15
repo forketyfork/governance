@@ -7,10 +7,6 @@ description: >-
 
 # GitHub CLI Reference
 
-This skill documents GitHub-specific CLI patterns for projects hosted on
-GitHub. The governance framework is infrastructure-agnostic — this skill
-provides the concrete commands for the GitHub case.
-
 ## Creating Issues
 
 ```bash

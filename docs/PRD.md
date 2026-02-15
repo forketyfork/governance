@@ -72,7 +72,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
     tracking, or CI/CD platforms. Each Land declares its infrastructure tooling
     in its CLAUDE.md. Command specs reference the project's declared tooling
     rather than hardcoding vendor-specific CLI commands. Vendor-specific
-    knowledge (e.g., GitHub CLI patterns) is preserved in dedicated skills.
+    knowledge is preserved in dedicated skills (`managing-github` skill for
+    GitHub, `managing-youtrack` skill for YouTrack, etc.).
 
 ## Non-Goals
 
@@ -189,7 +190,7 @@ remains intact for reference.
 1. Developer identifies a governance change needed (from a review, a session
    learning, or direct observation).
 2. Developer runs `/feature` or `/tech` to plan the governance change as a
-   issue.
+   an issue.
 3. The change is implemented, reviewed, and merged following the standard
    workflow.
 4. Affected command specifications and Land-level `CLAUDE.md` files are updated.
@@ -254,7 +255,7 @@ drift and hidden dependencies.
 3. When an agent runs a command like `/ship` or `/address`, it reads the
    project's CLAUDE.md to determine which CLI or API to use.
 4. For projects on a supported platform, the agent can use a platform-specific
-   skill (e.g., the `gh` skill for GitHub) for concrete CLI commands.
+   skill (e.g., the `managing-github` skill for GitHub) for concrete CLI commands.
 
 **Result:** The governance framework works with any combination of source code
 hosting, issue tracking, and CI/CD. Projects self-declare their tooling, and
@@ -301,4 +302,5 @@ agents adapt.
   vendors. The CLAUDE.md template includes an Infrastructure section with
   placeholders. Command specifications use generic terms and reference the
   project's declared tooling. Vendor-specific CLI knowledge is available
-  through dedicated skills (e.g., `gh` for GitHub).
+  through dedicated skills (`managing-github` skill for GitHub,
+  `managing-youtrack` skill for YouTrack, etc.).

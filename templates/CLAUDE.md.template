@@ -35,8 +35,8 @@
 
 ## Infrastructure
 
-- **Source code hosting:** [e.g., GitHub — CLI: `gh`]
-- **Issue tracker:** [e.g., GitHub Issues — CLI: `gh issue`]
+- **Source code hosting:** [e.g., GitHub — URL: `https://github.com/org/repo` — CLI: `gh`]
+- **Issue tracker:** [e.g., GitHub Issues — URL: `https://github.com/org/repo/issues` — CLI: `gh issue`]
 - **CI/CD:** [e.g., GitHub Actions — config: `.github/workflows/ci.yml`]
 
 ## Governance
