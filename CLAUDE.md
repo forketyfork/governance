@@ -47,7 +47,7 @@ shfmt -d scripts/*.sh
 
 - **Source code hosting:** GitHub — URL: `https://github.com/forketyfork/governance` — CLI: `gh`
 - **Issue tracker:** GitHub Issues — URL: `https://github.com/forketyfork/governance/issues` — CLI: `gh issue`
-- **CI/CD:** GitHub Actions — config: `.github/workflows/ci.yml`
+- **CI/CD:** GitHub Actions — config: `.github/workflows/build.yml`
 - **Issue/PR linkage convention:** For issue-driven work, include the issue number in the PR title as `(#<number>)` and add `Fixes #<number>` in the PR body. For hotfixes without an issue, omit linkage first and add it after creating the retroactive issue.
 
 ## Governance

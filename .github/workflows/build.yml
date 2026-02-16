@@ -1,4 +1,4 @@
-name: Lint & Format
+name: Build
 
 on:
   push:
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    name: Lint & Format Check
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

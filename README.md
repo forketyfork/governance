@@ -1,5 +1,9 @@
 # Governance
 
+[![Build status](https://github.com/forketyfork/governance/actions/workflows/build.yml/badge.svg)](https://github.com/forketyfork/governance/actions/workflows/build.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Markdown](https://img.shields.io/badge/language-Markdown-blue.svg)](https://daringfireball.net/projects/markdown/)
+
 ![Workflow Diagram](images/workflow-diagram.svg)
 
 Federated governance framework for AI-assisted software projects.
@@ -68,7 +72,7 @@ governance/
 ├── scripts/
 │   └── install-commands.sh
 ├── docs/                       # Standard docs directory (this repo currently includes docs/PRD.md)
-├── .github/workflows/ci.yml   # CI pipeline
+├── .github/workflows/build.yml # CI pipeline
 ├── flake.nix                   # Nix flake (toolchain + git hooks)
 ├── flake.lock
 ├── .envrc                      # direnv config
