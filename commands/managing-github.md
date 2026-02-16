@@ -7,6 +7,131 @@ description: >-
 
 # GitHub CLI Reference
 
+## Repository Setup
+
+These procedures implement the constitution's supply-chain security, branch
+protection, and repository hygiene requirements for GitHub-hosted Lands.
+
+### Repository Metadata
+
+Set a description and topics for discoverability:
+
+```bash
+gh repo edit --description "<description>" \
+  --add-topic "<topic1>" --add-topic "<topic2>"
+```
+
+Add a homepage link if applicable:
+
+```bash
+gh repo edit --homepage "<url>"
+```
+
+### Default Branch
+
+Rename the default branch to `main` if it is still named `master`:
+
+```bash
+# Rename the branch on GitHub (also updates the default branch)
+gh api repos/<org>/<repo>/branches/master/rename \
+  --method POST --field new_name=main
+
+# Update your local clone to track the renamed branch
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+```
+
+### Secret Scanning and Push Protection
+
+Enable via the repository security settings page:
+
+`https://github.com/<org>/<repo>/settings/security_analysis`
+
+- **Secret scanning:** enabled
+- **Push protection:** enabled
+
+Secret scanning and push protection may require GitHub Advanced Security for
+private repositories. If these options are not available, verify the
+repository's visibility and organization plan.
+
+### Code Scanning (CodeQL)
+
+Enable CodeQL with default settings via the repository security settings page:
+
+`https://github.com/<org>/<repo>/settings/security_analysis`
+
+- **CodeQL analysis:** enabled with default setup
+
+If the default setup fails, configure advanced settings with a custom workflow.
+CodeQL may require GitHub Advanced Security for private repositories. If the
+option is not available, verify the repository's visibility and organization
+plan.
+
+### CI Workflow Permissions
+
+In every GitHub Actions workflow file, add a top-level `permissions` block with
+the minimum required access:
+
+```yaml
+permissions:
+  contents: read
+```
+
+Grant additional permissions only when explicitly needed by a specific job.
+
+### Branch Rulesets
+
+On the Rulesets page (`https://github.com/<org>/<repo>/settings/rules`), create
+a ruleset named "Protect the main" targeting the default branch with these
+settings:
+
+- **Require status checks to pass** — add the CI build job as a required check
+- **Require branches to be up to date before merging**
+- **Block force pushes**
+- **Restrict deletions**
+- **Require code scanning results**
+
+### Dependabot Configuration
+
+Create `.github/dependabot.yml` with ecosystem-appropriate entries. Example for
+a Maven/Gradle project:
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      all-actions:
+        patterns:
+          - "*"
+```
+
+Enable Dependabot alerts and grouped security updates via the security settings
+page:
+
+`https://github.com/<org>/<repo>/settings/security_analysis`
+
+- **Dependency graph:** enabled
+- **Dependabot alerts:** enabled
+- **Grouped security updates:** enabled
+- **Dependabot security updates:** enabled
+
+---
+
 ## Creating Issues
 
 ```bash

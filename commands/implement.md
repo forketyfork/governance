@@ -25,9 +25,7 @@ Issue: $ARGUMENTS
 ### General
 
 - Follow docs/CONVENTIONS.md exactly. Do not introduce new patterns.
-- Maximum file length: 300 lines. Refactor if exceeded.
-- Maximum function length: 50 lines. Decompose if exceeded.
-- No TODOs in code. If something is incomplete, stop and tell the user.
+- Respect the file and function length limits configured in the project's linter. If no limits are configured, use reasonable judgment and decompose when a file or function becomes hard to follow.
 - No new dependencies without explicit user approval.
 - Conventional commit messages.
 
@@ -103,7 +101,6 @@ When implementation is complete, create a draft PR with this format:
 - [ ] Tests added/updated
 - [ ] All pre-commit hooks pass
 - [ ] All existing tests still pass
-- [ ] No new TODOs in code
 - [ ] No new dependencies (or explicitly approved)
 - [ ] Docs updated (PRD / ARCHITECTURE / TRACEABILITY as applicable)
 - [ ] Commit messages follow conventional commits

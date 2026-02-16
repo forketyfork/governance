@@ -18,18 +18,25 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails in CONSTITUTION.md).
    - Create pre-commit hooks that run lint + format + type check + test.
    - Set up CI with build + test + lint (see Infrastructure in CONSTITUTION.md).
-   - Enable branch protection on main/master.
+   - Enable branch protection on the default branch (status checks, up-to-date requirement, force-push blocking, deletion restriction, code scanning gate — see Standard Guardrails in CONSTITUTION.md).
 4. **Configure automated dependency updates:**
    - Set up a dependency update tool (Dependabot, Renovate, or equivalent) for the repository.
    - The tool must periodically scan for outdated dependencies and open PRs.
    - How those PRs are handled (automerge, grouping, review cadence) is each Land's decision.
-5. **Set up a reproducible, worktree-ready development environment:**
+5. **Configure supply-chain security:**
+   - Enable secret scanning with push protection so that commits containing secrets are rejected before reaching the remote.
+   - Enable automated code scanning (CodeQL, Semgrep, or equivalent) to run on every push and report results before merge.
+   - Ensure CI workflows use least-privilege permissions (read-only access to repository contents unless write access is explicitly required).
+6. **Set up repository hygiene:**
+   - Ensure the default branch is named `main`. If it is named `master`, rename it.
+   - Set a repository description and relevant topics for discoverability.
+7. **Set up a reproducible, worktree-ready development environment:**
    - Configure a stack-appropriate environment activation path from inside the repository (for example, Nix + direnv, devcontainer, virtual environment).
    - Define a worktree bootstrap entry point at the repository root (prefer `script/setup` following scripts-to-rule-them-all, or a clearly documented equivalent command).
    - Keep host prerequisites minimal and document them explicitly.
    - Verify that from a fresh git worktree, bootstrap + activation can run build, lint, type-check, and test without undeclared global dependencies or setup performed in another worktree.
-6. **Create the `docs/` directory.**
-7. **Assess observability:**
+8. **Create the `docs/` directory.**
+9. **Assess observability:**
    - Can the agent run the project and see output? If not, create a run/start script.
    - Can the agent run tests and see results? If not, configure the test runner for CLI output.
    - Can the agent read logs? Document log locations and how to enable debug logging.
@@ -72,8 +79,13 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] Type checker (if applicable) configured and enforced
 - [ ] Test suite exists with ≥60% coverage
 - [ ] CI pipeline runs build + test + lint on every push
-- [ ] Branch protection enabled on main/master
+- [ ] Branch protection enabled on default branch with status checks, up-to-date requirement, force-push blocking, deletion restriction, and code scanning gate
 - [ ] Automated dependency update tooling configured (Dependabot, Renovate, or equivalent)
+- [ ] Secret scanning with push protection enabled
+- [ ] Automated code scanning enabled and gating merges
+- [ ] CI workflows use least-privilege permissions
+- [ ] Default branch named `main`
+- [ ] Repository description and topics set
 - [ ] Pre-commit hooks installed and working
 - [ ] Reproducible development environment is documented in CLAUDE.md with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
 - [ ] From a fresh git worktree, bootstrap + activation can run build/lint/type-check/test without undeclared global setup or reliance on sibling worktrees

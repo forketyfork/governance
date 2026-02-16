@@ -55,16 +55,33 @@ Every Land must have these automated checks in place. They are non-negotiable be
 
 ### Universal (all projects)
 
-| Guardrail                     | Purpose                                                                        |
-| ----------------------------- | ------------------------------------------------------------------------------ |
-| Pre-commit hooks              | Block commits that fail lint, format, type check, or test                      |
-| CI pipeline                   | Build + test + lint on every push. PRs cannot merge without green CI           |
-| Branch protection             | Main/master requires passing CI                                                |
-| Conventional commits          | Structured commit messages. Agents must follow this                            |
-| Max file length: 300 lines    | Forces decomposition. Exceeding = refactor before continuing                   |
-| Max function length: 50 lines | Same principle at function level                                               |
-| No TODOs in code              | Incomplete work goes in issues, not in source comments                         |
-| Automated dependency updates  | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies |
+| Guardrail                    | Purpose                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pre-commit hooks             | Block commits that fail lint, format, type check, or test                                                                                         |
+| CI pipeline                  | Build + test + lint on every push. PRs cannot merge without green CI                                                                              |
+| Branch protection            | Default branch requires passing CI, up-to-date branches before merge, blocks force pushes and branch deletion, and gates on code scanning results |
+| Conventional commits         | Structured commit messages. Agents must follow this                                                                                               |
+| Automated dependency updates | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies                                                                    |
+
+### Supply-Chain Security
+
+Every Land must have these protections in place. They are outcome requirements —
+the specific tooling is a Land-level decision, but the outcomes are mandatory.
+
+| Requirement             | Outcome                                                                                                                                                         |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CI least-privilege      | CI workflows run with the minimum permissions needed for their tasks. Workflows must not receive write access to repository contents unless explicitly required |
+| Secret leak prevention  | A scanning tool detects secrets in commits before they reach the remote. Push protection rejects pushes that contain detected secrets                           |
+| Automated code scanning | A static-analysis or code-scanning tool runs on every push and reports results before merge. The specific tool is stack-dependent (CodeQL, Semgrep, etc.)       |
+
+### Repository Hygiene
+
+Every Land must maintain basic discoverability and consistency.
+
+| Requirement           | Outcome                                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Default branch naming | The default branch is named `main`                                                                          |
+| Repository metadata   | The repository has a description and relevant topics set so that it is discoverable within the organization |
 
 ### Stack-Specific
 
