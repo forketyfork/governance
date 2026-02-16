@@ -114,6 +114,19 @@ project-root/
 
 ---
 
+## External Contract Boundaries
+
+[Document file patterns and markers that indicate external contracts used or exposed by this project. `/review` uses this section for cross-project impact assessment.]
+
+- [e.g., `api/**` — public HTTP endpoints]
+- [e.g., `schemas/**` — shared payload schemas]
+- [e.g., `proto/**` — gRPC/protobuf contracts]
+- [e.g., `shared-lib/public/**` — exported interfaces consumed by other projects]
+
+[For each pattern, note what kind of contract it is (`API`, `schema`, `library`, `file format`, `protocol`) and any compatibility expectations.]
+
+---
+
 ## Stack-Specific Patterns
 
 [Patterns that are specific to this project's stack. Delete sections that don't apply.]

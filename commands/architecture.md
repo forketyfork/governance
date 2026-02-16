@@ -37,9 +37,9 @@ For each significant flow that crosses a service boundary, provide a Mermaid seq
 
 Table with columns: Direction (inbound/outbound/bidirectional), Counterpart, Protocol, Endpoint/Topic/Socket, Payload (brief), Auth, Owner (team, if known).
 
-### Cross-Land Dependencies (include only if this Land consumes contracts from other Lands)
+### Cross-Project Dependencies (include only if this project consumes contracts from other related projects)
 
-Table listing external contracts this Land depends on from other Lands in the Federation. Columns: Source Land, Contract (identifier such as endpoint, schema, module), Type (`API`, `schema`, `library`, `file format`, or `protocol`), Description (what this Land uses it for). This section is the authoritative record of what this Land consumes from the rest of the Federation and is consulted during cross-Land impact assessment (see CONSTITUTION.md).
+Table listing external contracts this project depends on from other related projects. Columns: Source Project, Contract (identifier such as endpoint, schema, module), Type (`API`, `schema`, `library`, `file format`, or `protocol`), Description (what this project uses it for). This section is the authoritative record of external contracts consumed by this project and is consulted during cross-project impact assessment.
 
 ### Component Diagram
 

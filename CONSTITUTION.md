@@ -26,11 +26,11 @@ The governance framework operates through three branches:
 
 **Legislative** — The rules. CONSTITUTION.md, command specifications, CONVENTIONS.md, ARCHITECTURE.md, and PRD.md. These define what agents must do and what they must not do. Changes to the legislative branch follow the amendment process.
 
-**Executive** — Mechanical enforcement. Linters, formatters, type checkers, pre-commit hooks, CI pipelines, branch protection, coverage thresholds. The executive enforces rules without discretion. If a rule can be expressed as an automated check, it should be — documentation is the fallback, not the primary enforcement mechanism.
+**Executive** — Mechanical enforcement. Linters, formatters, type checkers, pre-commit hooks, CI pipelines, branch protection, and coverage expectations. The executive enforces rules without discretion. If a rule can be expressed as an automated check, it should be — documentation is the fallback, not the primary enforcement mechanism.
 
 **Judiciary** — Interpretation and judgment. The `/review` command and the human checkpoints. The judiciary decides whether the spirit of the law was followed in a specific case, not just the letter. When `/review` identifies a pattern as problematic, that ruling should flow back into the legislative branch (update the rules) or the executive branch (add a linter rule).
 
-**Precedent flows upward.** When the judiciary (review) identifies a recurring problem, it becomes case law. Case law that applies to one project flows into that project's CONVENTIONS.md via `/learn`. Case law that applies across the federation flows into the governance repo via `/amend`.
+**Precedent flows upward.** When the judiciary (review) identifies a recurring problem, it becomes case law. Case law that applies to one project flows into that project's CLAUDE.md via `/learn`. Case law that applies across the federation flows into the governance repo via `/amend`.
 
 ---
 
@@ -45,7 +45,7 @@ Every Land must maintain these documents in a `docs/` directory at the repositor
 | `docs/CONVENTIONS.md`  | Coding patterns for this specific project. Naming, error handling, state management, file structure, stack-specific idioms. Fed to the agent at session start.           | Manually or with agent assistance | Manually when patterns evolve                                    |
 | `docs/TRACEABILITY.md` | Maps PRD features to test files. Shows what's tested, what's partial, what's missing.                                                                                    | `/traceability` command           | `/traceability` command or during `/implement` workflow          |
 
-Additionally, each project has a `CLAUDE.md` (symlinked to `AGENTS.md`) at the repository root containing agent-specific instructions, project context, and references to the docs/ files.
+Additionally, each project must maintain `CLAUDE.md` at the repository root and keep `AGENTS.md` as a symlink to `CLAUDE.md`. This file contains agent-specific instructions, project context, and references to the docs/ files.
 
 ---
 
@@ -89,14 +89,14 @@ This is a non-exhaustive list of recommended tools for different platforms provi
 
 #### TypeScript/CSS (Obsidian Plugins)
 
-| Tool                      | Purpose                                    |
-| ------------------------- | ------------------------------------------ |
-| ESLint (strict, no `any`) | Catch type errors and bad patterns         |
-| Prettier                  | Consistent formatting                      |
-| `tsc --noEmit --strict`   | Type checking                              |
-| Vitest or Jest            | Test runner                                |
-| c8 or Istanbul            | Coverage (threshold: 60%, raise over time) |
-| Stylelint                 | CSS linting                                |
+| Tool                      | Purpose                                                      |
+| ------------------------- | ------------------------------------------------------------ |
+| ESLint (strict, no `any`) | Catch type errors and bad patterns                           |
+| Prettier                  | Consistent formatting                                        |
+| `tsc --noEmit --strict`   | Type checking                                                |
+| Vitest or Jest            | Test runner                                                  |
+| c8 or Istanbul            | Coverage reporting (threshold set per Land, raise over time) |
+| Stylelint                 | CSS linting                                                  |
 
 #### Zig
 
@@ -108,12 +108,12 @@ This is a non-exhaustive list of recommended tools for different platforms provi
 
 #### Kotlin Multiplatform
 
-| Tool                 | Purpose                                    |
-| -------------------- | ------------------------------------------ |
-| Detekt               | Static analysis                            |
-| ktlint               | Formatting                                 |
-| kotlin.test / JUnit5 | Test runner                                |
-| Kover                | Coverage (threshold: 60%, raise over time) |
+| Tool                 | Purpose                                                      |
+| -------------------- | ------------------------------------------------------------ |
+| Detekt               | Static analysis                                              |
+| ktlint               | Formatting                                                   |
+| kotlin.test / JUnit5 | Test runner                                                  |
+| Kover                | Coverage reporting (threshold set per Land, raise over time) |
 
 ### Rule Promotion
 
@@ -149,11 +149,12 @@ requirements. The specific tools are a Land-level decision.
 
 ### Required Infrastructure
 
-| Component           | Outcome Requirement                                                                                                              |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Source code hosting | A platform that supports branches, pull/merge requests, and code review. The agent must be able to create PRs and post comments. |
-| Issue tracker       | A system for tracking issues with labels, descriptions, and status. Planning commands produce issues here.                       |
-| CI/CD pipeline      | Automated build, test, and lint on every push. PRs cannot merge without passing CI.                                              |
+| Component           | Outcome Requirement                                                                                                                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Source code hosting | A platform that supports branches, pull/merge requests, and code review. The agent must be able to create PRs and post comments.                                                            |
+| Issue tracker       | A system for tracking issues with labels, descriptions, and status. Planning commands produce issues here.                                                                                  |
+| CI/CD pipeline      | Automated build, test, and lint on every push. PRs cannot merge without passing CI.                                                                                                         |
+| Issue/PR linkage    | A documented convention that defines how issues and pull requests are linked for traceability (title markers, body keywords, tracker links/fields, and auto-close behavior when supported). |
 
 ### What Each Land Documents
 
@@ -162,10 +163,11 @@ In the Infrastructure section of its CLAUDE.md, each Land declares:
 - **Source code hosting:** platform name, CLI tool (if any), repository URL
 - **Issue tracker:** platform name, CLI tool or API (if any)
 - **CI/CD:** platform name, configuration file location
+- **Issue/PR linkage convention:** exact rules used in this Land to link issues and pull requests for traceability
 
 Agent commands read the project's CLAUDE.md to determine which CLI or API to
 use for operations like creating pull requests, posting review comments, or
-searching issues.
+searching issues, and to apply the Land's issue/PR linkage convention.
 
 ---
 
@@ -230,24 +232,24 @@ All Lands share a common set of agent commands that structure the development wo
 
 ### Documentation Commands
 
-| Command         | Purpose                               | Input                                 | Output                                             |
-| --------------- | ------------------------------------- | ------------------------------------- | -------------------------------------------------- |
-| `/architecture` | Create or update docs/ARCHITECTURE.md | Full codebase access                  | Architecture document verified against actual code |
-| `/prd`          | Create or update docs/PRD.md          | Full codebase access + user interview | Product requirements document                      |
-| `/traceability` | Create or update docs/TRACEABILITY.md | docs/PRD.md + all test files          | Feature-to-test mapping with coverage gaps         |
+| Command         | Purpose                               | Input                                              | Output                                             |
+| --------------- | ------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `/architecture` | Create or update docs/ARCHITECTURE.md | Full codebase access                               | Architecture document verified against actual code |
+| `/prd`          | Create or update docs/PRD.md          | Full codebase access (if present) + user interview | Product requirements document                      |
+| `/traceability` | Create or update docs/TRACEABILITY.md | docs/PRD.md + all test files                       | Feature-to-test mapping with coverage gaps         |
 
 ### Workflow Commands
 
-| Command      | Purpose                               | Input                                   | Output                                                            |
-| ------------ | ------------------------------------- | --------------------------------------- | ----------------------------------------------------------------- |
-| `/bug`       | Triage a bug report                   | User interview                          | Issue with reproduction steps and acceptance criteria             |
-| `/feature`   | Plan a new feature                    | User interview + project docs           | Issue with status quo, objectives, user flow, implementation plan |
-| `/tech`      | Plan a technical improvement          | User interview + project docs           | Issue with status quo, objectives, tasks, risk assessment         |
-| `/implement` | Implement an issue                    | Issue + project docs                    | Code, tests, doc updates, and PR-ready summary/checklist          |
-| `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context   | Branch, commit, and draft PR ready for review                     |
-| `/review`    | Guide the developer through PR review | PR diff + linked issue + project docs   | Step-by-step review walkthrough with verdict                      |
-| `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context | Classified comments, fixes, and reply drafts                      |
-| `/amend`     | Propose a governance amendment        | Project-level insight + governance docs | PR against governance repo with classification and affected Lands |
+| Command      | Purpose                               | Input                                          | Output                                                            |
+| ------------ | ------------------------------------- | ---------------------------------------------- | ----------------------------------------------------------------- |
+| `/bug`       | Triage a bug report                   | User interview                                 | Issue with reproduction steps and acceptance criteria             |
+| `/feature`   | Plan a new feature                    | User interview + project docs                  | Issue with status quo, objectives, user flow, implementation plan |
+| `/tech`      | Plan a technical improvement          | User interview + project docs                  | Issue with status quo, objectives, tasks, risk assessment         |
+| `/implement` | Implement an issue                    | Issue + project docs                           | Code, tests, doc updates, and PR-ready summary/checklist          |
+| `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context          | Branch, commit, and draft PR ready for review                     |
+| `/review`    | Guide the developer through PR review | PR diff + related issue context + project docs | Step-by-step review walkthrough with verdict                      |
+| `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context        | Classified comments, fixes, and reply drafts                      |
+| `/amend`     | Propose a governance amendment        | Project-level insight + governance docs        | PR against governance repo with classification and affected Lands |
 
 ### Session Commands
 
@@ -292,14 +294,14 @@ When a critical bug blocks the developer's immediate workflow, the normal planni
 1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem. No issue is required at this stage.
 2. The agent must still read project docs before coding.
 3. The agent must still write a regression test.
-4. `/ship` produces a PR without an issue-number suffix in the title and without a `fixes #` reference in the body (the issue does not exist yet).
+4. `/ship` produces a PR without issue-linkage metadata (the issue does not exist yet).
 5. `/review` still happens — the fast path skips planning, not review.
 
 **Cleanup (mandatory within 24 hours):**
 
 - Create the issue retroactively using `/bug`.
 - Link the PR to the issue.
-- Update the PR title/body to reference the issue (and add auto-close keyword where supported).
+- Update the PR title/body/metadata to reference the issue per the Land's documented issue/PR linkage convention (and add auto-close behavior where supported).
 - Run `/learn` to capture what broke and why.
 
 If hotfixes become frequent for a specific Land, that's a signal the test coverage or architecture has gaps. Create a `/tech` issue to address the root cause.

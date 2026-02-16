@@ -1,4 +1,6 @@
-# CLAUDE.md
+# CLAUDE.md (symlinked as AGENTS.md)
+
+[Canonical file: `CLAUDE.md`. Keep `AGENTS.md` as a symlink to `CLAUDE.md`.]
 
 ## Project
 
@@ -10,6 +12,9 @@
 ## Build & Run
 
 ```bash
+# Worktree bootstrap (run in a fresh worktree)
+[bootstrap command, prefer `script/setup`]
+
 # Environment activation
 [environment activation command]
 #
@@ -26,6 +31,9 @@
 # Test
 [test command]
 
+# Type check
+[type-check command or `N/A`]
+
 # Lint
 [lint command]
 
@@ -38,6 +46,7 @@
 - **Source code hosting:** [e.g., GitHub — URL: `https://github.com/org/repo` — CLI: `gh`]
 - **Issue tracker:** [e.g., GitHub Issues — URL: `https://github.com/org/repo/issues` — CLI: `gh issue`]
 - **CI/CD:** [e.g., GitHub Actions — config: `.github/workflows/ci.yml`]
+- **Issue/PR linkage convention:** [Exact traceability rule for this Land. Include title markers, body keywords, tracker links/fields, auto-close behavior if supported, and fallback if source hosting and issue tracker are different.]
 
 ## Governance
 

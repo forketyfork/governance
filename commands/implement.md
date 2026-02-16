@@ -68,9 +68,9 @@ When implementation is complete, prepare draft PR content for `/ship` with this 
 
 ---
 
-**Title:** <concise description> (#<issue_number>)
+**Title:** <concise description>
 
-Omit `(#<issue_number>)` when there is no related issue (hotfix fast path).
+**Issue/PR linkage:** <Apply the linkage convention documented in the project's CLAUDE.md (title suffix, body keyword, tracker field, URL reference, and auto-close behavior if supported). For hotfix fast-path work with no issue yet, omit linkage until cleanup.>
 
 ## Summary
 
@@ -116,9 +116,9 @@ Omit `(#<issue_number>)` when there is no related issue (hotfix fast path).
 ## Critical Constraints
 
 - `/ship` creates the PR using this content after implementation is done.
-- For issue-driven work, the PR title MUST reference the issue number for traceability (e.g., `<concise description> (#<number>)`).
-- For hotfix fast-path work (no issue yet), omit the issue suffix and add issue references during mandatory cleanup once the retroactive issue exists.
-- Where supported by the hosting platform, include an auto-close keyword in the PR **body** (e.g., "Fixes #<number>") when an issue exists. On platforms without auto-close, include the issue reference in the body for traceability.
+- For issue-driven work, link the PR to related issue(s) using the project's documented issue/PR linkage convention in CLAUDE.md.
+- For hotfix fast-path work (no issue yet), omit issue linkage and add it during mandatory cleanup once the retroactive issue exists.
+- If the platform supports auto-close behavior, apply it only as documented in CLAUDE.md. If not supported, use the documented traceability fallback.
 - The PR created by `/ship` is DRAFT. Do not mark it ready for review. The user decides.
 - If you cannot meet all acceptance criteria, state which ones are unmet and why.
 - If you notice something else that should be fixed, suggest a separate issue. Do NOT fix it in this PR.
