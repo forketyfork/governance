@@ -25,8 +25,8 @@ After confirmation:
 
 - Use the **humanizer** skill on the PR body before creating the PR
 - Write the PR body to `.tmp/pr-body-$RANDOM.md` (use a unique filename), then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the pull request CLI or API for the source code hosting declared in the project's CLAUDE.md:
-  - Title matching the commit's short description
+  - Title matching the commit's short description, with the issue number for traceability (e.g., `<description> (#<number>)`)
   - Body containing the Solution section expanded with context for reviewers
-  - Link to relevant issues if mentioned in session
+  - Where supported by the hosting platform, include an auto-close keyword in the body (e.g., "Fixes #<number>") to link and close the relevant issue on merge
 
 Show me the PR link when done.
