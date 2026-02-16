@@ -42,7 +42,7 @@ Ask: "Any of these surprise you?"
 ### Step 3: Architecture Conformance
 
 - Is new code in the correct module per docs/ARCHITECTURE.md (if present)?
-- Any new cross-module dependencies? Do they match the documented dependency direction?
+- Any new cross-module dependencies? If docs/ARCHITECTURE.md exists, do they match the documented dependency direction?
 - Any circular dependencies?
 - If architecture changed and docs/ARCHITECTURE.md exists: is it updated?
 
