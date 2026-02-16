@@ -32,7 +32,15 @@ gh repo edit --homepage "<url>"
 Rename the default branch to `main` if it is still named `master`:
 
 ```bash
-gh api repos/<org>/<repo> --method PATCH --field default_branch=main
+# Rename the branch on GitHub (also updates the default branch)
+gh api repos/<org>/<repo>/branches/master/rename \
+  --method POST --field new_name=main
+
+# Update your local clone to track the renamed branch
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
 ```
 
 ### Secret Scanning and Push Protection
@@ -41,8 +49,12 @@ Enable via the repository security settings page:
 
 `https://github.com/<org>/<repo>/settings/security_analysis`
 
-- **Secret Protection:** enabled
+- **Secret scanning:** enabled
 - **Push protection:** enabled
+
+Secret scanning and push protection may require GitHub Advanced Security for
+private repositories. If these options are not available, verify the
+repository's visibility and organization plan.
 
 ### Code Scanning (CodeQL)
 
@@ -53,6 +65,9 @@ Enable CodeQL with default settings via the repository security settings page:
 - **CodeQL analysis:** enabled with default setup
 
 If the default setup fails, configure advanced settings with a custom workflow.
+CodeQL may require GitHub Advanced Security for private repositories. If the
+option is not available, verify the repository's visibility and organization
+plan.
 
 ### CI Workflow Permissions
 

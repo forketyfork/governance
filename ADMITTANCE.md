@@ -18,7 +18,7 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails in CONSTITUTION.md).
    - Create pre-commit hooks that run lint + format + type check + test.
    - Set up CI with build + test + lint (see Infrastructure in CONSTITUTION.md).
-   - Enable branch protection on main/master.
+   - Enable branch protection on the default branch (status checks, up-to-date requirement, force-push blocking, deletion restriction, code scanning gate — see Standard Guardrails in CONSTITUTION.md).
 4. **Configure automated dependency updates:**
    - Set up a dependency update tool (Dependabot, Renovate, or equivalent) for the repository.
    - The tool must periodically scan for outdated dependencies and open PRs.
