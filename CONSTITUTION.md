@@ -55,16 +55,19 @@ Every Land must have these automated checks in place. They are non-negotiable be
 
 ### Universal (all projects)
 
-| Guardrail                     | Purpose                                                                                                                                           |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Pre-commit hooks              | Block commits that fail lint, format, type check, or test                                                                                         |
-| CI pipeline                   | Build + test + lint on every push. PRs cannot merge without green CI                                                                              |
-| Branch protection             | Default branch requires passing CI, up-to-date branches before merge, blocks force pushes and branch deletion, and gates on code scanning results |
-| Conventional commits          | Structured commit messages. Agents must follow this                                                                                               |
-| Max file length: 300 lines    | Forces decomposition. Exceeding = refactor before continuing                                                                                      |
-| Max function length: 50 lines | Same principle at function level                                                                                                                  |
-| No TODOs in code              | Incomplete work goes in issues, not in source comments                                                                                            |
-| Automated dependency updates  | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies                                                                    |
+| Guardrail                    | Purpose                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pre-commit hooks             | Block commits that fail lint, format, type check, or test                                                                                         |
+| CI pipeline                  | Build + test + lint on every push. PRs cannot merge without green CI                                                                              |
+| Branch protection            | Default branch requires passing CI, up-to-date branches before merge, blocks force pushes and branch deletion, and gates on code scanning results |
+| Conventional commits         | Structured commit messages. Agents must follow this                                                                                               |
+| Automated dependency updates | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies                                                                    |
+
+**Recommended linter rules (stack-dependent, configured per Land):**
+
+- Maximum file length (e.g., 300 lines) — forces decomposition
+- Maximum function length (e.g., 50 lines) — same principle at function level
+- No TODOs in code — incomplete work goes in issues, not in source comments
 
 ### Supply-Chain Security
 

@@ -59,11 +59,9 @@ Read these before making any changes:
 3. Every new public function must have a doc comment explaining WHAT it does.
 4. Every new feature must have corresponding tests.
 5. Do not introduce new dependencies without asking first.
-6. Do not leave TODOs in code. If something is incomplete, say so.
-7. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
-8. If you add a feature, update `docs/TRACEABILITY.md`.
-9. Maximum file length: 300 lines. Maximum function length: 50 lines.
-10. Use conventional commit messages.
+6. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
+7. If you add a feature, update `docs/TRACEABILITY.md`.
+8. Use conventional commit messages.
 
 ## Observability
 
