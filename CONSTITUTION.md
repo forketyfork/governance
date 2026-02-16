@@ -55,15 +55,16 @@ Every Land must have these automated checks in place. They are non-negotiable be
 
 ### Universal (all projects)
 
-| Guardrail                     | Purpose                                                              |
-| ----------------------------- | -------------------------------------------------------------------- |
-| Pre-commit hooks              | Block commits that fail lint, format, type check, or test            |
-| CI pipeline                   | Build + test + lint on every push. PRs cannot merge without green CI |
-| Branch protection             | Main/master requires passing CI                                      |
-| Conventional commits          | Structured commit messages. Agents must follow this                  |
-| Max file length: 300 lines    | Forces decomposition. Exceeding = refactor before continuing         |
-| Max function length: 50 lines | Same principle at function level                                     |
-| No TODOs in code              | Incomplete work goes in issues, not in source comments               |
+| Guardrail                     | Purpose                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------ |
+| Pre-commit hooks              | Block commits that fail lint, format, type check, or test                      |
+| CI pipeline                   | Build + test + lint on every push. PRs cannot merge without green CI           |
+| Branch protection             | Main/master requires passing CI                                                |
+| Conventional commits          | Structured commit messages. Agents must follow this                            |
+| Max file length: 300 lines    | Forces decomposition. Exceeding = refactor before continuing                   |
+| Max function length: 50 lines | Same principle at function level                                               |
+| No TODOs in code              | Incomplete work goes in issues, not in source comments                         |
+| Automated dependency updates  | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies |
 
 ### Stack-Specific
 

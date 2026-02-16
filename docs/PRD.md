@@ -12,9 +12,9 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
 ## Core Features
 
 1. **F1: Constitution** — A single authoritative document defining the
-   principles, separation of powers, standard documents, guardrails, agent
-   environment requirements, and development workflow that every governed project
-   must follow.
+   principles, separation of powers, standard documents, guardrails (including
+   automated dependency updates), agent environment requirements, and development
+   workflow that every governed project must follow.
 
 2. **F2: Agent Command Specifications** — A set of 13 reusable command
    specifications that structure the full development lifecycle: planning
@@ -261,8 +261,9 @@ agents adapt.
 ## Success Criteria
 
 - **F1:** The constitution covers principles, separation of powers, standard
-  documents, guardrails, agent environment, agent commands, the development
-  workflow, federation management, archival, and the amendment process.
+  documents, guardrails (including automated dependency updates), agent
+  environment, agent commands, the development workflow, federation management,
+  archival, and the amendment process.
 - **F2:** All 13 command specifications exist, each defining the command's
   purpose, input, procedure, output format, and behavioral rules.
 - **F3:** Running `install-commands.sh` creates working symlinks to
