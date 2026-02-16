@@ -45,7 +45,7 @@ Every Land must maintain these documents in a `docs/` directory at the repositor
 | `docs/CONVENTIONS.md`  | Coding patterns for this specific project. Naming, error handling, state management, file structure, stack-specific idioms. Fed to the agent at session start.           | Manually or with agent assistance | Manually when patterns evolve                                    |
 | `docs/TRACEABILITY.md` | Maps PRD features to test files. Shows what's tested, what's partial, what's missing.                                                                                    | `/traceability` command           | `/traceability` command or during `/implement` workflow          |
 
-Additionally, each project must maintain `AGENTS.md` at the repository root and keep `CLAUDE.md` as a symlink to `AGENTS.md`. This file contains agent-specific instructions, project context, and references to the docs/ files.
+Additionally, each project must maintain `CLAUDE.md` at the repository root and keep `AGENTS.md` as a symlink to `CLAUDE.md`. This file contains agent-specific instructions, project context, and references to the docs/ files.
 
 ---
 

@@ -31,8 +31,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    immediately across all tools.
 
 4. **F4: Land Admittance** — A phased process for bringing a new or existing
-   project under governance: foundation setup (including `AGENTS.md` with
-   `CLAUDE.md` symlinked to it), documentation generation, test backfill, and
+   project under governance: foundation setup (including `CLAUDE.md` with
+   `AGENTS.md` symlinked to it), documentation generation, test backfill, and
    federation registration.
 
 5. **F5: Federation Registry** — A table tracking every governed project and its
@@ -133,8 +133,8 @@ Codex environments, and future edits to command specs propagate instantly.
 ### F4: Land Admittance
 
 1. Developer decides a project is worth governing (Phase 0).
-2. Developer sets up the repository foundation: `AGENTS.md` with
-   `CLAUDE.md -> AGENTS.md` symlink, guardrails, pre-commit hooks, CI, branch
+2. Developer sets up the repository foundation: `CLAUDE.md` with
+   `AGENTS.md -> CLAUDE.md` symlink, guardrails, pre-commit hooks, CI, branch
    protection, observability, and issue/PR linkage convention (Phase 1).
 3. Developer runs documentation commands (`/prd`, `/architecture`, writes
    `CONVENTIONS.md`, runs `/traceability`) to generate standard docs (Phase 2).
@@ -160,8 +160,8 @@ checks, and federation registration in place.
 
 1. Developer creates a new project and decides to govern it.
 2. Developer copies `templates/CLAUDE.md.template` to the new project's root as
-   `AGENTS.md`, fills in the bracketed placeholders, and creates
-   `CLAUDE.md -> AGENTS.md` symlink.
+   `CLAUDE.md`, fills in the bracketed placeholders, and creates
+   `AGENTS.md -> CLAUDE.md` symlink.
 3. Developer copies `templates/CONVENTIONS.md.template` to `docs/CONVENTIONS.md`
    and fills in project-specific patterns.
 

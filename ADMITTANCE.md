@@ -9,7 +9,7 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
 ## Phase 1: Foundation
 
 1. **Create the repository** (or confirm it exists).
-2. **Add `AGENTS.md` and symlink `CLAUDE.md -> AGENTS.md`** at the repository root with:
+2. **Add `CLAUDE.md` and symlink `AGENTS.md -> CLAUDE.md`** at the repository root with:
    - One-paragraph project description
    - Stack and key dependencies
    - Build, lint, type-check, and test commands
@@ -43,7 +43,7 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Can the agent run tests and see results? If not, configure the test runner for CLI output.
    - Can the agent read logs? Document log locations and how to enable debug logging.
    - Can the agent observe the UI? If it's a CLI tool, yes. If it's a GUI app, document the limitation and evaluate whether DOM snapshots, screenshot automation, or visual regression tests can close the gap.
-   - Fill in the Observability section of AGENTS.md (via the CLAUDE.md symlink).
+   - Fill in the Observability section of CLAUDE.md (via the AGENTS.md symlink).
 
 ## Phase 2: Documentation
 
@@ -70,7 +70,7 @@ Run the documentation commands in this order. Each one builds on the previous.
 
 A Land reaches `Governed` status when ALL of the following are true:
 
-- [ ] AGENTS.md exists and CLAUDE.md is a symlink to AGENTS.md
+- [ ] CLAUDE.md exists and AGENTS.md is a symlink to CLAUDE.md
 - [ ] docs/PRD.md exists and covers all implemented features
 - [ ] docs/ARCHITECTURE.md exists and matches the actual code
 - [ ] docs/CONVENTIONS.md exists
@@ -88,9 +88,9 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] CI workflows use least-privilege permissions
 - [ ] Default branch named `main`
 - [ ] Repository description and topics set
-- [ ] Issue/PR linkage convention is documented in AGENTS.md (via CLAUDE.md symlink)
+- [ ] Issue/PR linkage convention is documented in CLAUDE.md (via AGENTS.md symlink)
 - [ ] Pre-commit hooks installed and working
-- [ ] Reproducible development environment is documented in AGENTS.md (via CLAUDE.md symlink) with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
+- [ ] Reproducible development environment is documented in CLAUDE.md (via AGENTS.md symlink) with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
 - [ ] From a fresh git worktree, bootstrap + activation can run build/lint/type-check/test without undeclared global setup or reliance on sibling worktrees
-- [ ] AGENTS.md (via CLAUDE.md symlink) includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
+- [ ] CLAUDE.md (via AGENTS.md symlink) includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
 - [ ] Cross-Land dependencies documented in the Land's own `docs/ARCHITECTURE.md` (if applicable)
