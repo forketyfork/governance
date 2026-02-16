@@ -116,7 +116,8 @@ When implementation is complete, create a draft PR with this format:
 
 ## Critical Constraints
 
-- The PR title MUST clearly reference the issue number. Where supported by the hosting platform, include an auto-close keyword (e.g., "fixes #<number>"). On platforms without auto-close, include the issue reference for traceability (e.g., "#<number>").
+- The PR title MUST reference the issue number for traceability (e.g., `<concise description> (#<number>)`).
+- Where supported by the hosting platform, include an auto-close keyword in the PR **body** (e.g., "Fixes #<number>"). On platforms without auto-close, include the issue reference in the body for traceability.
 - The PR is DRAFT. Do not mark it ready for review. The user decides.
 - If you cannot meet all acceptance criteria, state which ones are unmet and why.
 - If you notice something else that should be fixed, suggest a separate issue. Do NOT fix it in this PR.
