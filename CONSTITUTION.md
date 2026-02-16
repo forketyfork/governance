@@ -63,12 +63,6 @@ Every Land must have these automated checks in place. They are non-negotiable be
 | Conventional commits         | Structured commit messages. Agents must follow this                                                                                               |
 | Automated dependency updates | Tool (Dependabot, Renovate, or equivalent) opens PRs for outdated dependencies                                                                    |
 
-**Recommended linter rules (stack-dependent, configured per Land):**
-
-- Maximum file length (e.g., 300 lines) — forces decomposition
-- Maximum function length (e.g., 50 lines) — same principle at function level
-- No TODOs in code — incomplete work goes in issues, not in source comments
-
 ### Supply-Chain Security
 
 Every Land must have these protections in place. They are outcome requirements —
