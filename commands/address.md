@@ -7,7 +7,7 @@ Review the **unresolved** review and issue comments on this PR against the PR de
 Use the APIs or CLIs declared in the project's CLAUDE.md:
 
 - Source code hosting: fetch unresolved PR review threads
-- Issue tracker: fetch unresolved issue comments linked to this PR per the Land's issue/PR linkage convention
+- Issue tracker: fetch unresolved issue comments linked to this PR per the project's issue/PR linkage convention
 
 Only consider unresolved threads/comments.
 

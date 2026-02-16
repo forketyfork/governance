@@ -50,20 +50,20 @@ If there's architectural drift, be explicit about it.
 
 Ask: "Does the architectural impact look right?"
 
-### Step 4: Cross-Land Impact
+### Step 4: Cross-Project Impact
 
 If the PR touches files that match external contract patterns documented in CONVENTIONS.md (e.g., API routes, shared schemas, message formats):
 
 - **Contracts changed:** list each changed contract and what changed (endpoint, field, format).
-- **Dependent Lands:** consult the `docs/ARCHITECTURE.md` of other Lands in the Federation to find Lands that consume the changed contract. If a Land lacks `docs/ARCHITECTURE.md`, manually assess whether it could be affected — the absence of the document does not mean the Land has no dependencies. List every dependent Land.
-- **Impact assessment in PR:** verify the PR description includes an impact assessment for each dependent Land: _breaks_, _needs update_, or _unaffected_.
-- **Linked issues:** for each Land marked _breaks_ or _needs update_, verify a linked issue exists in that Land's repository.
+- **Dependent projects:** consult available architecture docs or dependency documentation for related projects that consume the changed contract. If a related project lacks architecture docs, manually assess whether it could be affected. List every dependent project you can identify from available project-local context.
+- **Impact assessment in PR:** verify the PR description includes an impact assessment for each dependent project: _breaks_, _needs update_, or _unaffected_.
+- **Linked issues:** for each project marked _breaks_ or _needs update_, verify a linked issue exists in that project's repository.
 
 If the PR changes external contracts but has no impact assessment, flag this as a blocker.
 
 If CONVENTIONS.md does not document contract boundary patterns for this project, note the gap — the reviewer should still check manually and recommend adding the patterns.
 
-Ask: "Does the cross-Land impact look complete?"
+Ask: "Does the cross-project impact look complete?"
 
 ### Step 5: Type-Specific Checks
 
