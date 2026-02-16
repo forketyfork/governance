@@ -49,12 +49,14 @@ governance/
 ├── README.md                   # This file
 ├── commands/                   # Agent command specifications
 │   ├── address.md
+│   ├── amend.md
 │   ├── architecture.md
 │   ├── bug.md
 │   ├── feature.md
 │   ├── implement.md
 │   ├── knowledge.md
 │   ├── learn.md
+│   ├── managing-github.md
 │   ├── prd.md
 │   ├── review.md
 │   ├── ship.md
@@ -65,7 +67,7 @@ governance/
 │   └── CONVENTIONS.md.template
 ├── scripts/
 │   └── install-commands.sh
-├── docs/                       # Standard docs directory (empty, for future use)
+├── docs/                       # Standard docs directory (this repo currently includes docs/PRD.md)
 ├── .github/workflows/ci.yml   # CI pipeline
 ├── flake.nix                   # Nix flake (toolchain + git hooks)
 ├── flake.lock
@@ -92,7 +94,7 @@ Every Land maintains these in a `docs/` directory:
 
 ### Agent Commands
 
-The `commands/` directory contains specifications for agent commands that structure the development workflow. Documentation commands (`/prd`, `/architecture`, `/traceability`) create and maintain the standard documents. Workflow commands (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`) handle the full cycle from planning to shipping.
+The `commands/` directory contains specifications for agent commands that structure the development workflow. Documentation commands (`/prd`, `/architecture`, `/traceability`) create and maintain the standard documents. Delivery commands (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`) handle planning through review. Session commands (`/learn`, `/knowledge`) capture reusable learning, and governance commands (`/amend`) evolve the framework. Platform-specific operational references (for example `managing-github.md`) are stored in the same directory.
 
 ### The Workflow
 

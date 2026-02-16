@@ -243,7 +243,7 @@ All Lands share a common set of agent commands that structure the development wo
 | `/bug`       | Triage a bug report                   | User interview                          | Issue with reproduction steps and acceptance criteria             |
 | `/feature`   | Plan a new feature                    | User interview + project docs           | Issue with status quo, objectives, user flow, implementation plan |
 | `/tech`      | Plan a technical improvement          | User interview + project docs           | Issue with status quo, objectives, tasks, risk assessment         |
-| `/implement` | Implement an issue                    | Issue + project docs                    | Draft PR with tests, doc updates, and checklist                   |
+| `/implement` | Implement an issue                    | Issue + project docs                    | Code, tests, doc updates, and PR-ready summary/checklist          |
 | `/ship`      | Commit, push, and create a PR         | Uncommitted changes + session context   | Branch, commit, and draft PR ready for review                     |
 | `/review`    | Guide the developer through PR review | PR diff + linked issue + project docs   | Step-by-step review walkthrough with verdict                      |
 | `/address`   | Address PR review and issue comments  | Unresolved review comments + PR context | Classified comments, fixes, and reply drafts                      |
@@ -261,7 +261,7 @@ All Lands share a common set of agent commands that structure the development wo
 The development workflow has four phases:
 
 1. **Plan** — A planning command (`/bug`, `/feature`, or `/tech`) interviews the developer and produces an issue with clear scope, acceptance criteria, and implementation tasks. The developer reviews the issue before implementation begins. _(Human checkpoint 1.)_
-2. **Implement** — `/implement` picks up the approved issue and produces code: a draft PR with tests, documentation updates, and a checklist. `/ship` handles the mechanics of committing, pushing, and creating the PR.
+2. **Implement** — `/implement` picks up the approved issue and produces code, tests, documentation updates, and a PR-ready summary/checklist. `/ship` handles the mechanics of committing, pushing, and creating the draft PR.
 3. **Review** — `/review` walks the developer through the PR diff with a structured checklist. The developer makes the merge decision. If changes are needed, `/address` processes review comments and produces fixes. _(Human checkpoint 2.)_
 4. **Reflect** — After the session's work is done, `/learn` extracts reusable insights into the project's CLAUDE.md so future agent sessions start smarter. `/knowledge` produces learning notes the developer can study in their Zettelkasten — staying informed about their own codebase without reading every line of code.
 
@@ -270,8 +270,8 @@ The development workflow has four phases:
   ─────                         ─────────                   ──────                   ───────
 
   /bug
-  /feature ──► Issue ──► /implement ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
-  /tech                        /ship                       /address ◄┘              /knowledge
+  /feature ──► Issue ──► /implement ──► /ship ──► Draft PR ──► /review  ─┬──► Merge ──► /learn
+  /tech                                                         /address ◄┘              /knowledge
 
                     ▲                                          ▲
                     │                                          │
@@ -292,13 +292,14 @@ When a critical bug blocks the developer's immediate workflow, the normal planni
 1. Skip `/bug`. Go directly to `/implement` with a verbal description of the problem. No issue is required at this stage.
 2. The agent must still read project docs before coding.
 3. The agent must still write a regression test.
-4. `/ship` produces a PR without a `fixes #` reference (the issue does not exist yet).
+4. `/ship` produces a PR without an issue-number suffix in the title and without a `fixes #` reference in the body (the issue does not exist yet).
 5. `/review` still happens — the fast path skips planning, not review.
 
 **Cleanup (mandatory within 24 hours):**
 
 - Create the issue retroactively using `/bug`.
 - Link the PR to the issue.
+- Update the PR title/body to reference the issue (and add auto-close keyword where supported).
 - Run `/learn` to capture what broke and why.
 
 If hotfixes become frequent for a specific Land, that's a signal the test coverage or architecture has gaps. Create a `/tech` issue to address the root cause.

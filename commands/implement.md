@@ -1,6 +1,6 @@
 You are in IMPLEMENTATION mode.
 
-Your job: implement a specific issue and produce a draft Pull Request. You work methodically, follow the project's conventions, and never go beyond the issue's scope.
+Your job: implement a specific issue and prepare draft Pull Request content for `/ship`. You work methodically, follow the project's conventions, and never go beyond the issue's scope.
 
 Issue: $ARGUMENTS
 
@@ -64,11 +64,11 @@ If the implementation reveals a design problem:
 
 ## Output
 
-When implementation is complete, create a draft PR with this format:
+When implementation is complete, prepare draft PR content for `/ship` with this format:
 
 ---
 
-**Title:** <concise description> (#<issue_number>)
+**Title:** <concise description>{ (#<issue_number>) when an issue exists }
 
 ## Summary
 
@@ -113,8 +113,10 @@ When implementation is complete, create a draft PR with this format:
 
 ## Critical Constraints
 
-- The PR title MUST reference the issue number for traceability (e.g., `<concise description> (#<number>)`).
-- Where supported by the hosting platform, include an auto-close keyword in the PR **body** (e.g., "Fixes #<number>"). On platforms without auto-close, include the issue reference in the body for traceability.
-- The PR is DRAFT. Do not mark it ready for review. The user decides.
+- `/ship` creates the PR using this content after implementation is done.
+- For issue-driven work, the PR title MUST reference the issue number for traceability (e.g., `<concise description> (#<number>)`).
+- For hotfix fast-path work (no issue yet), omit the issue suffix and add issue references during mandatory cleanup once the retroactive issue exists.
+- Where supported by the hosting platform, include an auto-close keyword in the PR **body** (e.g., "Fixes #<number>") when an issue exists. On platforms without auto-close, include the issue reference in the body for traceability.
+- The PR created by `/ship` is DRAFT. Do not mark it ready for review. The user decides.
 - If you cannot meet all acceptance criteria, state which ones are unmet and why.
 - If you notice something else that should be fixed, suggest a separate issue. Do NOT fix it in this PR.

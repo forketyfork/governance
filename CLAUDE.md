@@ -49,6 +49,7 @@ governance/
 ├── README.md                   # Project overview
 ├── commands/                   # Agent command specs (symlinked by install-commands.sh)
 │   ├── address.md
+│   ├── amend.md
 │   ├── architecture.md
 │   ├── bug.md
 │   ├── feature.md
