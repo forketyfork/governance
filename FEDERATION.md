@@ -1,8 +1,8 @@
 # The Federation
 
-| Land       | Stack          | Repository                                                          | PRD | ARCH | TRACE | CONV | Lint | CI  | Coverage | Pre-commit | Branch Prot. | Dep. Updates | Secret Prot. | Code Scanning | CI Perms | Repo Hygiene | Worktree Env | Observability | Status  |
-| ---------- | -------------- | ------------------------------------------------------------------- | --- | ---- | ----- | ---- | ---- | --- | -------- | ---------- | ------------ | ------------ | ------------ | ------------- | -------- | ------------ | ------------ | ------------- | ------- |
-| governance | Markdown, Bash | [forketyfork/governance](https://github.com/forketyfork/governance) | ✓   | ✓    | —     | ✓    | ✓    | ✓   | —        | ✓          | ✓            | ✗            | ✗            | —             | ✓        | ✗            | ✓            | ✗             | Partial |
+| Land       | Stack          | Repository                                                          | PRD | ARCH | TRACE | CONV | Lint | CI  | Coverage | Pre-commit | Branch Prot. | Dep. Updates | Secret Prot. | Code Scanning | CI Perms | Repo Hygiene | Worktree Env | Observability | Status   |
+| ---------- | -------------- | ------------------------------------------------------------------- | --- | ---- | ----- | ---- | ---- | --- | -------- | ---------- | ------------ | ------------ | ------------ | ------------- | -------- | ------------ | ------------ | ------------- | -------- |
+| governance | Markdown, Bash | [forketyfork/governance](https://github.com/forketyfork/governance) | ✓   | ✓    | —     | ✓    | ✓    | ✓   | —        | ✓          | ✓            | ✓            | ✓            | ✓             | ✓        | ✓            | ✓            | ✓             | Governed |
 
 **Column legend:**
 
