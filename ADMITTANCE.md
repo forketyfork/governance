@@ -9,10 +9,12 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
 ## Phase 1: Foundation
 
 1. **Create the repository** (or confirm it exists).
-2. **Add CLAUDE.md** (symlink to AGENTS.md) to the repository root with:
+2. **Add `AGENTS.md` and symlink `CLAUDE.md -> AGENTS.md`** at the repository root with:
    - One-paragraph project description
    - Stack and key dependencies
-   - Build and test commands
+   - Build, lint, type-check, and test commands
+   - Worktree bootstrap entry point command (prefer `script/setup`, or clearly documented equivalent)
+   - Infrastructure section (source code hosting, issue tracker, CI/CD, issue/PR linkage convention)
    - Reference to docs/ for detailed documentation
 3. **Set up guardrails:**
    - Install and configure the linter, formatter, and type checker for the stack (see Standard Guardrails in CONSTITUTION.md).
@@ -41,13 +43,13 @@ Not every project needs governance. If it's a throwaway experiment, a one-off sc
    - Can the agent run tests and see results? If not, configure the test runner for CLI output.
    - Can the agent read logs? Document log locations and how to enable debug logging.
    - Can the agent observe the UI? If it's a CLI tool, yes. If it's a GUI app, document the limitation and evaluate whether DOM snapshots, screenshot automation, or visual regression tests can close the gap.
-   - Fill in the Observability section of CLAUDE.md.
+   - Fill in the Observability section of AGENTS.md (via the CLAUDE.md symlink).
 
 ## Phase 2: Documentation
 
 Run the documentation commands in this order. Each one builds on the previous.
 
-1. **Run `/prd`** — The agent reverse-engineers the product from the code and interviews you. Review and correct the output. This is the most important document because everything else references it.
+1. **Run `/prd`** — For existing codebases, the agent reverse-engineers the product from the code and interviews you. For greenfield or minimally implemented projects, the agent uses interview-first mode to draft the PRD from your intent and marks non-implemented features as planned. Review and correct the output. This is the most important document because everything else references it.
 2. **Run `/architecture`** — The agent reads the codebase and produces the architecture doc. Review the ADRs — the agent will infer rationale, and you need to correct the "why" where it's wrong.
 3. **Write `docs/CONVENTIONS.md`** — This one is best written by you (with agent help). The agent can document existing patterns, but only you know which patterns are intentional vs. accidental.
 4. **Run `/traceability`** — The agent maps PRD features to tests. This will expose coverage gaps. Don't fix them yet — just know where they are.
@@ -57,7 +59,7 @@ Run the documentation commands in this order. Each one builds on the previous.
 1. Review the traceability matrix. Identify the highest-priority coverage gaps.
 2. Use `/tech` to create test-gap issues for each.
 3. Use `/implement` to fill them, one at a time.
-4. Raise coverage thresholds as gaps are filled (60% → 70% → 80%).
+4. Raise coverage expectations as gaps are filled.
 
 ## Phase 4: Register
 
@@ -68,7 +70,7 @@ Run the documentation commands in this order. Each one builds on the previous.
 
 A Land reaches `Governed` status when ALL of the following are true:
 
-- [ ] CLAUDE.md exists and is accurate
+- [ ] AGENTS.md exists and CLAUDE.md is a symlink to AGENTS.md
 - [ ] docs/PRD.md exists and covers all implemented features
 - [ ] docs/ARCHITECTURE.md exists and matches the actual code
 - [ ] docs/CONVENTIONS.md exists
@@ -77,7 +79,7 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] Linter configured and enforced via pre-commit
 - [ ] Formatter configured and enforced via pre-commit
 - [ ] Type checker (if applicable) configured and enforced
-- [ ] Test suite exists with ≥60% coverage
+- [ ] Test suite exists and is enforced in CI
 - [ ] CI pipeline runs build + test + lint on every push
 - [ ] Branch protection enabled on default branch with status checks, up-to-date requirement, force-push blocking, deletion restriction, and code scanning gate
 - [ ] Automated dependency update tooling configured (Dependabot, Renovate, or equivalent)
@@ -86,8 +88,9 @@ A Land reaches `Governed` status when ALL of the following are true:
 - [ ] CI workflows use least-privilege permissions
 - [ ] Default branch named `main`
 - [ ] Repository description and topics set
+- [ ] Issue/PR linkage convention is documented in AGENTS.md (via CLAUDE.md symlink)
 - [ ] Pre-commit hooks installed and working
-- [ ] Reproducible development environment is documented in CLAUDE.md with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
+- [ ] Reproducible development environment is documented in AGENTS.md (via CLAUDE.md symlink) with activation steps, a worktree bootstrap entry point (`script/setup` preferred), and minimal host prerequisites
 - [ ] From a fresh git worktree, bootstrap + activation can run build/lint/type-check/test without undeclared global setup or reliance on sibling worktrees
-- [ ] CLAUDE.md includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
+- [ ] AGENTS.md (via CLAUDE.md symlink) includes an Observability section (what the agent can do independently, what requires developer assistance, debug mode)
 - [ ] Cross-Land dependencies documented in the Land's own `docs/ARCHITECTURE.md` (if applicable)

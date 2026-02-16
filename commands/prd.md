@@ -1,11 +1,11 @@
 You are in PRD DOCUMENTATION mode.
 
-Your job: create or update docs/PRD.md for this project by reverse-engineering the product from the codebase and interviewing the user for intent.
+Your job: create or update docs/PRD.md for this project by reverse-engineering the product from the codebase and interviewing the user for intent. For greenfield projects, use interview-first mode.
 
 ## Procedure
 
 1. Read CLAUDE.md (or AGENTS.md) and all existing docs/ files.
-2. Read the entire codebase: source files, tests, config, README, any existing documentation.
+2. Read the entire codebase (if present): source files, tests, config, README, any existing documentation.
 3. If docs/PRD.md already exists:
    - Verify every listed feature actually exists in the code.
    - Flag features listed in the PRD that have no corresponding implementation.
@@ -13,7 +13,10 @@ Your job: create or update docs/PRD.md for this project by reverse-engineering t
    - Check non-goals: are any of them actually implemented? If so, flag the contradiction.
    - Update and present the revised document.
 4. If docs/PRD.md does not exist:
-   - Reverse-engineer the feature list from the code.
+   - If the project already has meaningful implementation, reverse-engineer the feature list from the code.
+   - If the project is greenfield or minimally implemented, switch to interview-first mode:
+     - Ask the user to define problem statement, core features, user flows, non-goals, and success criteria.
+     - Mark features not yet implemented as "Planned."
    - Present a draft to the user.
 5. After producing the draft, ask the user:
    - "Are there features I missed?"
@@ -58,7 +61,7 @@ For each core feature, one or more concrete, testable criteria. These become the
 Before presenting the document, verify:
 
 1. Every feature in "Core Features" has a corresponding "User Flow" and "Success Criteria" entry.
-2. Every feature maps to actual code. If you find code that implements something not in the feature list, either add it or ask the user if it's intentional.
+2. Every non-"Planned" feature maps to actual code. If you find code that implements something not in the feature list, either add it or ask the user if it's intentional.
 3. Non-goals do not contradict implemented features.
 
 ## Output
@@ -72,6 +75,7 @@ After presenting the document, always ask the user to review and correct it. The
 - This document is the source of truth for WHAT the software does. docs/ARCHITECTURE.md covers HOW.
 - Do not include implementation details. No module names, no function names, no file paths.
 - Do not list aspirational features unless the user explicitly says to include them as "Planned."
+- In greenfield interview-first mode, include user-approved features as "Planned" until implementation exists.
 - If a feature is partially implemented, list it and mark it as "Partial — {what's missing}."
 - Keep the language non-technical. A product manager should be able to read this.
 - Feature numbering (F1, F2, ...) is stable — when updating, do not renumber existing features. Add new features at the end.

@@ -4,7 +4,12 @@ description: "Address the PR review and issue comments"
 
 Review the **unresolved** review and issue comments on this PR against the PR description and our session context.
 
-Use the API or CLI for the source code hosting declared in the project's CLAUDE.md to fetch unresolved review threads and issue comments. Only consider unresolved threads.
+Use the APIs or CLIs declared in the project's CLAUDE.md:
+
+- Source code hosting: fetch unresolved PR review threads
+- Issue tracker: fetch unresolved issue comments linked to this PR per the Land's issue/PR linkage convention
+
+Only consider unresolved threads/comments.
 
 For each comment:
 
@@ -31,7 +36,7 @@ Comment 2 — <same as above>
 When replying to review or issue comments:
 
 - Never edit or PATCH the original review comment body.
-- Always post a new reply using the API or CLI for the source code hosting declared in the project's CLAUDE.md.
+- Always post a new reply using the correct system declared in CLAUDE.md: source code hosting for PR review comments, issue tracker for issue comments.
 - To avoid shell expansion issues with backticks or special characters, write the reply body to a temp file and pass it by reference.
 - If a mistaken edit already happened, leave it and add a new reply noting the fix.
 

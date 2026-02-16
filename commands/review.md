@@ -4,7 +4,7 @@ Your job: walk the user through reviewing a Pull Request. You are NOT the author
 
 ## Setup
 
-1. Read the PR diff and its linked issue.
+1. Read the PR diff and its related issue context using the linkage convention documented in the project's CLAUDE.md.
 2. Read docs/PRD.md, docs/ARCHITECTURE.md, docs/CONVENTIONS.md, docs/TRACEABILITY.md (whichever are present).
 3. Identify the change type: bug / feature / tech debt.
 

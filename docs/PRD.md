@@ -21,6 +21,9 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    (`/bug`, `/feature`, `/tech`), documentation (`/prd`, `/architecture`,
    `/traceability`), implementation (`/implement`, `/ship`), review (`/review`,
    `/address`), reflection (`/learn`, `/knowledge`), and governance (`/amend`).
+   `/prd` supports both reverse-engineering and interview-first greenfield mode.
+   Workflow commands follow the Land's issue/PR linkage convention declared in
+   `CLAUDE.md`.
 
 3. **F3: Command Installation** — A script that symlinks all command
    specifications into the developer's agent tool configuration directories
@@ -28,16 +31,17 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    immediately across all tools.
 
 4. **F4: Land Admittance** — A phased process for bringing a new or existing
-   project under governance: foundation setup, documentation generation, test
-   backfill, and federation registration.
+   project under governance: foundation setup (including `AGENTS.md` with
+   `CLAUDE.md` symlinked to it), documentation generation, test backfill, and
+   federation registration.
 
 5. **F5: Federation Registry** — A table tracking every governed project and its
    compliance status across standard documents, tracked guardrails, key
    admittance requirements, and overall governance state.
 
-6. **F6: Project Templates** — Starter templates for `CLAUDE.md` and
-   `CONVENTIONS.md` that new projects fill in with their own details, ensuring
-   consistent structure across the federation.
+6. **F6: Project Templates** — Starter templates for `CLAUDE.md`/`AGENTS.md`
+   and `CONVENTIONS.md` that new projects fill in with their own details,
+   ensuring consistent structure across the federation.
 
 7. **F7: Automated Quality Checks** — A Nix-based development environment that
    provides pre-commit hooks (markdown lint, markdown formatting, shell lint,
@@ -70,7 +74,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
 13. **F13: Infrastructure-Agnostic Governance** — The constitution and command
     specifications do not prescribe specific source code hosting, issue
     tracking, or CI/CD platforms. Each Land declares its infrastructure tooling
-    in its CLAUDE.md. Command specs reference the project's declared tooling
+    in its CLAUDE.md. Each Land also declares its issue/PR linkage convention
+    there. Command specs reference declared tooling and linkage conventions
     rather than hardcoding vendor-specific CLI commands. Vendor-specific
     knowledge is preserved in dedicated skills (`managing-github` skill for
     GitHub, `managing-youtrack` skill for YouTrack, etc.).
@@ -128,10 +133,12 @@ Codex environments, and future edits to command specs propagate instantly.
 ### F4: Land Admittance
 
 1. Developer decides a project is worth governing (Phase 0).
-2. Developer sets up the repository foundation: `CLAUDE.md`, guardrails,
-   pre-commit hooks, CI, branch protection, observability (Phase 1).
+2. Developer sets up the repository foundation: `AGENTS.md` with
+   `CLAUDE.md -> AGENTS.md` symlink, guardrails, pre-commit hooks, CI, branch
+   protection, observability, and issue/PR linkage convention (Phase 1).
 3. Developer runs documentation commands (`/prd`, `/architecture`, writes
    `CONVENTIONS.md`, runs `/traceability`) to generate standard docs (Phase 2).
+   For greenfield projects, `/prd` starts in interview-first mode.
 4. Developer backfills test coverage gaps identified by the traceability matrix
    (Phase 3, ongoing).
 5. Developer registers the project in `FEDERATION.md` and documents any known
@@ -153,7 +160,8 @@ checks, and federation registration in place.
 
 1. Developer creates a new project and decides to govern it.
 2. Developer copies `templates/CLAUDE.md.template` to the new project's root as
-   `CLAUDE.md` and fills in the bracketed placeholders.
+   `AGENTS.md`, fills in the bracketed placeholders, and creates
+   `CLAUDE.md -> AGENTS.md` symlink.
 3. Developer copies `templates/CONVENTIONS.md.template` to `docs/CONVENTIONS.md`
    and fills in project-specific patterns.
 
@@ -204,8 +212,9 @@ used for code changes.
    and ships a PR.
 4. `/review` still happens — planning is skipped, not review.
 5. Within 24 hours, the developer retroactively creates the issue, updates the
-   PR title/body to reference that issue (including an auto-close keyword where
-   supported), links the PR, and runs `/learn`.
+   PR title/body/metadata to reference that issue using the Land's documented
+   issue/PR linkage convention (including auto-close behavior where supported),
+   links the PR, and runs `/learn`.
 
 **Result:** Critical bugs are fixed immediately without sacrificing review
 quality, with full documentation created retroactively.
@@ -249,9 +258,10 @@ drift and hidden dependencies.
    without naming specific vendors.
 2. Developer fills in the Infrastructure section of their project's CLAUDE.md
    with the specific tools used (e.g., GitHub + GitHub Actions, or GitLab +
-   GitLab CI).
+   GitLab CI), plus that Land's issue/PR linkage convention.
 3. When an agent runs a command like `/ship` or `/address`, it reads the
-   project's CLAUDE.md to determine which CLI or API to use.
+   project's CLAUDE.md to determine which CLI or API to use and how to apply
+   issue/PR linkage.
 4. For projects on a supported platform, the agent can use a platform-specific
    skill (e.g., the `managing-github` skill for GitHub) for concrete CLI commands.
 
@@ -278,7 +288,8 @@ agents adapt.
   documents, tracked guardrails, and key admittance requirements, with clear
   status indicators and a column legend.
 - **F6:** Templates exist for `CLAUDE.md` and `CONVENTIONS.md` with bracketed
-  placeholders and instructional comments covering all required sections.
+  placeholders and instructional comments covering all required sections,
+  including worktree bootstrap and issue/PR linkage metadata.
 - **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, and
   shfmt; CI blocks merges on failure.
 - **F8:** The constitution documents archival triggers, the archival process,
@@ -299,7 +310,8 @@ agents adapt.
 - **F13:** The constitution's Infrastructure section defines outcome requirements
   for source code hosting, issue tracking, and CI/CD without naming specific
   vendors. The CLAUDE.md template includes an Infrastructure section with
-  placeholders. Command specifications use generic terms and reference the
-  project's declared tooling. Vendor-specific CLI knowledge is available
-  through dedicated skills (`managing-github` skill for GitHub,
+  placeholders, including issue/PR linkage convention metadata. Command
+  specifications use generic terms and reference the project's declared tooling
+  and linkage convention. Vendor-specific CLI knowledge is available through
+  dedicated skills (`managing-github` skill for GitHub,
   `managing-youtrack` skill for YouTrack, etc.).
