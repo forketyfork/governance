@@ -4,6 +4,8 @@ description: "Preparing and shipping code changes"
 
 Prepare to ship the current work:
 
+`/ship` handles packaging and publishing existing changes (branch, commit, push, draft PR). It does not implement new code.
+
 1. Read the uncommitted files
 2. Provide a summary of the changes to commit based on the current work session (if there are changes not related to your work, mention them separately)
 3. Wait for my confirmation before proceeding
@@ -25,8 +27,8 @@ After confirmation:
 
 - Use the **humanizer** skill on the PR body before creating the PR
 - Write the PR body to `.tmp/pr-body-$RANDOM.md` (use a unique filename), then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the pull request CLI or API for the source code hosting declared in the project's CLAUDE.md:
-  - Title matching the commit's short description, with the issue number for traceability (e.g., `<description> (#<number>)`)
+  - Title matching the commit's short description; include the issue number suffix for issue-driven work (e.g., `<description> (#<number>)`), and omit it only for hotfix fast-path work where no issue exists yet
   - Body containing the Solution section expanded with context for reviewers
-  - Where supported by the hosting platform, include an auto-close keyword in the body (e.g., "Fixes #<number>") to link and close the relevant issue on merge
+  - Where supported by the hosting platform, include an auto-close keyword in the body (e.g., "Fixes #<number>") only when an issue exists; for hotfix fast-path work, omit auto-close and note that issue linkage will be added during mandatory cleanup
 
 Show me the PR link when done.

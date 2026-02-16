@@ -16,7 +16,7 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    automated dependency updates), agent environment requirements, and development
    workflow that every governed project must follow.
 
-2. **F2: Agent Command Specifications** — A set of 13 reusable command
+2. **F2: Agent Command Specifications** — A reusable set of command
    specifications that structure the full development lifecycle: planning
    (`/bug`, `/feature`, `/tech`), documentation (`/prd`, `/architecture`,
    `/traceability`), implementation (`/implement`, `/ship`), review (`/review`,
@@ -32,8 +32,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    backfill, and federation registration.
 
 5. **F5: Federation Registry** — A table tracking every governed project and its
-   compliance status across standard documents, automated guardrails, and
-   overall governance state.
+   compliance status across standard documents, tracked guardrails, key
+   admittance requirements, and overall governance state.
 
 6. **F6: Project Templates** — Starter templates for `CLAUDE.md` and
    `CONVENTIONS.md` that new projects fill in with their own details, ensuring
@@ -203,8 +203,9 @@ used for code changes.
 3. The agent reads project docs, writes a regression test, implements the fix,
    and ships a PR.
 4. `/review` still happens — planning is skipped, not review.
-5. Within 24 hours, the developer retroactively creates the issue, links the PR,
-   and runs `/learn`.
+5. Within 24 hours, the developer retroactively creates the issue, updates the
+   PR title/body to reference that issue (including an auto-close keyword where
+   supported), links the PR, and runs `/learn`.
 
 **Result:** Critical bugs are fixed immediately without sacrificing review
 quality, with full documentation created retroactively.
@@ -264,17 +265,18 @@ agents adapt.
   documents, guardrails (including automated dependency updates), agent
   environment, agent commands, the development workflow, federation management,
   archival, and the amendment process.
-- **F2:** All 13 command specifications exist, each defining the command's
-  purpose, input, procedure, output format, and behavioral rules.
+- **F2:** Command specifications exist for each governance workflow area, each
+  defining the command's purpose, input, procedure, output format, and
+  behavioral rules.
 - **F3:** Running `install-commands.sh` creates working symlinks to
   `~/.claude/commands/` and `~/.codex/prompts/` for every command spec; the
   script is idempotent and handles existing symlinks, updated targets, and
   non-symlink conflicts.
 - **F4:** `ADMITTANCE.md` describes all phases with concrete steps and
   includes a checklist for when a Land reaches "Governed" status.
-- **F5:** `FEDERATION.md` contains a registry table with columns for every
-  standard document and guardrail, with clear status indicators and a column
-  legend.
+- **F5:** `FEDERATION.md` contains a registry table with columns for standard
+  documents, tracked guardrails, and key admittance requirements, with clear
+  status indicators and a column legend.
 - **F6:** Templates exist for `CLAUDE.md` and `CONVENTIONS.md` with bracketed
   placeholders and instructional comments covering all required sections.
 - **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, and

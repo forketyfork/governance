@@ -167,8 +167,8 @@ gh pr create --draft --title "<title>" --body-file .tmp/pr-body-$RANDOM.md
 
 ### Auto-Close Convention
 
-Include `fixes #<number>` in the PR title or body to auto-close the linked
-issue on merge.
+Include `fixes #<number>` in the PR body to auto-close the linked issue on
+merge.
 
 ## Fetching Unresolved Review Threads
 
