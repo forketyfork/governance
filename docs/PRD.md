@@ -203,8 +203,9 @@ used for code changes.
 3. The agent reads project docs, writes a regression test, implements the fix,
    and ships a PR.
 4. `/review` still happens — planning is skipped, not review.
-5. Within 24 hours, the developer retroactively creates the issue, links the PR,
-   and runs `/learn`.
+5. Within 24 hours, the developer retroactively creates the issue, updates the
+   PR title/body to reference that issue (including an auto-close keyword where
+   supported), links the PR, and runs `/learn`.
 
 **Result:** Critical bugs are fixed immediately without sacrificing review
 quality, with full documentation created retroactively.

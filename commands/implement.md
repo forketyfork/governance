@@ -68,7 +68,9 @@ When implementation is complete, prepare draft PR content for `/ship` with this 
 
 ---
 
-**Title:** <concise description>{ (#<issue_number>) when an issue exists }
+**Title:** <concise description> (#<issue_number>)
+
+Omit `(#<issue_number>)` when there is no related issue (hotfix fast path).
 
 ## Summary
 
