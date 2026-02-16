@@ -55,7 +55,7 @@ Ask: "Does the architectural impact look right?"
 If the PR touches files that match external contract patterns documented in CONVENTIONS.md (e.g., API routes, shared schemas, message formats):
 
 - **Contracts changed:** list each changed contract and what changed (endpoint, field, format).
-- **Dependent projects:** consult available architecture docs or dependency documentation for related projects that consume the changed contract. If a related project lacks architecture docs, manually assess whether it could be affected. List every dependent project you can identify from available project-local context.
+- **Dependent projects:** consult available architecture docs or dependency documentation for related projects that consume the changed contract. If a related project lacks architecture docs, manually assess whether it could be affected. List every dependent project you can identify from repository references, linked documentation, and other available context.
 - **Impact assessment in PR:** verify the PR description includes an impact assessment for each dependent project: _breaks_, _needs update_, or _unaffected_.
 - **Linked issues:** for each project marked _breaks_ or _needs update_, verify a linked issue exists in that project's repository.
 

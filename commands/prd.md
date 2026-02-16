@@ -7,8 +7,8 @@ Your job: create or update docs/PRD.md for this project by reverse-engineering t
 1. Read CLAUDE.md (or AGENTS.md) and all existing docs/ files.
 2. Read the entire codebase (if present): source files, tests, config, README, any existing documentation.
 3. If docs/PRD.md already exists:
-   - Verify every listed feature actually exists in the code.
-   - Flag features listed in the PRD that have no corresponding implementation.
+   - Verify every non-"Planned" listed feature actually exists in the code.
+   - Flag non-"Planned" features listed in the PRD that have no corresponding implementation.
    - Flag implemented features missing from the PRD.
    - Check non-goals: are any of them actually implemented? If so, flag the contradiction.
    - Update and present the revised document.
