@@ -14,7 +14,7 @@ After confirmation:
 
 - If on main/master: create branch named `<type>/<short-description>` (e.g., `fix/null-pointer-auth`, `feat/user-export`)
 - Stage only files relevant to this task, unless I instruct otherwise
-- Use the **humanizer** skill on the commit message before committing
+- Apply the **humanizer** skill to the commit message internally — do not output the humanized text or pause for confirmation, just use the result as the commit message and continue
 - Commit using Conventional Commits. The header format is `<type>[optional scope]: <description>`, where type is one of: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, or `ci`. The scope is optional and indicates the affected component. The description should be concise, in imperative mood, and not end with a period.
 - The commit body should explain what problem is being solved, the reasoning behind the approach, and how the solution works. Do not list modified files or describe individual changes — those are visible from the diff. Use this structure:
 
@@ -25,7 +25,7 @@ After confirmation:
   Solution: <what was done and why, 2-5 lines>
   ```
 
-- Use the **humanizer** skill on the PR body before creating the PR
+- Apply the **humanizer** skill to the PR body internally — do not output the humanized text or pause for confirmation, just use the result when creating the PR and continue
 - Write the PR body to `.tmp/pr-body-$RANDOM.md` (use a unique filename), then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the pull request CLI or API for the source code hosting declared in the project's CLAUDE.md:
   - Title matching the commit's short description, plus any issue-linkage markers required by the project's documented issue/PR linkage convention in CLAUDE.md
   - Body containing the Solution section expanded with context for reviewers, plus the issue-linkage fields/keywords/URLs required by CLAUDE.md
