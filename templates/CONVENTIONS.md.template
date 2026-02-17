@@ -3,9 +3,9 @@
 [This is an example of coding patterns documentation for this project. The AI agent reads this at the start of every session to produce consistent code. If a pattern isn't documented here, the agent will invent one — and it will be different every time.]
 [Adjust this template according to the project's stack, and what makes sense for the project.]
 
-[Mark each rule with its enforcement status:]
+[Mark each rule with its enforcement status. `[auto: <tool>]` rules must name the enforcing tool or check:]
 
-- [`[auto]` — enforced by linter, type system, or CI]
+- [`[auto: <tool>]` — enforced by linter, type system, or CI (e.g., `[auto: ESLint no-unused-vars]`, `[auto: Prettier]`, `[auto: check-conventions]`)]
 - [`[review]` — enforced during code review only]
 - [`[planned]` — automation planned but not yet implemented]
 
