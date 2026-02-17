@@ -16,11 +16,17 @@ error() {
 
 # ── AGENTS.md symlink ────────────────────────────────────────────────────────
 
-if [ -e "${REPO_ROOT}/AGENTS.md" ]; then
-	if [ ! -L "${REPO_ROOT}/AGENTS.md" ]; then
+if [ -e "${REPO_ROOT}/CLAUDE.md" ]; then
+	if [ ! -e "${REPO_ROOT}/AGENTS.md" ]; then
+		error "CLAUDE.md exists but AGENTS.md is missing (must be a symlink to CLAUDE.md)"
+	elif [ ! -L "${REPO_ROOT}/AGENTS.md" ]; then
 		error "AGENTS.md exists but is not a symlink (must be a symlink to CLAUDE.md)"
-	elif [ "$(readlink "${REPO_ROOT}/AGENTS.md")" != "CLAUDE.md" ]; then
-		error "AGENTS.md is a symlink but does not point to CLAUDE.md"
+	else
+		agents_resolved="$(cd "${REPO_ROOT}" && realpath "$(readlink "${REPO_ROOT}/AGENTS.md")")"
+		claude_resolved="$(realpath "${REPO_ROOT}/CLAUDE.md")"
+		if [ "${agents_resolved}" != "${claude_resolved}" ]; then
+			error "AGENTS.md is a symlink but does not point to CLAUDE.md"
+		fi
 	fi
 fi
 

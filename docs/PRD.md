@@ -292,8 +292,8 @@ agents adapt.
   including worktree bootstrap and issue/PR linkage metadata.
 - **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, shfmt,
   and a conventions validation script (`check-conventions.sh`); CI blocks merges
-  on failure. Every `[auto]` rule in CONVENTIONS.md names the enforcing tool or
-  rule. `/review` includes a step that checks `[review]`-tagged conventions
+  on failure. Every `[auto: <tool>]` rule in CONVENTIONS.md names the enforcing
+  tool or rule. `/review` includes a step that checks `[review]`-tagged conventions
   against the PR diff.
 - **F8:** The constitution documents archival triggers, the archival process,
   and the reactivation path.

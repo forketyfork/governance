@@ -58,7 +58,7 @@ If docs/CONVENTIONS.md is present, scan it for all `[review]`-tagged rules. For 
 - **Status:** Compliant / Violation.
 - For violations: explain what conflicts and suggest a fix.
 
-Skip `[auto]` rules — those are enforced by tooling. Focus only on `[review]` rules that require human judgment.
+Skip `[auto: <tool>]` rules — those are enforced by tooling. Focus only on `[review]` rules that require human judgment.
 
 If docs/CONVENTIONS.md is not present, note the gap and move on.
 
