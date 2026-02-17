@@ -50,7 +50,21 @@ If there's architectural drift, be explicit about it.
 
 Ask: "Does the architectural impact look right?"
 
-### Step 4: Cross-Project Impact
+### Step 4: Conventions Compliance
+
+If docs/CONVENTIONS.md is present, scan it for all `[review]`-tagged rules. For each rule that applies to the files changed in this PR:
+
+- **Rule:** quote the convention text.
+- **Status:** Compliant / Violation.
+- For violations: explain what conflicts and suggest a fix.
+
+Skip `[auto]` rules — those are enforced by tooling. Focus only on `[review]` rules that require human judgment.
+
+If docs/CONVENTIONS.md is not present, note the gap and move on.
+
+Ask: "Any conventions concerns?"
+
+### Step 5: Cross-Project Impact
 
 If the PR touches files that match external contract patterns documented in CONVENTIONS.md (e.g., API routes, shared schemas, message formats):
 
@@ -65,7 +79,7 @@ If CONVENTIONS.md does not document contract boundary patterns for this project,
 
 Ask: "Does the cross-project impact look complete?"
 
-### Step 5: Type-Specific Checks
+### Step 6: Type-Specific Checks
 
 **For Bugs:**
 
@@ -87,7 +101,7 @@ Ask: "Does the cross-project impact look complete?"
 
 Ask: "Concerns with any of this?"
 
-### Step 6: Suspicious Patterns
+### Step 7: Suspicious Patterns
 
 Only report issues you actually find. Do not list clean categories.
 
@@ -102,7 +116,7 @@ Scan for:
 - Dependency bloat (large library for trivial use)
 - Inconsistent naming vs. existing code
 
-### Step 7: Verdict
+### Step 8: Verdict
 
 - **Confidence:** High / Medium / Low
 - **Top risks:** 1-3 things most likely to cause problems.

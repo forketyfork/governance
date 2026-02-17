@@ -4,32 +4,35 @@
 
 ### Files and Directories
 
-- `[auto]` Command specs: `kebab-case.md` in `commands/`
-- `[auto]` Templates: `PascalCase.md.template` in `templates/`
-- `[auto]` Shell scripts: `kebab-case.sh` in `scripts/`
-- `[review]` Governance documents: `UPPER_CASE.md` at repository root
-- `[review]` Standard docs: `UPPER_CASE.md` in `docs/`
+- `[auto: ls-lint]` Command specs: `kebab-case.md` in `commands/`
+- `[auto: ls-lint]` Templates: `UPPER_CASE.md.template` or
+  `PascalCase.md.template` in `templates/`
+- `[auto: ls-lint]` Shell scripts: `kebab-case.sh` in `scripts/`
+- `[auto: ls-lint]` Governance documents: `UPPER_CASE.md` at repository root
+- `[auto: ls-lint]` Standard docs: `UPPER_CASE.md` in `docs/`
 
 ### Markdown Headings
 
-- `[auto]` ATX-style headings only (`## Heading`, not underline style)
+- `[auto: markdownlint MD003]` ATX-style headings only (`## Heading`, not
+  underline style)
 - `[review]` Use sentence case for headings, not title case
 
 ## Markdown Formatting
 
-- `[auto]` Fenced code blocks must specify a language tag (`text` for
-  ASCII diagrams, `bash` for shell, `mermaid` for diagrams)
-- `[auto]` Tables must be pipe-aligned (enforced by markdownlint MD060)
-- `[auto]` Prose wrap: preserve (Prettier does not reflow paragraphs)
-- `[auto]` Print width: 100 characters (Prettier)
-- `[auto]` Indent: 2 spaces (EditorConfig)
-- `[auto]` Files end with a newline (EditorConfig)
+- `[auto: markdownlint MD040]` Fenced code blocks must specify a language tag
+  (`text` for ASCII diagrams, `bash` for shell, `mermaid` for diagrams)
+- `[auto: markdownlint MD060]` Tables must be pipe-aligned
+- `[auto: Prettier]` Prose wrap: preserve (Prettier does not reflow paragraphs)
+- `[auto: Prettier]` Print width: 100 characters
+- `[auto: EditorConfig]` Indent: 2 spaces
+- `[auto: EditorConfig]` Files end with a newline
 
 ## Shell Script Patterns
 
-- `[auto]` Start every script with `#!/usr/bin/env bash` and `set -euo pipefail`
-- `[auto]` Indent with tabs (EditorConfig + shfmt)
-- `[auto]` Pass ShellCheck with no warnings
+- `[auto: check-conventions]` Start every script with `#!/usr/bin/env bash` and
+  `set -euo pipefail`
+- `[auto: EditorConfig + shfmt]` Indent with tabs
+- `[auto: ShellCheck]` Pass ShellCheck with no warnings
 - `[review]` Quote all variable expansions: `"${VAR}"`, not `$VAR`
 - `[review]` Use `"$(command)"` for command substitution, not backticks
 
@@ -54,22 +57,23 @@
 
 ### Content Rules
 
-- `[review]` Day-to-day commands (`bug`, `feature`, `tech`, `implement`, `ship`,
-  `review`, `address`) never reference governance-repository documents
-  (`CONSTITUTION.md`, `FEDERATION.md`, `ADMITTANCE.md`) or use federation
-  terminology like "Land"
+- `[auto: check-conventions]` Day-to-day commands (`bug`, `feature`, `tech`,
+  `implement`, `ship`, `review`, `address`) never reference
+  governance-repository documents (`CONSTITUTION.md`, `FEDERATION.md`,
+  `ADMITTANCE.md`) or use federation terminology like "Land"
 - `[review]` Day-to-day commands reference the target project's `CLAUDE.md` and
   `docs/` files for infrastructure, tooling, and conventions
 - `[review]` Platform-specific CLI commands belong in reference files
   (`managing-github.md`, `managing-youtrack.md`), not in command specs
-- `[review]` Keep command specs concise — most are 50-90 lines
+- `[auto: check-conventions]` Keep command specs concise — most are 50-90 lines,
+  hard ceiling of 150 (reference files like `managing-*.md` are exempt)
 
 ## Governance Documents
 
 - `[review]` `CONSTITUTION.md`, `FEDERATION.md`, and `ADMITTANCE.md` require
   explicit user approval before modification
-- `[review]` `CLAUDE.md` is the canonical agent instructions file; `AGENTS.md` is
-  always a symlink to it — never a separate file
+- `[auto: check-conventions]` `CLAUDE.md` is the canonical agent instructions
+  file; `AGENTS.md` is always a symlink to it — never a separate file
 - `[review]` When adding a new feature to the governance framework, update
   `docs/PRD.md` with the feature entry and success criteria
 

@@ -1,0 +1,15 @@
+ls:
+  commands:
+    .md: kebab-case
+  templates:
+    .md.template: PascalCase | SCREAMING_SNAKE_CASE
+  scripts:
+    .sh: kebab-case
+  docs:
+    .md: SCREAMING_SNAKE_CASE
+  .md: SCREAMING_SNAKE_CASE
+
+ignore:
+  - .git
+  - .tmp
+  - node_modules

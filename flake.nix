@@ -45,8 +45,23 @@
                 enable = true;
                 files = "\\.md(\\.template)?$";
               };
+              ls-lint = {
+                enable = true;
+                name = "ls-lint";
+                entry = "${pkgs.ls-lint}/bin/ls_lint";
+                language = "system";
+                pass_filenames = false;
+              };
               shellcheck.enable = true;
               shfmt.enable = true;
+              check-conventions = {
+                enable = true;
+                name = "check-conventions";
+                entry = "./scripts/check-conventions.sh";
+                files = "\\.(md|sh|md\\.template)$";
+                language = "system";
+                pass_filenames = false;
+              };
             };
           };
         }

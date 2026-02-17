@@ -130,12 +130,12 @@ Every documented convention is a candidate for automation. Promotion is the proc
 1. Identify the convention in CONVENTIONS.md.
 2. Determine the enforcement mechanism (linter rule, type constraint, pre-commit check, CI test).
 3. Implement the automated check.
-4. Update CONVENTIONS.md to note that the rule is now enforced automatically, keeping the explanation of _why_.
+4. Update CONVENTIONS.md: change the tag to `[auto: <tool>]`, naming the specific tool or rule that enforces it (e.g., `[auto: markdownlint MD040]`, `[auto: ESLint no-unused-vars]`). Keep the explanation of _why_.
 5. If the rule applies across the federation, propose an amendment to the governance repo.
 
 **Tracking:** In CONVENTIONS.md, mark each rule with its enforcement status:
 
-- `[auto]` — enforced by linter, type system, or CI
+- `[auto: <tool>]` — enforced by linter, type system, or CI. Must name the enforcing tool or rule so the claim is verifiable.
 - `[review]` — enforced during code review only
 - `[planned]` — automation planned but not yet implemented
 

@@ -290,8 +290,11 @@ agents adapt.
 - **F6:** Templates exist for `CLAUDE.md` and `CONVENTIONS.md` with bracketed
   placeholders and instructional comments covering all required sections,
   including worktree bootstrap and issue/PR linkage metadata.
-- **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, and
-  shfmt; CI blocks merges on failure.
+- **F7:** Pre-commit hooks and CI run markdownlint, Prettier, ShellCheck, shfmt,
+  and a conventions validation script (`check-conventions.sh`); CI blocks merges
+  on failure. Every `[auto]` rule in CONVENTIONS.md names the enforcing tool or
+  rule. `/review` includes a step that checks `[review]`-tagged conventions
+  against the PR diff.
 - **F8:** The constitution documents archival triggers, the archival process,
   and the reactivation path.
 - **F9:** The constitution defines the amendment process requiring the same
