@@ -78,7 +78,8 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
     there. Command specs reference declared tooling and linkage conventions
     rather than hardcoding vendor-specific CLI commands. Vendor-specific
     knowledge is preserved in dedicated skills (`managing-github` skill for
-    GitHub, `managing-youtrack` skill for YouTrack, etc.).
+    GitHub, `managing-youtrack` skill for YouTrack, etc.), such as the skills
+    published in [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills).
 
 ## Non-Goals
 
@@ -263,7 +264,8 @@ drift and hidden dependencies.
    project's CLAUDE.md to determine which CLI or API to use and how to apply
    issue/PR linkage.
 4. For projects on a supported platform, the agent can use a platform-specific
-   skill (e.g., the `managing-github` skill for GitHub) for concrete CLI commands.
+   skill from an external skill catalog (e.g., the `managing-github` skill for
+   GitHub) for concrete CLI commands.
 
 **Result:** The governance framework works with any combination of source code
 hosting, issue tracking, and CI/CD. Projects self-declare their tooling, and
@@ -317,4 +319,6 @@ agents adapt.
   specifications use generic terms and reference the project's declared tooling
   and linkage convention. Vendor-specific CLI knowledge is available through
   dedicated skills (`managing-github` skill for GitHub,
-  `managing-youtrack` skill for YouTrack, etc.).
+  `managing-youtrack` skill for YouTrack, etc.), including skills provided by
+  external catalogs such as
+  [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills).

@@ -60,7 +60,6 @@ governance/
 │   ├── implement.md
 │   ├── knowledge.md
 │   ├── learn.md
-│   ├── managing-github.md
 │   ├── prd.md
 │   ├── review.md
 │   ├── ship.md
@@ -98,7 +97,7 @@ Every Land maintains these in a `docs/` directory:
 
 ### Agent Commands
 
-The `commands/` directory contains specifications for agent commands that structure the development workflow. Documentation commands (`/prd`, `/architecture`, `/traceability`) create and maintain the standard documents. Delivery commands (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`) handle planning through review. Session commands (`/learn`, `/knowledge`) capture reusable learning, and governance commands (`/amend`) evolve the framework. Platform-specific operational references (for example `managing-github.md`) are stored in the same directory.
+The `commands/` directory contains specifications for agent commands that structure the development workflow. Documentation commands (`/prd`, `/architecture`, `/traceability`) create and maintain the standard documents. Delivery commands (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`) handle planning through review. Session commands (`/learn`, `/knowledge`) capture reusable learning, and governance commands (`/amend`) evolve the framework. Platform-specific operational procedures are provided through dedicated skills (for example the `managing-github` skill in the [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills) GitHub repository).
 
 ### The Workflow
 

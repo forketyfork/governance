@@ -29,7 +29,10 @@ graph TD
         REV["Review commands\n_review, address_"]
         SESS["Session commands\n_learn, knowledge_"]
         GOV["Governance commands\n_amend_"]
-        REF["Platform references\n_managing-github_"]
+    end
+
+    subgraph skills["External Skills (forketyfork/agentic-skills)"]
+        GH["managing-github\n_GitHub CLI procedures_"]
     end
 
     subgraph templates["Templates (templates/)"]
@@ -49,6 +52,9 @@ graph TD
     REV -->|references| governance
     GOV -->|modifies| governance
     IMPL -->|references| commands
+    PLAN -->|can invoke| GH
+    IMPL -->|can invoke| GH
+    REV -->|can invoke| GH
 ```
 
 ## Dependency Rules
@@ -102,19 +108,19 @@ CONSTITUTION.md          (top-level authority)
 
 ## Where to Put New Code
 
-| I need to...                      | Put it in...                                                        |
-| --------------------------------- | ------------------------------------------------------------------- |
-| Add a new agent command           | `commands/<name>.md` — then run `install-commands.sh` to symlink it |
-| Add a platform-specific reference | `commands/managing-<platform>.md`                                   |
-| Add a new project template        | `templates/<name>.md.template`                                      |
-| Change governance rules           | `CONSTITUTION.md` (requires explicit user approval)                 |
-| Change the admittance process     | `ADMITTANCE.md` (requires explicit user approval)                   |
-| Change the federation registry    | `FEDERATION.md` (requires explicit user approval)                   |
-| Add a new CI check                | `flake.nix` (add a hook) and verify in `.github/workflows/ci.yml`   |
-| Add a new linter config           | Root directory (e.g., `.markdownlint-cli2.jsonc`, `.prettierrc`)    |
-| Add a utility script              | `scripts/<name>.sh`                                                 |
-| Update product requirements       | `docs/PRD.md`                                                       |
-| Store temporary files during dev  | `.tmp/` with unique filenames                                       |
+| I need to...                     | Put it in...                                                        |
+| -------------------------------- | ------------------------------------------------------------------- |
+| Add a new agent command          | `commands/<name>.md` — then run `install-commands.sh` to symlink it |
+| Add a platform-specific skill    | external skill catalog entry for `managing-<platform>`              |
+| Add a new project template       | `templates/<name>.md.template`                                      |
+| Change governance rules          | `CONSTITUTION.md` (requires explicit user approval)                 |
+| Change the admittance process    | `ADMITTANCE.md` (requires explicit user approval)                   |
+| Change the federation registry   | `FEDERATION.md` (requires explicit user approval)                   |
+| Add a new CI check               | `flake.nix` (add a hook) and verify in `.github/workflows/ci.yml`   |
+| Add a new linter config          | Root directory (e.g., `.markdownlint-cli2.jsonc`, `.prettierrc`)    |
+| Add a utility script             | `scripts/<name>.sh`                                                 |
+| Update product requirements      | `docs/PRD.md`                                                       |
+| Store temporary files during dev | `.tmp/` with unique filenames                                       |
 
 ## Data Flow
 
@@ -210,22 +216,22 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 
 ## Module Boundary Table
 
-| Module                 | Responsibility                                               | Public API                                                 | Dependencies                  |
-| ---------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------- |
-| Governance documents   | Define principles, processes, and federation registry        | `CONSTITUTION.md`, `ADMITTANCE.md`, `FEDERATION.md`        | None                          |
-| Product requirements   | Document this repository's own features and success criteria | `docs/PRD.md`                                              | Governance documents          |
-| Planning commands      | Interview developer, produce issues                          | `commands/bug.md`, `feature.md`, `tech.md`                 | Target Land's CLAUDE.md, docs |
-| Documentation commands | Generate/update standard project documents                   | `commands/prd.md`, `architecture.md`, `traceability.md`    | Target Land's codebase, docs  |
-| Delivery commands      | Implement issues, ship PRs                                   | `commands/implement.md`, `ship.md`                         | Target Land's CLAUDE.md, docs |
-| Review commands        | Guide PR review, address comments                            | `commands/review.md`, `address.md`                         | Target Land's CLAUDE.md, docs |
-| Session commands       | Capture learnings from work sessions                         | `commands/learn.md`, `knowledge.md`                        | Target Land's CLAUDE.md       |
-| Governance commands    | Propose amendments to governance repo                        | `commands/amend.md`                                        | Governance documents          |
-| Platform references    | Vendor-specific CLI procedures                               | `commands/managing-github.md`                              | None (reference only)         |
-| Templates              | Starter documents for new Lands                              | `templates/CLAUDE.md.template`, `CONVENTIONS.md.template`  | Governance documents (link)   |
-| Install script         | Symlink commands into agent tool directories                 | `scripts/install-commands.sh`                              | `commands/`                   |
-| Nix environment        | Dev shell with tools and pre-commit hooks                    | `flake.nix`, `flake.lock`                                  | nixpkgs, git-hooks.nix        |
-| CI pipeline            | Automated lint and format checks on PR/push                  | `.github/workflows/ci.yml`                                 | Nix environment               |
-| Editor/linter config   | Tool configuration for consistent formatting                 | `.editorconfig`, `.prettierrc`, `.markdownlint-cli2.jsonc` | None                          |
+| Module                   | Responsibility                                               | Public API                                                 | Dependencies                  |
+| ------------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------- |
+| Governance documents     | Define principles, processes, and federation registry        | `CONSTITUTION.md`, `ADMITTANCE.md`, `FEDERATION.md`        | None                          |
+| Product requirements     | Document this repository's own features and success criteria | `docs/PRD.md`                                              | Governance documents          |
+| Planning commands        | Interview developer, produce issues                          | `commands/bug.md`, `feature.md`, `tech.md`                 | Target Land's CLAUDE.md, docs |
+| Documentation commands   | Generate/update standard project documents                   | `commands/prd.md`, `architecture.md`, `traceability.md`    | Target Land's codebase, docs  |
+| Delivery commands        | Implement issues, ship PRs                                   | `commands/implement.md`, `ship.md`                         | Target Land's CLAUDE.md, docs |
+| Review commands          | Guide PR review, address comments                            | `commands/review.md`, `address.md`                         | Target Land's CLAUDE.md, docs |
+| Session commands         | Capture learnings from work sessions                         | `commands/learn.md`, `knowledge.md`                        | Target Land's CLAUDE.md       |
+| Governance commands      | Propose amendments to governance repo                        | `commands/amend.md`                                        | Governance documents          |
+| External platform skills | Vendor-specific CLI procedures                               | `managing-github` skill (external catalog)                 | None (reference only)         |
+| Templates                | Starter documents for new Lands                              | `templates/CLAUDE.md.template`, `CONVENTIONS.md.template`  | Governance documents (link)   |
+| Install script           | Symlink commands into agent tool directories                 | `scripts/install-commands.sh`                              | `commands/`                   |
+| Nix environment          | Dev shell with tools and pre-commit hooks                    | `flake.nix`, `flake.lock`                                  | nixpkgs, git-hooks.nix        |
+| CI pipeline              | Automated lint and format checks on PR/push                  | `.github/workflows/ci.yml`                                 | Nix environment               |
+| Editor/linter config     | Tool configuration for consistent formatting                 | `.editorconfig`, `.prettierrc`, `.markdownlint-cli2.jsonc` | None                          |
 
 ## Key Architectural Decisions
 
@@ -311,12 +317,12 @@ step. Symlinks achieve this automatically.
 
 **Decision:** Command specifications use generic terms for source code hosting,
 issue tracking, and CI/CD. Platform-specific procedures live in dedicated
-reference files (e.g., `managing-github.md`).
+skills (e.g., the `managing-github` skill).
 
 **Context:** Governed Lands may use different platforms (GitHub, GitLab, YouTrack,
 etc.). Commands read the target Land's `CLAUDE.md` Infrastructure section to
 determine which CLI or API to use. This separates "what to do" (command spec) from
-"how to do it on this platform" (reference file + Land config).
+"how to do it on this platform" (skill + Land config).
 
 **Alternatives considered:**
 
