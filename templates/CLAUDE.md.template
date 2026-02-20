@@ -71,6 +71,7 @@ Read these before making any changes:
 6. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
 7. If you add a feature, update `docs/TRACEABILITY.md`.
 8. Use conventional commit messages.
+9. After making changes, verify the build, tests, and linting all pass before considering the task done.
 
 ## Observability
 
