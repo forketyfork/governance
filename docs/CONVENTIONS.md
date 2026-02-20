@@ -63,10 +63,10 @@
   `ADMITTANCE.md`) or use federation terminology like "Land"
 - `[review]` Day-to-day commands reference the target project's `CLAUDE.md` and
   `docs/` files for infrastructure, tooling, and conventions
-- `[review]` Platform-specific CLI commands belong in reference files
-  (`managing-github.md`, `managing-youtrack.md`), not in command specs
+- `[review]` Platform-specific CLI commands belong in dedicated skills
+  (`managing-github`, `managing-youtrack`), not in command specs
 - `[auto: check-conventions]` Keep command specs concise — most are 50-90 lines,
-  hard ceiling of 150 (reference files like `managing-*.md` are exempt)
+  hard ceiling of 150 (external skill documentation is outside this repository)
 
 ## Governance Documents
 

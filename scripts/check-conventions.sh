@@ -45,16 +45,12 @@ for f in "${REPO_ROOT}"/scripts/*.sh; do
 	fi
 done
 
-# ── Command spec line count (max 150, reference files exempt) ────────────────
+# ── Command spec line count (max 150) ────────────────────────────────────────
 
 MAX_LINES=150
 for f in "${REPO_ROOT}"/commands/*.md; do
 	[ -e "${f}" ] || continue
 	name="$(basename "${f}")"
-	# Reference files (managing-*.md) are exempt
-	if [[ ${name} == managing-* ]]; then
-		continue
-	fi
 	lines="$(wc -l <"${f}")"
 	if [ "${lines}" -gt "${MAX_LINES}" ]; then
 		error "commands/${name}: ${lines} lines exceeds ${MAX_LINES}-line ceiling"
