@@ -79,7 +79,7 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
     rather than hardcoding vendor-specific CLI commands. Vendor-specific
     knowledge is preserved in dedicated skills (`managing-github` skill for
     GitHub, `managing-youtrack` skill for YouTrack, etc.), such as the skills
-    published in `agentic-skills`.
+    published in [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills).
 
 ## Non-Goals
 
@@ -320,4 +320,5 @@ agents adapt.
   and linkage convention. Vendor-specific CLI knowledge is available through
   dedicated skills (`managing-github` skill for GitHub,
   `managing-youtrack` skill for YouTrack, etc.), including skills provided by
-  external catalogs such as `agentic-skills`.
+  external catalogs such as
+  [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills).

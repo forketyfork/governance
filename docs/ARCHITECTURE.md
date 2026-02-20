@@ -31,7 +31,7 @@ graph TD
         GOV["Governance commands\n_amend_"]
     end
 
-    subgraph skills["External Skills (agentic-skills/)"]
+    subgraph skills["External Skills (forketyfork/agentic-skills)"]
         GH["managing-github\n_GitHub CLI procedures_"]
     end
 
