@@ -71,6 +71,7 @@ Read these before making any changes:
 4. Do not introduce new dependencies without asking first.
 5. Use conventional commit messages.
 6. For day-to-day command specs (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`), do not reference governance-repository documents or federation-specific terminology. Assume the agent only has access to the target repository's local instructions and docs.
+7. After making changes, verify the build, tests, and linting all pass before considering a task done.
 
 ## Observability
 
