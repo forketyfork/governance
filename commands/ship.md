@@ -27,6 +27,7 @@ After confirmation:
 
 - Apply the **humanizer** skill to the PR body internally — do not output the humanized text or pause for confirmation, just use the result when creating the PR and continue
 - Write the PR body to `.tmp/pr-body-$RANDOM.md` (use a unique filename), then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the pull request CLI or API for the source code hosting declared in the project's CLAUDE.md:
+  - If a PR already exists for the branch, **adjust** its title/body if needed to incorporate the new changes while preserving existing context. Do **not** overwrite the title/body with only the current session's text.
   - Title matching the commit's short description, plus any issue-linkage markers required by the project's documented issue/PR linkage convention in CLAUDE.md
   - Body containing:
     - The Solution section expanded with context for reviewers, plus the issue-linkage fields/keywords/URLs required by CLAUDE.md
