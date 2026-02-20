@@ -111,7 +111,7 @@ CONSTITUTION.md          (top-level authority)
 | I need to...                     | Put it in...                                                        |
 | -------------------------------- | ------------------------------------------------------------------- |
 | Add a new agent command          | `commands/<name>.md` — then run `install-commands.sh` to symlink it |
-| Add a platform-specific skill    | `../agentic-skills/skills/<skill-name>/`                            |
+| Add a platform-specific skill    | external skill catalog entry for `managing-<platform>`              |
 | Add a new project template       | `templates/<name>.md.template`                                      |
 | Change governance rules          | `CONSTITUTION.md` (requires explicit user approval)                 |
 | Change the admittance process    | `ADMITTANCE.md` (requires explicit user approval)                   |
@@ -226,7 +226,7 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 | Review commands          | Guide PR review, address comments                            | `commands/review.md`, `address.md`                         | Target Land's CLAUDE.md, docs |
 | Session commands         | Capture learnings from work sessions                         | `commands/learn.md`, `knowledge.md`                        | Target Land's CLAUDE.md       |
 | Governance commands      | Propose amendments to governance repo                        | `commands/amend.md`                                        | Governance documents          |
-| External platform skills | Vendor-specific CLI procedures                               | `../agentic-skills/skills/managing-github/`                | None (reference only)         |
+| External platform skills | Vendor-specific CLI procedures                               | `managing-github` skill (external catalog)                 | None (reference only)         |
 | Templates                | Starter documents for new Lands                              | `templates/CLAUDE.md.template`, `CONVENTIONS.md.template`  | Governance documents (link)   |
 | Install script           | Symlink commands into agent tool directories                 | `scripts/install-commands.sh`                              | `commands/`                   |
 | Nix environment          | Dev shell with tools and pre-commit hooks                    | `flake.nix`, `flake.lock`                                  | nixpkgs, git-hooks.nix        |
