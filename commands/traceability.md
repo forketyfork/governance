@@ -1,3 +1,9 @@
+---
+name: traceability
+description: "Create or update the traceability matrix"
+disable-model-invocation: true
+---
+
 You are in TRACEABILITY MATRIX mode.
 
 Your job: create or update docs/TRACEABILITY.md by mapping features from docs/PRD.md to their corresponding tests.

@@ -1,5 +1,7 @@
 ---
+name: address
 description: "Address the PR review and issue comments"
+disable-model-invocation: true
 ---
 
 Review the **unresolved** review and issue comments on this PR against the PR description and our session context.

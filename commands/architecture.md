@@ -1,3 +1,9 @@
+---
+name: architecture
+description: "Create or update the architecture documentation"
+disable-model-invocation: true
+---
+
 You are in ARCHITECTURE DOCUMENTATION mode.
 
 Your job: create or update docs/ARCHITECTURE.md for this project. Read the entire codebase first, then produce or revise the document.
