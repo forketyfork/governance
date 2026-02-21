@@ -45,8 +45,8 @@ shfmt -d scripts/*.sh
 
 ## Infrastructure
 
-- **Source code hosting:** GitHub — URL: `https://github.com/forketyfork/governance` — CLI: `gh`
-- **Issue tracker:** GitHub Issues — URL: `https://github.com/forketyfork/governance/issues` — CLI: `gh issue`
+- **Source code hosting:** GitHub — URL: `https://github.com/forketyfork/governance` — Skill: `managing-github`
+- **Issue tracker:** GitHub Issues — URL: `https://github.com/forketyfork/governance/issues` — Skill: `managing-github`
 - **CI/CD:** GitHub Actions — config: `.github/workflows/build.yml`
 - **Issue/PR linkage convention:** For issue-driven work, include the issue number in the PR title as `(#<number>)` and add `Fixes #<number>` in the PR body. For hotfixes without an issue, omit linkage first and add it after creating the retroactive issue.
 
@@ -79,8 +79,8 @@ Read these before making any changes:
 
 - Run repository checks (`pre-commit run --all-files`, `nix flake check`)
 - Run markdown and shell quality tools directly
-- Create and update issues and pull requests via `gh`
-- Inspect CI workflow runs and logs via `gh`
+- Create and update issues and pull requests via the `managing-github` skill
+- Inspect CI workflow runs and logs via the `managing-github` skill
 
 ### What requires developer assistance
 

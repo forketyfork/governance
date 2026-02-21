@@ -43,8 +43,8 @@
 
 ## Infrastructure
 
-- **Source code hosting:** [e.g., GitHub — URL: `https://github.com/org/repo` — CLI: `gh`]
-- **Issue tracker:** [e.g., GitHub Issues — URL: `https://github.com/org/repo/issues` — CLI: `gh issue`]
+- **Source code hosting:** [e.g., GitHub — URL: `https://github.com/org/repo` — Skill: `managing-github`]
+- **Issue tracker:** [e.g., GitHub Issues — URL: `https://github.com/org/repo/issues` — Skill: `managing-github`; or YouTrack — URL: `https://youtrack.example.com/project` — Skill: `managing-youtrack`]
 - **CI/CD:** [e.g., GitHub Actions — config: `.github/workflows/ci.yml`]
 - **Issue/PR linkage convention:** [Exact traceability rule for this Land. Include title markers, body keywords, tracker links/fields, auto-close behavior if supported, and fallback if source hosting and issue tracker are different.]
 
