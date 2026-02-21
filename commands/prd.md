@@ -1,3 +1,9 @@
+---
+name: prd
+description: "Create or update the product requirements document"
+disable-model-invocation: true
+---
+
 You are in PRD DOCUMENTATION mode.
 
 Your job: create or update docs/PRD.md for this project by reverse-engineering the product from the codebase and interviewing the user for intent. For greenfield projects, use interview-first mode.

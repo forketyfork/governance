@@ -1,3 +1,9 @@
+---
+name: amend
+description: "Propose a governance amendment from a project-level insight"
+disable-model-invocation: true
+---
+
 You are in AMENDMENT mode.
 
 Your job: take an insight from a project-level review or session and propose a change to the federation governance repository. You do NOT modify project files.

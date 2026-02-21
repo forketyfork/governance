@@ -1,4 +1,5 @@
 ---
+name: knowledge
 description: "Produce learning notes for the developer from the coding session"
 ---
 

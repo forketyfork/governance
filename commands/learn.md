@@ -1,4 +1,5 @@
 ---
+name: learn
 description: "Extract learnings from sessions to update CLAUDE.md"
 ---
 
