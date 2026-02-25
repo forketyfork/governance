@@ -1,8 +1,9 @@
 # The Federation
 
-| Land       | Stack          | Repository                                                          | PRD | ARCH | TRACE | CONV | Lint | CI  | Coverage | Pre-commit | Branch Prot. | Dep. Updates | Secret Prot. | Code Scanning | CI Perms | Repo Hygiene | Worktree Env | Observability | Status   |
-| ---------- | -------------- | ------------------------------------------------------------------- | --- | ---- | ----- | ---- | ---- | --- | -------- | ---------- | ------------ | ------------ | ------------ | ------------- | -------- | ------------ | ------------ | ------------- | -------- |
-| governance | Markdown, Bash | [forketyfork/governance](https://github.com/forketyfork/governance) | ✓   | ✓    | —     | ✓    | ✓    | ✓   | —        | ✓          | ✓            | ✓            | ✓            | ✓             | ✓        | ✓            | ✓            | ✓             | Governed |
+| Land       | Stack           | Repository                                                          | PRD | ARCH | TRACE | CONV | Lint | CI  | Coverage | Pre-commit | Branch Prot. | Dep. Updates | Secret Prot. | Code Scanning | CI Perms | Repo Hygiene | Worktree Env | Observability | Status   |
+| ---------- | --------------- | ------------------------------------------------------------------- | --- | ---- | ----- | ---- | ---- | --- | -------- | ---------- | ------------ | ------------ | ------------ | ------------- | -------- | ------------ | ------------ | ------------- | -------- |
+| governance | Markdown, Bash  | [forketyfork/governance](https://github.com/forketyfork/governance) | ✓   | ✓    | —     | ✓    | ✓    | ✓   | —        | ✓          | ✓            | ✓            | ✓            | ✓             | ✓        | ✓            | ✓            | ✓             | Governed |
+| welk       | Kotlin, Compose | [forketyfork/welk](https://github.com/forketyfork/welk)             | ✗   | ✗    | ✗     | ✗    | ✓    | ✓   | ◐        | ✓          | ✗            | ✓            | ✗            | ✗             | ✓        | ✓            | ✓            | ✓             | Partial  |
 
 **Column legend:**
 
