@@ -12,4 +12,5 @@ ls:
 ignore:
   - .git
   - .tmp
+  - docs/decisions
   - node_modules
