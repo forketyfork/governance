@@ -16,7 +16,7 @@ Your job: create or update docs/ARCHITECTURE.md for this project. Read the entir
    - Treat it as a draft to be verified and improved, not as ground truth.
    - Check every claim against the actual code. Flag and fix anything that's wrong.
    - Add missing sections. Remove outdated information.
-   - Move inline ADR content to `docs/decisions/` files and keep only a summary table in docs/ARCHITECTURE.md.
+   - Preserve existing decision records, verify their accuracy, and migrate any inline ADR content to `docs/decisions/` files while keeping a summary table in docs/ARCHITECTURE.md.
 4. If docs/ARCHITECTURE.md does not exist, create it from scratch.
 
 ## Document Structure
@@ -83,7 +83,7 @@ Collapse rules:
 
 ### Key Architectural Decisions
 
-Do not embed full ADR prose in docs/ARCHITECTURE.md. Use separate decision files and keep this section as a summary table only.
+Keep full decision prose in separate files under `docs/decisions/`, and keep the Key Architectural Decisions section in docs/ARCHITECTURE.md as a summary table that links to those files.
 
 1. Ensure `docs/decisions/` exists.
 2. If `docs/decisions/decision-template.md` is missing, create it with the exact template below.
@@ -104,12 +104,19 @@ Decision template (write exactly to `docs/decisions/decision-template.md`):
 ## Decision
 
 <what was decided>
+
 ## Context
+
 <why this decision was needed>
+
 ## Alternatives considered
+
 ### 1. <alternative name>
+
 <why it was rejected>
+
 ### 2. <alternative name>
+
 <why it was rejected>
 ```
 

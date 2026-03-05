@@ -104,7 +104,7 @@ CONSTITUTION.md          (top-level authority)
    `AGENTS.md` file. _(DR-006)_
 
 5. **Use conventional commit messages:** all commits follow the Conventional
-   Commits format. _(DR-003)_
+   Commits format. _(DR-007)_
 
 ## Where to Put New Code
 
@@ -237,11 +237,12 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 
 Decision details are stored in `docs/decisions/` and summarized here.
 
-| ID       | Title                                             | Status   | Date                                | Link                                                                                                                                                |
-| -------- | ------------------------------------------------- | -------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DR-001` | Markdown-based command specifications             | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-001-markdown-based-command-specifications.md](decisions/DR-001-markdown-based-command-specifications.md)                         |
-| `DR-002` | Day-to-day commands are governance-unaware        | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-002-day-to-day-commands-are-governance-unaware.md](decisions/DR-002-day-to-day-commands-are-governance-unaware.md)               |
-| `DR-003` | Nix-based reproducible toolchain                  | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-003-nix-based-reproducible-toolchain.md](decisions/DR-003-nix-based-reproducible-toolchain.md)                                   |
-| `DR-004` | Symlink-based command distribution                | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-004-symlink-based-command-distribution.md](decisions/DR-004-symlink-based-command-distribution.md)                               |
-| `DR-005` | Infrastructure-agnostic command specifications    | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-005-infrastructure-agnostic-command-specifications.md](decisions/DR-005-infrastructure-agnostic-command-specifications.md)       |
-| `DR-006` | Single-file agent instructions with symlink alias | Accepted | 2025 (inferred — verify maintainer) | [docs/decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md](decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md) |
+| ID       | Title                                             | Status   | Date       | Link                                                                                                                                                |
+| -------- | ------------------------------------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DR-001` | Markdown-based command specifications             | Accepted | 2026-02-16 | [docs/decisions/DR-001-markdown-based-command-specifications.md](decisions/DR-001-markdown-based-command-specifications.md)                         |
+| `DR-002` | Day-to-day commands are governance-unaware        | Accepted | 2026-02-16 | [docs/decisions/DR-002-day-to-day-commands-are-governance-unaware.md](decisions/DR-002-day-to-day-commands-are-governance-unaware.md)               |
+| `DR-003` | Nix-based reproducible toolchain                  | Accepted | 2026-02-16 | [docs/decisions/DR-003-nix-based-reproducible-toolchain.md](decisions/DR-003-nix-based-reproducible-toolchain.md)                                   |
+| `DR-004` | Symlink-based command distribution                | Accepted | 2026-02-16 | [docs/decisions/DR-004-symlink-based-command-distribution.md](decisions/DR-004-symlink-based-command-distribution.md)                               |
+| `DR-005` | Infrastructure-agnostic command specifications    | Accepted | 2026-02-16 | [docs/decisions/DR-005-infrastructure-agnostic-command-specifications.md](decisions/DR-005-infrastructure-agnostic-command-specifications.md)       |
+| `DR-006` | Single-file agent instructions with symlink alias | Accepted | 2026-02-16 | [docs/decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md](decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md) |
+| `DR-007` | Conventional commit messages                      | Accepted | 2026-03-05 | [docs/decisions/DR-007-conventional-commit-messages.md](decisions/DR-007-conventional-commit-messages.md)                                           |

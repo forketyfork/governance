@@ -1,7 +1,7 @@
 # DR-003: Nix-based reproducible toolchain
 
 **Status:** Accepted
-**Date:** 2025 (inferred — verify with maintainer)
+**Date:** 2026-02-16
 
 ## Decision
 
