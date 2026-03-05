@@ -90,21 +90,21 @@ CONSTITUTION.md          (top-level authority)
 
 1. **New command specs must follow the existing format:** a mode declaration, a
    purpose section, a procedure section, an output format section, and a rules
-   section. Do not invent a new structure. _(ADR-1)_
+   section. Do not invent a new structure. _(DR-001)_
 
 2. **Day-to-day commands must not reference governance documents:** use only the
    target Land's `CLAUDE.md` and `docs/` files. Do not mention `CONSTITUTION.md`,
-   `FEDERATION.md`, `ADMITTANCE.md`, or federation terminology. _(ADR-2)_
+   `FEDERATION.md`, `ADMITTANCE.md`, or federation terminology. _(DR-002)_
 
 3. **All Markdown and shell changes must pass pre-commit hooks before merge:**
    markdownlint-cli2, Prettier, ShellCheck, and shfmt. Do not disable or skip
-   hooks. _(ADR-3)_
+   hooks. _(DR-003)_
 
 4. **Keep `AGENTS.md` as a symlink to `CLAUDE.md`:** never create a separate
-   `AGENTS.md` file. _(ADR-4)_
+   `AGENTS.md` file. _(DR-006)_
 
 5. **Use conventional commit messages:** all commits follow the Conventional
-   Commits format. _(ADR-5)_
+   Commits format. _(DR-007)_
 
 ## Where to Put New Code
 
@@ -235,119 +235,14 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 
 ## Key Architectural Decisions
 
-### ADR-1: Markdown-Based Command Specifications
+Decision details are stored in `docs/decisions/` and summarized here.
 
-**Decision:** Agent commands are plain Markdown files that are symlinked into
-agent tool configuration directories.
-
-**Context:** Commands need to be readable by multiple AI agent tools (Claude Code,
-Codex, Junie) and editable by both humans and agents. A code-based plugin system
-would tie commands to a specific tool.
-
-**Alternatives considered:**
-
-- JSON/YAML config files — rejected because they are harder to read and write for
-  both humans and agents, and lack the expressiveness needed for procedural
-  instructions.
-- Tool-specific plugin formats — rejected because each tool has its own format,
-  and the governance framework must work across tools.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-2: Day-to-Day Commands Are Governance-Unaware
-
-**Decision:** Commands like `/bug`, `/feature`, `/implement`, `/ship`, `/review`,
-and `/address` never reference governance-repository documents or federation
-terminology. They rely only on the target Land's local `CLAUDE.md` and `docs/`.
-
-**Context:** When an agent runs in a target Land, it should not need access to the
-governance repository. Commands must be self-contained given the target project's
-local documentation. This also prevents coupling between the governance framework
-and individual projects.
-
-**Alternatives considered:**
-
-- Having commands fetch governance docs at runtime — rejected because it creates a
-  runtime dependency on the governance repo and requires network access.
-- Inlining governance rules into each command — rejected because it duplicates
-  information and creates a maintenance burden when governance rules change.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-3: Nix-Based Reproducible Toolchain
-
-**Decision:** Use a Nix flake to provide the development environment, pre-commit
-hooks, and all linting/formatting tools.
-
-**Context:** The repository needs consistent tooling across developer machines and
-CI. Nix provides hermetic, reproducible environments. The `git-hooks.nix` flake
-input generates pre-commit configuration automatically, and the same hooks run in
-CI via `nix flake check`.
-
-**Alternatives considered:**
-
-- npm/Node.js toolchain — rejected because this is not a JavaScript project, and
-  adding a Node runtime for Markdown tooling adds unnecessary complexity.
-- Manual tool installation with version pinning — rejected because it relies on
-  developers maintaining consistent tool versions, which is exactly the kind of
-  drift governance aims to prevent.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-4: Symlink-Based Command Distribution
-
-**Decision:** `install-commands.sh` creates symlinks from `commands/*.md` to agent
-tool directories (`~/.claude/commands/`, `~/.codex/prompts/`), rather than copying
-files.
-
-**Context:** When command specs are edited in the governance repository, the
-changes must propagate immediately to all tools without re-running an install
-step. Symlinks achieve this automatically.
-
-**Alternatives considered:**
-
-- File copying with a watcher — rejected because it requires a running process and
-  adds complexity.
-- Git submodules in each Land — rejected because it couples each Land's repository
-  to the governance repo's Git history and requires submodule update discipline.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-5: Infrastructure-Agnostic Command Specifications
-
-**Decision:** Command specifications use generic terms for source code hosting,
-issue tracking, and CI/CD. Platform-specific procedures live in dedicated
-skills (e.g., the `managing-github` skill).
-
-**Context:** Governed Lands may use different platforms (GitHub, GitLab, YouTrack,
-etc.). Commands read the target Land's `CLAUDE.md` Infrastructure section to
-determine which CLI or API to use. This separates "what to do" (command spec) from
-"how to do it on this platform" (skill + Land config).
-
-**Alternatives considered:**
-
-- Hardcoding GitHub CLI commands into all specs — rejected because it prevents
-  adoption by projects on other platforms.
-- Abstract adapter layer in code — rejected because this is a documentation
-  project, not a software application. The "adapter" is the Land's `CLAUDE.md`
-  declaration.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-6: Single-File Agent Instructions with Symlink Alias
-
-**Decision:** Each project maintains `CLAUDE.md` as the canonical agent
-instructions file and keeps `AGENTS.md` as a symlink to it.
-
-**Context:** Different AI tools look for different filenames (`CLAUDE.md` for
-Claude Code, `AGENTS.md` for other tools). A symlink ensures both tools find the
-same content without duplication or drift.
-
-**Alternatives considered:**
-
-- Maintaining two separate files — rejected because content would inevitably
-  diverge.
-- Using only one filename — rejected because it would break compatibility with
-  tools that expect the other filename.
-
-**Date:** 2025 (inferred — verify with maintainer)
+| ID       | Title                                             | Status   | Date       | Link                                                                                                                                                |
+| -------- | ------------------------------------------------- | -------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DR-001` | Markdown-based command specifications             | Accepted | 2026-02-16 | [docs/decisions/DR-001-markdown-based-command-specifications.md](decisions/DR-001-markdown-based-command-specifications.md)                         |
+| `DR-002` | Day-to-day commands are governance-unaware        | Accepted | 2026-02-16 | [docs/decisions/DR-002-day-to-day-commands-are-governance-unaware.md](decisions/DR-002-day-to-day-commands-are-governance-unaware.md)               |
+| `DR-003` | Nix-based reproducible toolchain                  | Accepted | 2026-02-16 | [docs/decisions/DR-003-nix-based-reproducible-toolchain.md](decisions/DR-003-nix-based-reproducible-toolchain.md)                                   |
+| `DR-004` | Symlink-based command distribution                | Accepted | 2026-02-16 | [docs/decisions/DR-004-symlink-based-command-distribution.md](decisions/DR-004-symlink-based-command-distribution.md)                               |
+| `DR-005` | Infrastructure-agnostic command specifications    | Accepted | 2026-02-16 | [docs/decisions/DR-005-infrastructure-agnostic-command-specifications.md](decisions/DR-005-infrastructure-agnostic-command-specifications.md)       |
+| `DR-006` | Single-file agent instructions with symlink alias | Accepted | 2026-02-16 | [docs/decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md](decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md) |
+| `DR-007` | Conventional commit messages                      | Accepted | 2026-03-05 | [docs/decisions/DR-007-conventional-commit-messages.md](decisions/DR-007-conventional-commit-messages.md)                                           |
