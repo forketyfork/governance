@@ -1,0 +1,7 @@
+interface:
+  display_name: "Tech"
+  short_description: "Interview and draft a tech issue"
+  default_prompt: "Use $tech to interview me about technical debt and draft the issue."
+
+policy:
+  allow_implicit_invocation: false

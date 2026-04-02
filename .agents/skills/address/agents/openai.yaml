@@ -1,0 +1,7 @@
+interface:
+  display_name: "Address"
+  short_description: "Address review and issue comments"
+  default_prompt: "Use $address to summarize the unresolved review and issue comments on this PR and prepare the follow-up work."
+
+policy:
+  allow_implicit_invocation: false

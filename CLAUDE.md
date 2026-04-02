@@ -5,7 +5,7 @@ Canonical file: `CLAUDE.md`. Keep `AGENTS.md` as a symlink to `CLAUDE.md`.
 ## Project
 
 **Name:** governance  
-**Description:** Shared command specs, templates, and process documentation for AI-assisted software projects. This repository defines the baseline workflow and standards that other projects can adopt.  
+**Description:** Shared command specs, Codex skill metadata, templates, and process documentation for AI-assisted software projects. This repository defines the baseline workflow and standards that other projects can adopt.  
 **Stack:** Markdown, Bash, Nix, GitHub Actions  
 **Status:** Active development
 
@@ -52,7 +52,7 @@ shfmt -d scripts/*.sh
 
 ## Governance
 
-This repository is the source of command and process guidance. During day-to-day work in other repositories, commands must rely only on that target repository's local `CLAUDE.md`/`AGENTS.md` and local docs.
+This repository is the source of command, skill, and process guidance. During day-to-day work in other repositories, commands must rely only on that target repository's local `CLAUDE.md`/`AGENTS.md` and local docs.
 
 ## Project Documentation
 
@@ -95,6 +95,6 @@ Read these before making any changes:
 
 ## Project-Specific Notes
 
-- `scripts/install-commands.sh` creates symlinks; it does not copy command files.
-- Changes in `commands/` affect agent behavior across projects that consume these command specs.
+- `scripts/install-commands.sh` creates symlinks for Claude command files and materializes Codex skill directories with a real `SKILL.md`.
+- Changes in `commands/` affect the Claude command install immediately and the installed Codex `SKILL.md` immediately when hard links are used, otherwise on the next install. Changes in `.agents/skills/*` affect Codex-only metadata and support files on the next install.
 - Keep temporary files in `.tmp/` with unique names.
