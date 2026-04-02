@@ -63,11 +63,38 @@ normalize_path() {
 	local path="$1"
 	local dir_path
 	local base_name
+	local dir_abs
 
 	dir_path="$(dirname "${path}")"
 	base_name="$(basename "${path}")"
 
-	printf "%s/%s\n" "$(cd "${dir_path}" && pwd -P)" "${base_name}"
+	if dir_abs="$(cd "${dir_path}" 2>/dev/null && pwd -P)"; then
+		printf "%s/%s\n" "${dir_abs}" "${base_name}"
+		return
+	fi
+
+	case "${path}" in
+	/*)
+		printf "%s\n" "${path}"
+		;;
+	*)
+		printf "%s/%s\n" "${PWD}" "${path}"
+		;;
+	esac
+}
+
+looks_like_legacy_skill_target() {
+	local path="$1"
+	local skill_name="$2"
+
+	case "${path}" in
+	*/.agents/skills/"${skill_name}" | */.agents/skills/"${skill_name}"/ | .agents/skills/"${skill_name}" | .agents/skills/"${skill_name}"/)
+		return 0
+		;;
+	*)
+		return 1
+		;;
+	esac
 }
 
 normalized_link_target() {
@@ -92,7 +119,7 @@ materialize_file() {
 
 	if [ -e "${target_path}" ] && [ ! -f "${target_path}" ] && [ ! -L "${target_path}" ]; then
 		echo "Skipping: ${target_path} exists and is not a file" >&2
-		return 1
+		return 0
 	fi
 
 	if [ -L "${target_path}" ]; then
@@ -191,9 +218,10 @@ for cmd_file in "${COMMANDS_DIR}"/*.md; do
 	target_skill_dir="${CODEX_SKILLS_DIR}/${skill_name}"
 
 	if [ -L "${target_skill_dir}" ]; then
+		raw_existing_target="$(readlink "${target_skill_dir}")"
 		existing_target="$(normalized_link_target "${target_skill_dir}")"
 		expected_legacy_target="$(normalize_path "${skill_dir}")"
-		if [ "${existing_target}" = "${expected_legacy_target}" ]; then
+		if [ "${existing_target}" = "${expected_legacy_target}" ] || looks_like_legacy_skill_target "${raw_existing_target}" "${skill_name}"; then
 			echo "Replacing legacy Codex skill symlink: ${target_skill_dir}"
 			rm "${target_skill_dir}"
 		else
