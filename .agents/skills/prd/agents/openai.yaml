@@ -1,0 +1,7 @@
+interface:
+  display_name: "PRD"
+  short_description: "Create or update the PRD"
+  default_prompt: "Use $prd to create or update docs/PRD.md for this project."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Amend"
+  short_description: "Propose a governance amendment"
+  default_prompt: "Use $amend to turn this governance insight into a proposed amendment with the right supporting updates."
+
+policy:
+  allow_implicit_invocation: false

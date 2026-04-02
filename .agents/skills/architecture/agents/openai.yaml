@@ -1,0 +1,7 @@
+interface:
+  display_name: "Architecture"
+  short_description: "Create or update architecture docs"
+  default_prompt: "Use $architecture to create or update docs/ARCHITECTURE.md for this project."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,11 +1,14 @@
 # DR-004: Symlink-based command distribution
 
-**Status:** Accepted
+**Status:** Superseded by DR-008
 **Date:** 2026-02-16
 
 ## Decision
 
 `install-commands.sh` creates symlinks from `commands/*.md` to agent tool directories (`~/.claude/commands/`, `~/.codex/prompts/`) rather than copying files.
+
+This decision remains in force for Claude Code. Codex prompt installation was
+superseded when Codex moved from prompt files to skill folders.
 
 ## Context
 
