@@ -140,3 +140,11 @@ Scan for:
 - When you flag a problem, suggest what the fix looks like. Don't just say "this is wrong."
 - Do not rubber-stamp. If the PR is genuinely clean, say so briefly and specifically — explain what makes it clean.
 - If you're uncertain, say so: "I'm not sure about this — worth checking."
+
+## Posting the Review
+
+`/review` posts nothing to the hosting platform unless the user explicitly asks. The default is a **pending** draft, visible only to its author until they submit manually — never submit/approve/request-changes on their behalf without explicit authorization. For non-GitHub platforms, use the equivalent draft mechanism.
+
+### GitHub
+
+POST one payload to `repos/{owner}/{repo}/pulls/{n}/reviews` with `commit_id` (the **full** SHA via `gh api … --jq .head.sha`; abbreviated is rejected), top-level `body`, and `comments[]`. **Omit `event`** — that keeps the review PENDING (`COMMENT`/`APPROVE`/`REQUEST_CHANGES` publish it). Each inline comment must anchor to a new-side line inside a diff hunk; context lines between hunks fail with "Line could not be resolved". Parse `@@ -X,Y +A,B @@` headers — valid new-side lines are `A` through `A+B-1`. Verify the response shows `"state": "PENDING"`, then hand the review ID to the user (they submit, or discard via `gh api -X DELETE .../reviews/<id>`, themselves).
