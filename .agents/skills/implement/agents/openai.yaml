@@ -1,0 +1,7 @@
+interface:
+  display_name: "Implement"
+  short_description: "Implement an issue methodically"
+  default_prompt: "Use $implement to work through this issue and prepare draft PR content."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Learn"
+  short_description: "Extract learnings into CLAUDE.md"
+  default_prompt: "Use $learn to extract the durable learnings from this session and update CLAUDE.md."
+
+policy:
+  allow_implicit_invocation: false

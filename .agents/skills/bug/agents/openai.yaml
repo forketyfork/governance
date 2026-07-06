@@ -1,0 +1,7 @@
+interface:
+  display_name: "Bug"
+  short_description: "Interview and draft a bug issue"
+  default_prompt: "Use $bug to interview me about a bug and draft the issue."
+
+policy:
+  allow_implicit_invocation: false

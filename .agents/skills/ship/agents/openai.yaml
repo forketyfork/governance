@@ -1,0 +1,7 @@
+interface:
+  display_name: "Ship"
+  short_description: "Prepare and ship code changes"
+  default_prompt: "Use $ship to prepare the current changes for commit, push, and a draft PR."
+
+policy:
+  allow_implicit_invocation: false

@@ -16,7 +16,7 @@ Your job: create or update docs/ARCHITECTURE.md for this project. Read the entir
    - Treat it as a draft to be verified and improved, not as ground truth.
    - Check every claim against the actual code. Flag and fix anything that's wrong.
    - Add missing sections. Remove outdated information.
-   - Preserve existing ADRs but verify their accuracy. Update dates and "alternatives considered" if the code has evolved.
+   - Preserve existing decision records, verify their accuracy, and migrate any inline ADR content to `docs/decisions/` files while keeping a summary table in docs/ARCHITECTURE.md.
 4. If docs/ARCHITECTURE.md does not exist, create it from scratch.
 
 ## Document Structure
@@ -57,7 +57,7 @@ State the dependency direction invariant: which layers may depend on which. List
 
 ### Rules for New Code
 
-3-6 mandatory patterns that any new code must follow. Each rule: one sentence stating what to do, one sentence stating what NOT to do, and a reference to the ADR that explains why. These are extracted from the ADRs — not new inventions. They exist so the implementing agent doesn't have to read all ADRs to know the critical rules.
+3-6 mandatory patterns that any new code must follow. Each rule: one sentence stating what to do, one sentence stating what NOT to do, and a reference to the decision record ID (`DR-NNN`) that explains why. These are extracted from the decision records — not new inventions. They exist so the implementing agent doesn't have to read every decision record before coding.
 
 ### Where to Put New Code
 
@@ -83,14 +83,42 @@ Collapse rules:
 
 ### Key Architectural Decisions
 
-ADR format for every non-obvious decision. Each ADR:
+Keep full decision prose in separate files under `docs/decisions/`, and keep the Key Architectural Decisions section in docs/ARCHITECTURE.md as a summary table that links to those files.
 
-- Decision: what was decided
-- Context: why this decision was needed
-- Alternatives considered: at least 2 alternatives, each with a reason for rejection
-- Date: when (approximate is fine)
+1. Ensure `docs/decisions/` exists.
+2. If `docs/decisions/decision-template.md` is missing, create it with the exact template below.
+3. If docs/ARCHITECTURE.md contains inline ADRs, extract them into `docs/decisions/DR-NNN-slug.md` files.
+4. If the codebase shows significant architectural choices that are undocumented, create missing `DR-NNN-slug.md` files.
+5. Replace inline ADR prose with a summary table in docs/ARCHITECTURE.md linking each `DR-NNN` file.
 
-Include ADRs for: architecture style, key dependency choices (frameworks, libraries, databases), communication/concurrency patterns, caching/performance strategies, configuration approach, security decisions, and any pattern that a contributor would get wrong without documentation.
+Summary table format: `| ID | Title | Status | Date | Link |`
+Decision file conventions: one decision per file (`docs/decisions/DR-NNN-slug.md`), IDs are zero-padded and monotonically increasing, and existing IDs are never renumbered.
+Decision template (write exactly to `docs/decisions/decision-template.md`):
+
+```markdown
+# DR-NNN: <short decision title>
+
+**Status:** Proposed | Accepted | Deprecated | Superseded by DR-NNN
+**Date:** YYYY-MM-DD
+
+## Decision
+
+<what was decided>
+
+## Context
+
+<why this decision was needed>
+
+## Alternatives considered
+
+### 1. <alternative name>
+
+<why it was rejected>
+
+### 2. <alternative name>
+
+<why it was rejected>
+```
 
 ## Quality Checks
 

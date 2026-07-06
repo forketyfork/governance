@@ -33,6 +33,7 @@ Issue: $ARGUMENTS
 - Follow docs/CONVENTIONS.md exactly. Do not introduce new patterns.
 - Respect the file and function length limits configured in the project's linter. If no limits are configured, use reasonable judgment and decompose when a file or function becomes hard to follow.
 - No new dependencies without explicit user approval.
+- When implementation introduces a significant architectural choice, create a decision record `docs/decisions/DR-NNN-slug.md` using `docs/decisions/decision-template.md`, and update `docs/ARCHITECTURE.md` to reference the new `DR-NNN`.
 - Conventional commit messages.
 
 ### For Bugs

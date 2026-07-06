@@ -25,10 +25,10 @@ guardrails, structured workflows, and human checkpoints that prevent that rot.
    Workflow commands follow the Land's issue/PR linkage convention declared in
    `CLAUDE.md`.
 
-3. **F3: Command Installation** — A script that symlinks all command
-   specifications into the developer's agent tool configuration directories
-   (Claude Code and Codex), so that changes to command specs take effect
-   immediately across all tools.
+3. **F3: Agent Workflow Installation** — A script that symlinks Claude command
+   specifications and materializes Codex skills from command specs plus
+   Codex-specific metadata into the developer's agent tool configuration
+   directories.
 
 4. **F4: Land Admittance** — A phased process for bringing a new or existing
    project under governance: foundation setup (including `CLAUDE.md` with
@@ -110,8 +110,8 @@ governed projects operate.
 ### F2: Agent Command Specifications
 
 1. Developer invokes a command (e.g., `/feature`) in their AI coding agent.
-2. The agent reads the corresponding command specification from the symlinked
-   file.
+2. The agent reads the corresponding workflow specification from the installed
+   command file or skill `SKILL.md`.
 3. The agent follows the specification's procedure: interviewing the developer,
    reading project docs, and producing the expected output (an issue, a PR,
    a review walkthrough, etc.).
@@ -119,17 +119,20 @@ governed projects operate.
 **Result:** The agent performs a structured task with consistent quality across
 all projects.
 
-### F3: Command Installation
+### F3: Agent Workflow Installation
 
 1. Developer runs `./scripts/install-commands.sh`.
-2. The script creates symlinks from `commands/*.md` to `~/.claude/commands/` and
-   `~/.codex/prompts/`.
-3. If a symlink already points to the correct target, it is skipped. If it
-   points elsewhere, it is updated. Non-symlink files at the target path are not
-   overwritten.
+2. The script creates symlinks from `commands/*.md` to `~/.claude/commands/`
+   and materializes real skill directories in `~/.agents/skills/` by writing
+   `SKILL.md` from `commands/*.md` plus any Codex-specific support files from
+   `.agents/skills/*`.
+3. If the source and target live on the same filesystem, the script hard-links
+   files so skill-body changes propagate without another copy step. Otherwise it
+   copies them. Legacy prompt symlinks in `~/.codex/prompts/` that were
+   previously managed by this repository are removed.
 
-**Result:** All agent commands are available in the developer's Claude Code and
-Codex environments, and future edits to command specs propagate instantly.
+**Result:** Claude command specs and Codex skills are available in the
+developer's environments.
 
 ### F4: Land Admittance
 
@@ -281,9 +284,12 @@ agents adapt.
   defining the command's purpose, input, procedure, output format, and
   behavioral rules.
 - **F3:** Running `install-commands.sh` creates working symlinks to
-  `~/.claude/commands/` and `~/.codex/prompts/` for every command spec; the
-  script is idempotent and handles existing symlinks, updated targets, and
-  non-symlink conflicts.
+  `~/.claude/commands/` for command specs and materialized skill directories in
+  `~/.agents/skills/` for Codex. The script is idempotent, replaces its own
+  legacy skill-directory symlinks with real directories, hard-links files when
+  possible, falls back to copying when necessary, avoids non-file and
+  non-directory conflicts, and removes only the legacy `~/.codex/prompts/`
+  symlinks previously managed by this repository.
 - **F4:** `ADMITTANCE.md` describes all phases with concrete steps and
   includes a checklist for when a Land reaches "Governed" status.
 - **F5:** `FEDERATION.md` contains a registry table with columns for standard

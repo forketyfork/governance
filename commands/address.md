@@ -6,10 +6,11 @@ disable-model-invocation: true
 
 Review the **unresolved** review and issue comments on this PR against the PR description and our session context.
 
-Use the APIs or CLIs declared in the project's CLAUDE.md:
+For any interactions with the source code hosting and issue tracker used in the project, use the skills or tools described in the project's CLAUDE.md. If not explicitly specified there, use your best judgement.
 
 - Source code hosting: fetch unresolved PR review threads
 - Issue tracker: fetch unresolved issue comments linked to this PR per the project's issue/PR linkage convention
+- Source code hosting may coincide with issue tracker if the project uses the same platform for both (e.g., GitHub).
 
 Only consider unresolved threads/comments.
 
@@ -38,7 +39,7 @@ Comment 2 — <same as above>
 When replying to review or issue comments:
 
 - Never edit or PATCH the original review comment body.
-- Always post a new reply using the correct system declared in CLAUDE.md: source code hosting for PR review comments, issue tracker for issue comments.
+- Always post a new reply using the skills or tools declared in CLAUDE.md: source code hosting for PR review comments, issue tracker for issue comments.
 - To avoid shell expansion issues with backticks or special characters, write the reply body to a temp file and pass it by reference.
 - If a mistaken edit already happened, leave it and add a new reply noting the fix.
 

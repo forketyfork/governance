@@ -57,7 +57,8 @@ This project is a Land in the federated governance framework. The constitution o
 Read these before making any changes:
 
 - `docs/PRD.md` — What the software does (features, user flows, success criteria)
-- `docs/ARCHITECTURE.md` — How it's built (layers, modules, dependencies, ADRs)
+- `docs/ARCHITECTURE.md` — How it's built (layers, modules, dependencies, data flow)
+- `docs/decisions/` — Architectural decision records (`DR-NNN-slug.md`)
 - `docs/CONVENTIONS.md` — Coding patterns for this project
 - `docs/TRACEABILITY.md` — Feature-to-test mapping
 
@@ -65,13 +66,14 @@ Read these before making any changes:
 
 1. Read the project documentation listed above before writing any code.
 2. Follow `docs/CONVENTIONS.md` exactly. Do not introduce new patterns.
-3. Every new public function must have a doc comment explaining WHAT it does.
-4. Every new feature must have corresponding tests.
-5. Do not introduce new dependencies without asking first.
-6. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
-7. If you add a feature, update `docs/TRACEABILITY.md`.
-8. Use conventional commit messages.
-9. After making changes, verify the build, tests, and linting all pass before considering the task done.
+3. Before suggesting architectural alternatives, read relevant files in `docs/decisions/`.
+4. Every new public function must have a doc comment explaining WHAT it does.
+5. Every new feature must have corresponding tests.
+6. Do not introduce new dependencies without asking first.
+7. If you change the architecture (new modules, new data flows), update `docs/ARCHITECTURE.md`.
+8. If you add a feature, update `docs/TRACEABILITY.md`.
+9. Use conventional commit messages.
+10. After making changes, verify the build, tests, and linting all pass before considering the task done.
 
 ## Observability
 

@@ -140,3 +140,7 @@ Scan for:
 - When you flag a problem, suggest what the fix looks like. Don't just say "this is wrong."
 - Do not rubber-stamp. If the PR is genuinely clean, say so briefly and specifically — explain what makes it clean.
 - If you're uncertain, say so: "I'm not sure about this — worth checking."
+
+## Posting the Review
+
+`/review` posts nothing to the source code hosting platform unless the user explicitly asks. Even then, the default is a **pending** draft, visible only to its author until they submit manually — never submit, approve, or request-changes on the user's behalf without explicit authorization. For the platform-specific mechanics, consult the hosting-platform skill named in the project's `CLAUDE.md` (for example, `managing-github`).

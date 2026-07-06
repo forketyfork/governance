@@ -1,0 +1,7 @@
+interface:
+  display_name: "Knowledge"
+  short_description: "Write developer learning notes"
+  default_prompt: "Use $knowledge to turn this coding session into concise developer learning notes."
+
+policy:
+  allow_implicit_invocation: false

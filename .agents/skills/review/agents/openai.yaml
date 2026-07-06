@@ -1,0 +1,7 @@
+interface:
+  display_name: "Review"
+  short_description: "Walk through reviewing a PR"
+  default_prompt: "Use $review to walk me through reviewing this pull request."
+
+policy:
+  allow_implicit_invocation: false

@@ -2,14 +2,14 @@
 
 ## System Overview
 
-Governance is a documentation-only repository that defines a federated governance
-framework for AI-assisted software projects. It contains no application code —
-only Markdown specifications, Bash scripts, Nix configuration, and GitHub Actions
-workflows. The repository produces two artifacts: agent command specifications
-(installed via symlinks into developer tool directories) and governance documents
-(consumed by humans and AI agents across multiple projects called "Lands"). Quality
-is enforced through Nix-managed pre-commit hooks and a CI pipeline that runs the
-same checks.
+Governance is a documentation-only repository that defines a federated
+governance framework for AI-assisted software projects. It contains no
+application code — only Markdown specifications, Bash scripts, Nix
+configuration, and GitHub Actions workflows. The repository produces three
+artifacts: command specifications, Codex skill metadata/support files used to
+build installed skills, and governance documents consumed by humans and AI
+agents across multiple projects called "Lands". Quality is enforced through
+Nix-managed pre-commit hooks and a CI pipeline that runs the same checks.
 
 ## Component Diagram
 
@@ -31,6 +31,10 @@ graph TD
         GOV["Governance commands\n_amend_"]
     end
 
+    subgraph codexskills["Codex Skill Support Files (.agents/skills/)"]
+        WRAP["Per-command metadata/assets\n_openai.yaml and optional support files_"]
+    end
+
     subgraph skills["External Skills (forketyfork/agentic-skills)"]
         GH["managing-github\n_GitHub CLI procedures_"]
     end
@@ -40,13 +44,15 @@ graph TD
     end
 
     subgraph tooling["Tooling"]
-        INSTALL["scripts/install-commands.sh\n_Symlinks commands to agent tools_"]
+        INSTALL["scripts/install-commands.sh\n_Symlinks commands and materializes Codex skills_"]
         NIX["flake.nix\n_Dev environment + pre-commit hooks_"]
         CI[".github/workflows/ci.yml\n_Lint & format pipeline_"]
     end
 
     INSTALL -->|reads| commands
+    INSTALL -->|reads| codexskills
     CI -->|runs| NIX
+    WRAP -->|paired with| commands
     PLAN -->|references| governance
     DOC -->|references| governance
     REV -->|references| governance
@@ -67,8 +73,9 @@ CONSTITUTION.md          (top-level authority)
 ├── ADMITTANCE.md        (references constitution)
 ├── FEDERATION.md        (references admittance checklist)
 ├── docs/PRD.md          (references constitution features)
-└── commands/*.md        (implement constitution workflows)
-    └── templates/*.md.template  (referenced by admittance)
+├── commands/*.md        (implement constitution workflows)
+├── .agents/skills/*     (Codex metadata and optional support files)
+└── templates/*.md.template  (referenced by admittance)
 ```
 
 **Rules:**
@@ -90,54 +97,68 @@ CONSTITUTION.md          (top-level authority)
 
 1. **New command specs must follow the existing format:** a mode declaration, a
    purpose section, a procedure section, an output format section, and a rules
-   section. Do not invent a new structure. _(ADR-1)_
+   section. Do not invent a new structure. _(DR-001)_
 
-2. **Day-to-day commands must not reference governance documents:** use only the
+2. **Codex skill installs are materialized from command specs:** keep the
+   canonical workflow body in `commands/<name>.md` and store only Codex-specific
+   metadata or support files in `.agents/skills/<name>/`. The installer writes a
+   real `SKILL.md` into `~/.agents/skills/<name>/` because Codex does not load
+   symlinked `SKILL.md` files. _(DR-008)_
+
+3. **Day-to-day commands must not reference governance documents:** use only the
    target Land's `CLAUDE.md` and `docs/` files. Do not mention `CONSTITUTION.md`,
-   `FEDERATION.md`, `ADMITTANCE.md`, or federation terminology. _(ADR-2)_
+   `FEDERATION.md`, `ADMITTANCE.md`, or federation terminology. _(DR-002)_
 
-3. **All Markdown and shell changes must pass pre-commit hooks before merge:**
+4. **All Markdown and shell changes must pass pre-commit hooks before merge:**
    markdownlint-cli2, Prettier, ShellCheck, and shfmt. Do not disable or skip
-   hooks. _(ADR-3)_
+   hooks. _(DR-003)_
 
-4. **Keep `AGENTS.md` as a symlink to `CLAUDE.md`:** never create a separate
-   `AGENTS.md` file. _(ADR-4)_
+5. **Keep `AGENTS.md` as a symlink to `CLAUDE.md`:** never create a separate
+   `AGENTS.md` file. _(DR-006)_
 
-5. **Use conventional commit messages:** all commits follow the Conventional
-   Commits format. _(ADR-5)_
+6. **Use conventional commit messages:** all commits follow the Conventional
+   Commits format. _(DR-007)_
 
 ## Where to Put New Code
 
-| I need to...                     | Put it in...                                                        |
-| -------------------------------- | ------------------------------------------------------------------- |
-| Add a new agent command          | `commands/<name>.md` — then run `install-commands.sh` to symlink it |
-| Add a platform-specific skill    | external skill catalog entry for `managing-<platform>`              |
-| Add a new project template       | `templates/<name>.md.template`                                      |
-| Change governance rules          | `CONSTITUTION.md` (requires explicit user approval)                 |
-| Change the admittance process    | `ADMITTANCE.md` (requires explicit user approval)                   |
-| Change the federation registry   | `FEDERATION.md` (requires explicit user approval)                   |
-| Add a new CI check               | `flake.nix` (add a hook) and verify in `.github/workflows/ci.yml`   |
-| Add a new linter config          | Root directory (e.g., `.markdownlint-cli2.jsonc`, `.prettierrc`)    |
-| Add a utility script             | `scripts/<name>.sh`                                                 |
-| Update product requirements      | `docs/PRD.md`                                                       |
-| Store temporary files during dev | `.tmp/` with unique filenames                                       |
+| I need to...                     | Put it in...                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Add a new agent command          | `commands/<name>.md`, plus `.agents/skills/<name>/agents/openai.yaml`, then run `install-commands.sh`  |
+| Add Codex-only support files     | `.agents/skills/<name>/assets`, `.agents/skills/<name>/references`, or `.agents/skills/<name>/scripts` |
+| Adjust Codex skill metadata      | `.agents/skills/<name>/agents/openai.yaml`                                                             |
+| Add a platform-specific skill    | external skill catalog entry for `managing-<platform>`                                                 |
+| Add a new project template       | `templates/<name>.md.template`                                                                         |
+| Change governance rules          | `CONSTITUTION.md` (requires explicit user approval)                                                    |
+| Change the admittance process    | `ADMITTANCE.md` (requires explicit user approval)                                                      |
+| Change the federation registry   | `FEDERATION.md` (requires explicit user approval)                                                      |
+| Add a new CI check               | `flake.nix` (add a hook) and verify in `.github/workflows/ci.yml`                                      |
+| Add a new linter config          | Root directory (e.g., `.markdownlint-cli2.jsonc`, `.prettierrc`)                                       |
+| Add a utility script             | `scripts/<name>.sh`                                                                                    |
+| Update product requirements      | `docs/PRD.md`                                                                                          |
+| Store temporary files during dev | `.tmp/` with unique filenames                                                                          |
 
 ## Data Flow
 
 ### Command Installation Flow
 
 ```text
-commands/*.md
-     │
-     ▼
-scripts/install-commands.sh
-     │
-     ├──► ~/.claude/commands/*.md   (symlinks)
-     └──► ~/.codex/prompts/*.md     (symlinks)
+commands/*.md                    .agents/skills/*
+     │                                 │
+     └──────────────┬──────────────────┘
+                    ▼
+        scripts/install-commands.sh
+                    │
+                    ├──► ~/.claude/commands/*.md        (symlinks)
+                    └──► ~/.agents/skills/*/SKILL.md    (materialized files)
+                               plus support files
 ```
 
-The script is idempotent: existing correct symlinks are skipped, stale symlinks
-are updated, and non-symlink files at the target path are never overwritten.
+The install script is idempotent: existing correct Claude symlinks are skipped,
+Codex skill files are hard-linked when possible and copied otherwise, stale
+legacy Codex skill-directory symlinks previously created by this repository are
+replaced with real directories, non-file and non-directory conflicts are not
+overwritten, and only legacy prompt symlinks previously managed by this
+repository are removed.
 
 ### Quality Check Flow
 
@@ -185,13 +206,13 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 
 ### Entry Points
 
-| Entry point              | How data gets in                                             |
-| ------------------------ | ------------------------------------------------------------ |
-| `install-commands.sh`    | Developer runs the script manually                           |
-| `nix develop` / `direnv` | Developer activates the dev environment                      |
-| Pre-commit hooks         | Triggered automatically on `git commit`                      |
-| CI pipeline              | Triggered on push to `main` or PR targeting `main`           |
-| Agent command invocation | Developer invokes `/command` in Claude Code, Codex, or Junie |
+| Entry point               | How data gets in                                                                                      |
+| ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `install-commands.sh`     | Developer runs the script manually                                                                    |
+| `nix develop` / `direnv`  | Developer activates the dev environment                                                               |
+| Pre-commit hooks          | Triggered automatically on `git commit`                                                               |
+| CI pipeline               | Triggered on push to `main` or PR targeting `main`                                                    |
+| Agent workflow invocation | Developer invokes `/command` in Claude Code, `$skill` in Codex, or an equivalent entry point in Junie |
 
 ### Storage
 
@@ -199,6 +220,7 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 | -------------------------- | -------------------------------------------------------------------------- |
 | Governance documents       | Repository root (`*.md`)                                                   |
 | Command specifications     | `commands/*.md`                                                            |
+| Codex skill support files  | `.agents/skills/*`                                                         |
 | Templates                  | `templates/*.md.template`                                                  |
 | Linter/formatter config    | Root dotfiles (`.markdownlint-cli2.jsonc`, `.prettierrc`, `.editorconfig`) |
 | Nix environment definition | `flake.nix`, `flake.lock`                                                  |
@@ -207,147 +229,44 @@ from Review to Merge (PR review). The Reflect phase is additive and ungated.
 
 ### Exit Points
 
-| Exit point     | How data gets out                                                        |
-| -------------- | ------------------------------------------------------------------------ |
-| Symlinks       | Command specs available in `~/.claude/commands/` and `~/.codex/prompts/` |
-| CI status      | Pass/fail reported to GitHub PR checks                                   |
-| Agent behavior | Commands shape agent output in target Land repositories                  |
-| Templates      | Copied to new Lands during admittance                                    |
+| Exit point      | How data gets out                                                                                     |
+| --------------- | ----------------------------------------------------------------------------------------------------- |
+| Install outputs | Command specs available in `~/.claude/commands/` and materialized Codex skills in `~/.agents/skills/` |
+| CI status       | Pass/fail reported to GitHub PR checks                                                                |
+| Agent behavior  | Commands and installed Codex skills shape agent output in target Land repositories                    |
+| Templates       | Copied to new Lands during admittance                                                                 |
 
 ## Module Boundary Table
 
-| Module                   | Responsibility                                               | Public API                                                 | Dependencies                  |
-| ------------------------ | ------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------- |
-| Governance documents     | Define principles, processes, and federation registry        | `CONSTITUTION.md`, `ADMITTANCE.md`, `FEDERATION.md`        | None                          |
-| Product requirements     | Document this repository's own features and success criteria | `docs/PRD.md`                                              | Governance documents          |
-| Planning commands        | Interview developer, produce issues                          | `commands/bug.md`, `feature.md`, `tech.md`                 | Target Land's CLAUDE.md, docs |
-| Documentation commands   | Generate/update standard project documents                   | `commands/prd.md`, `architecture.md`, `traceability.md`    | Target Land's codebase, docs  |
-| Delivery commands        | Implement issues, ship PRs                                   | `commands/implement.md`, `ship.md`                         | Target Land's CLAUDE.md, docs |
-| Review commands          | Guide PR review, address comments                            | `commands/review.md`, `address.md`                         | Target Land's CLAUDE.md, docs |
-| Session commands         | Capture learnings from work sessions                         | `commands/learn.md`, `knowledge.md`                        | Target Land's CLAUDE.md       |
-| Governance commands      | Propose amendments to governance repo                        | `commands/amend.md`                                        | Governance documents          |
-| External platform skills | Vendor-specific CLI procedures                               | `managing-github` skill (external catalog)                 | None (reference only)         |
-| Templates                | Starter documents for new Lands                              | `templates/CLAUDE.md.template`, `CONVENTIONS.md.template`  | Governance documents (link)   |
-| Install script           | Symlink commands into agent tool directories                 | `scripts/install-commands.sh`                              | `commands/`                   |
-| Nix environment          | Dev shell with tools and pre-commit hooks                    | `flake.nix`, `flake.lock`                                  | nixpkgs, git-hooks.nix        |
-| CI pipeline              | Automated lint and format checks on PR/push                  | `.github/workflows/ci.yml`                                 | Nix environment               |
-| Editor/linter config     | Tool configuration for consistent formatting                 | `.editorconfig`, `.prettierrc`, `.markdownlint-cli2.jsonc` | None                          |
+| Module                    | Responsibility                                               | Public API                                                 | Dependencies                   |
+| ------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------------ |
+| Governance documents      | Define principles, processes, and federation registry        | `CONSTITUTION.md`, `ADMITTANCE.md`, `FEDERATION.md`        | None                           |
+| Product requirements      | Document this repository's own features and success criteria | `docs/PRD.md`                                              | Governance documents           |
+| Planning commands         | Interview developer, produce issues                          | `commands/bug.md`, `feature.md`, `tech.md`                 | Target Land's CLAUDE.md, docs  |
+| Documentation commands    | Generate/update standard project documents                   | `commands/prd.md`, `architecture.md`, `traceability.md`    | Target Land's codebase, docs   |
+| Delivery commands         | Implement issues, ship PRs                                   | `commands/implement.md`, `ship.md`                         | Target Land's CLAUDE.md, docs  |
+| Review commands           | Guide PR review, address comments                            | `commands/review.md`, `address.md`                         | Target Land's CLAUDE.md, docs  |
+| Session commands          | Capture learnings from work sessions                         | `commands/learn.md`, `knowledge.md`                        | Target Land's CLAUDE.md        |
+| Governance commands       | Propose amendments to governance repo                        | `commands/amend.md`                                        | Governance documents           |
+| Codex skill support files | Provide Codex-only metadata and optional bundled resources   | `.agents/skills/*`                                         | `commands/`                    |
+| External platform skills  | Vendor-specific CLI procedures                               | `managing-github` skill (external catalog)                 | None (reference only)          |
+| Templates                 | Starter documents for new Lands                              | `templates/CLAUDE.md.template`, `CONVENTIONS.md.template`  | Governance documents (link)    |
+| Install script            | Symlink Claude commands and materialize Codex skills         | `scripts/install-commands.sh`                              | `commands/`, `.agents/skills/` |
+| Nix environment           | Dev shell with tools and pre-commit hooks                    | `flake.nix`, `flake.lock`                                  | nixpkgs, git-hooks.nix         |
+| CI pipeline               | Automated lint and format checks on PR/push                  | `.github/workflows/ci.yml`                                 | Nix environment                |
+| Editor/linter config      | Tool configuration for consistent formatting                 | `.editorconfig`, `.prettierrc`, `.markdownlint-cli2.jsonc` | None                           |
 
 ## Key Architectural Decisions
 
-### ADR-1: Markdown-Based Command Specifications
+Decision details are stored in `docs/decisions/` and summarized here.
 
-**Decision:** Agent commands are plain Markdown files that are symlinked into
-agent tool configuration directories.
-
-**Context:** Commands need to be readable by multiple AI agent tools (Claude Code,
-Codex, Junie) and editable by both humans and agents. A code-based plugin system
-would tie commands to a specific tool.
-
-**Alternatives considered:**
-
-- JSON/YAML config files — rejected because they are harder to read and write for
-  both humans and agents, and lack the expressiveness needed for procedural
-  instructions.
-- Tool-specific plugin formats — rejected because each tool has its own format,
-  and the governance framework must work across tools.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-2: Day-to-Day Commands Are Governance-Unaware
-
-**Decision:** Commands like `/bug`, `/feature`, `/implement`, `/ship`, `/review`,
-and `/address` never reference governance-repository documents or federation
-terminology. They rely only on the target Land's local `CLAUDE.md` and `docs/`.
-
-**Context:** When an agent runs in a target Land, it should not need access to the
-governance repository. Commands must be self-contained given the target project's
-local documentation. This also prevents coupling between the governance framework
-and individual projects.
-
-**Alternatives considered:**
-
-- Having commands fetch governance docs at runtime — rejected because it creates a
-  runtime dependency on the governance repo and requires network access.
-- Inlining governance rules into each command — rejected because it duplicates
-  information and creates a maintenance burden when governance rules change.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-3: Nix-Based Reproducible Toolchain
-
-**Decision:** Use a Nix flake to provide the development environment, pre-commit
-hooks, and all linting/formatting tools.
-
-**Context:** The repository needs consistent tooling across developer machines and
-CI. Nix provides hermetic, reproducible environments. The `git-hooks.nix` flake
-input generates pre-commit configuration automatically, and the same hooks run in
-CI via `nix flake check`.
-
-**Alternatives considered:**
-
-- npm/Node.js toolchain — rejected because this is not a JavaScript project, and
-  adding a Node runtime for Markdown tooling adds unnecessary complexity.
-- Manual tool installation with version pinning — rejected because it relies on
-  developers maintaining consistent tool versions, which is exactly the kind of
-  drift governance aims to prevent.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-4: Symlink-Based Command Distribution
-
-**Decision:** `install-commands.sh` creates symlinks from `commands/*.md` to agent
-tool directories (`~/.claude/commands/`, `~/.codex/prompts/`), rather than copying
-files.
-
-**Context:** When command specs are edited in the governance repository, the
-changes must propagate immediately to all tools without re-running an install
-step. Symlinks achieve this automatically.
-
-**Alternatives considered:**
-
-- File copying with a watcher — rejected because it requires a running process and
-  adds complexity.
-- Git submodules in each Land — rejected because it couples each Land's repository
-  to the governance repo's Git history and requires submodule update discipline.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-5: Infrastructure-Agnostic Command Specifications
-
-**Decision:** Command specifications use generic terms for source code hosting,
-issue tracking, and CI/CD. Platform-specific procedures live in dedicated
-skills (e.g., the `managing-github` skill).
-
-**Context:** Governed Lands may use different platforms (GitHub, GitLab, YouTrack,
-etc.). Commands read the target Land's `CLAUDE.md` Infrastructure section to
-determine which CLI or API to use. This separates "what to do" (command spec) from
-"how to do it on this platform" (skill + Land config).
-
-**Alternatives considered:**
-
-- Hardcoding GitHub CLI commands into all specs — rejected because it prevents
-  adoption by projects on other platforms.
-- Abstract adapter layer in code — rejected because this is a documentation
-  project, not a software application. The "adapter" is the Land's `CLAUDE.md`
-  declaration.
-
-**Date:** 2025 (inferred — verify with maintainer)
-
-### ADR-6: Single-File Agent Instructions with Symlink Alias
-
-**Decision:** Each project maintains `CLAUDE.md` as the canonical agent
-instructions file and keeps `AGENTS.md` as a symlink to it.
-
-**Context:** Different AI tools look for different filenames (`CLAUDE.md` for
-Claude Code, `AGENTS.md` for other tools). A symlink ensures both tools find the
-same content without duplication or drift.
-
-**Alternatives considered:**
-
-- Maintaining two separate files — rejected because content would inevitably
-  diverge.
-- Using only one filename — rejected because it would break compatibility with
-  tools that expect the other filename.
-
-**Date:** 2025 (inferred — verify with maintainer)
+| ID       | Title                                             | Status     | Date       | Link                                                                                                                                                |
+| -------- | ------------------------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DR-001` | Markdown-based command specifications             | Accepted   | 2026-02-16 | [docs/decisions/DR-001-markdown-based-command-specifications.md](decisions/DR-001-markdown-based-command-specifications.md)                         |
+| `DR-002` | Day-to-day commands are governance-unaware        | Accepted   | 2026-02-16 | [docs/decisions/DR-002-day-to-day-commands-are-governance-unaware.md](decisions/DR-002-day-to-day-commands-are-governance-unaware.md)               |
+| `DR-003` | Nix-based reproducible toolchain                  | Accepted   | 2026-02-16 | [docs/decisions/DR-003-nix-based-reproducible-toolchain.md](decisions/DR-003-nix-based-reproducible-toolchain.md)                                   |
+| `DR-004` | Symlink-based command distribution                | Superseded | 2026-02-16 | [docs/decisions/DR-004-symlink-based-command-distribution.md](decisions/DR-004-symlink-based-command-distribution.md)                               |
+| `DR-005` | Infrastructure-agnostic command specifications    | Accepted   | 2026-02-16 | [docs/decisions/DR-005-infrastructure-agnostic-command-specifications.md](decisions/DR-005-infrastructure-agnostic-command-specifications.md)       |
+| `DR-006` | Single-file agent instructions with symlink alias | Accepted   | 2026-02-16 | [docs/decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md](decisions/DR-006-single-file-agent-instructions-with-symlink-alias.md) |
+| `DR-007` | Conventional commit messages                      | Accepted   | 2026-03-05 | [docs/decisions/DR-007-conventional-commit-messages.md](decisions/DR-007-conventional-commit-messages.md)                                           |
+| `DR-008` | Codex skills materialized from command specs      | Accepted   | 2026-04-02 | [docs/decisions/DR-008-codex-skill-wrappers-backed-by-command-specs.md](decisions/DR-008-codex-skill-wrappers-backed-by-command-specs.md)           |

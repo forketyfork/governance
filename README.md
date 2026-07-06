@@ -16,15 +16,21 @@ The core idea: standardized documentation, mandatory automated checks, structure
 
 ## Quick Start
 
-### Install Agent Commands
+### Install Agent Workflows
 
-The `install-commands.sh` script symlinks command specifications to your Claude Code and Codex configuration directories:
+The `install-commands.sh` script symlinks Claude command specs to
+`~/.claude/commands/` and materializes Codex skills under `~/.agents/skills/`:
 
 ```bash
 ./scripts/install-commands.sh
 ```
 
-Changes to files in `commands/` take effect immediately across all tools that consumed the symlinks.
+Changes to files in `commands/` take effect immediately in Claude Code. For
+Codex, the installer writes a real `SKILL.md` for each installed skill because
+Codex does not load symlinked `SKILL.md` files. The installer hard-links files
+when possible and falls back to copying them when it cannot. Invoke the
+installed workflows in Codex as skills such as `$feature`, `$review`, or
+`$ship`.
 
 ### Set Up Development Environment
 
@@ -51,6 +57,8 @@ governance/
 ├── ADMITTANCE.md               # How to admit a new Land
 ├── CLAUDE.md                   # Agent instructions for this repo
 ├── README.md                   # This file
+├── .agents/
+│   └── skills/                 # Codex metadata and support files for installed skills
 ├── commands/                   # Agent command specifications
 │   ├── address.md
 │   ├── amend.md
@@ -97,7 +105,21 @@ Every Land maintains these in a `docs/` directory:
 
 ### Agent Commands
 
-The `commands/` directory contains specifications for agent commands that structure the development workflow. Documentation commands (`/prd`, `/architecture`, `/traceability`) create and maintain the standard documents. Delivery commands (`/bug`, `/feature`, `/tech`, `/implement`, `/ship`, `/review`, `/address`) handle planning through review. Session commands (`/learn`, `/knowledge`) capture reusable learning, and governance commands (`/amend`) evolve the framework. Platform-specific operational procedures are provided through dedicated skills (for example the `managing-github` skill in the [`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills) GitHub repository).
+The `commands/` directory contains the canonical workflow specifications.
+Claude Code consumes those files directly as slash commands. Codex consumes
+materialized skills in `~/.agents/skills/`. The repository keeps Codex-specific
+metadata and support files in `.agents/skills/`, and
+`install-commands.sh` combines those files with the corresponding
+`commands/*.md` body to build each installed skill.
+Documentation commands (`/prd`, `/architecture`, `/traceability`) create and
+maintain the standard documents. Delivery commands (`/bug`, `/feature`, `/tech`,
+`/implement`, `/ship`, `/review`, `/address`) handle planning through review.
+Session commands (`/learn`, `/knowledge`) capture reusable learning, and
+governance commands (`/amend`) evolve the framework. Platform-specific
+operational procedures are provided through dedicated skills (for example the
+`managing-github` skill in the
+[`forketyfork/agentic-skills`](https://github.com/forketyfork/agentic-skills)
+GitHub repository).
 
 ### The Workflow
 

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Feature"
+  short_description: "Interview and plan a feature issue"
+  default_prompt: "Use $feature to interview me about a feature and draft the issue with an implementation plan."
+
+policy:
+  allow_implicit_invocation: false
