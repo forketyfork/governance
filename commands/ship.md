@@ -1,11 +1,11 @@
 ---
 name: ship
-description: "Preparing and shipping code changes"
+description: Prepares and ships existing code changes by confirming scope, committing intentionally, pushing the branch, and opening or updating a draft pull request. Use only when explicitly invoked by the user.
 ---
 
 Prepare to ship the current work:
 
-`/ship` handles packaging and publishing existing changes (branch, commit, push, draft PR). It does not implement new code.
+This workflow handles packaging and publishing existing changes (branch, commit, push, draft PR). It does not implement new code.
 
 1. Read the uncommitted files
 2. Provide a summary of the changes to commit based on the current work session (if there are changes not related to your work, mention them separately)
@@ -15,7 +15,6 @@ After confirmation:
 
 - If on main/master: create branch named `<type>/<short-description>` (e.g., `fix/null-pointer-auth`, `feat/user-export`)
 - Stage only files relevant to this task, unless I instruct otherwise
-- Apply the **humanizer** skill to the commit message internally — do not output the humanized text or pause for confirmation, just use the result as the commit message and continue
 - Commit using Conventional Commits. The header format is `<type>[optional scope]: <description>`, where type is one of: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, or `ci`. The scope is optional and indicates the affected component. The description should be concise, in imperative mood, and not end with a period.
 - The commit body should explain what problem is being solved, the reasoning behind the approach, and how the solution works. Do not list modified files or describe individual changes — those are visible from the diff. Use this structure:
 
@@ -26,8 +25,7 @@ After confirmation:
   Solution: <what was done and why, 2-5 lines>
   ```
 
-- Apply the **humanizer** skill to the PR body internally — do not output the humanized text or pause for confirmation, just use the result when creating the PR and continue
-- Run `date +%s` to get a timestamp, write the PR body to `.tmp/pr-body-<timestamp>.md` using that value as a concrete filename, then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the skills or tools declared in the project's CLAUDE.md (if there are no directions, use your best judgement).
+- Run `date +%s` to get a timestamp, write the PR body to `.tmp/pr-body-<timestamp>.md` using that value as a concrete filename, then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the skills or tools declared in the project's agent guidance (if there are no directions, use your best judgement).
   - If a PR already exists for the branch, **adjust** its title/body if needed to incorporate the new changes while preserving existing context. Do **not** overwrite the title/body with only the current session's text.
   - Title matching the commit's short description, plus any issue-linkage markers required by the project's documented issue/PR linkage convention in CLAUDE.md
   - Body containing:
