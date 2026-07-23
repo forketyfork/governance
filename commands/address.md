@@ -49,5 +49,4 @@ After I approve:
 - Commit with message referencing the addressed comments
 - Push the changes
 - Draft responses for each comment (don't post them — show me first)
-- Use the **humanizer** skill on each reply draft before presenting it
 - The comment should be concise and explain what was done to fix the issue or why it won't be fixed; no "good catch" or "thanks for pointing that out" phrases.
