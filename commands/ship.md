@@ -28,9 +28,28 @@ After confirmation:
 - Run `date +%s` to get a timestamp, write the PR body to `.tmp/pr-body-<timestamp>.md` using that value as a concrete filename, then create the PR **as a draft** (or the hosting platform's equivalent draft/WIP state) using the skills or tools declared in the project's agent guidance (if there are no directions, use your best judgement).
   - If a PR already exists for the branch, **adjust** its title/body if needed to incorporate the new changes while preserving existing context. Do **not** overwrite the title/body with only the current session's text.
   - Title matching the commit's short description, plus any issue-linkage markers required by the project's documented issue/PR linkage convention in CLAUDE.md
-  - Body containing:
-    - The Solution section expanded with context for reviewers, plus the issue-linkage fields/keywords/URLs required by CLAUDE.md
-    - A **Test plan** section with a checklist of manual verification steps the reviewer should perform. Only include steps that require human judgment or interaction — exclude anything already verified by automated tests, linters, type checkers, or CI. If the change is fully covered by automation, omit this section entirely.
-  - For hotfix fast-path work where no issue exists yet, omit issue linkage and note that linkage will be added during mandatory cleanup
+  - Body with the following structure:
+
+```markdown
+## TLDR
+
+<a simplified explanation of the issue and its solution; use ASD-STE100 language and assume the reader has zero context>
+
+## Issue
+
+<explain the problem(s) being solved by this PR; reference issue links if present>
+
+## Solution
+
+<how is the problem solved in this PR>
+
+## Context
+
+<links to other relevant PRs, issues, or discussions; any other context that helps the reviewer understand the change>
+
+## Test plan
+
+<a checklist of manual verification steps the reviewer should perform; only include steps that require human judgment or interaction — exclude anything already verified by automated tests, linters, type checkers, or CI. If the change is fully covered by automation, omit this section entirely.>
+```
 
 Show me the PR link when done.
